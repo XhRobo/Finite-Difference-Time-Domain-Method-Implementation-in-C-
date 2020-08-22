@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1598117636 source:c:\users\xhoni\onedrive\desktop\master thesis\trunk\fdtd\fdtd\main.cpp
+	<iostream>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<cmath>
+	<vector>
+	<string>
+
