@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.8)  14 DEC 2020 22:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.8)  21 DEC 2020 18:45
 entering extended mode
 **./main.tex
 (main.tex
@@ -432,7 +432,7 @@ Package biblatex Info: ... file 'blx-dm.def' found.
 File: blx-dm.def 2020/08/23 v3.15a biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'authoryear.dbx' not found.
+Package biblatex Info: ... file 'numeric.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@afterword=\count333
@@ -570,11 +570,11 @@ File: blx-natbib.def 2020/08/23 v3.15a biblatex compatibility (PK/MW)
 Package biblatex Info: Delimiter 'nameyeardelim' in context '' already defined,
  overwriting.
 )
-Package biblatex Info: Trying to load bibliography style 'authoryear'...
-Package biblatex Info: ... file 'authoryear.bbx' found.
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
 
-("C:\Program Files\MiKTeX\tex/latex/biblatex/bbx\authoryear.bbx"
-File: authoryear.bbx 2020/08/23 v3.15a biblatex bibliography style (PK/MW)
+("C:\Program Files\MiKTeX\tex/latex/biblatex/bbx\numeric.bbx"
+File: numeric.bbx 2020/08/23 v3.15a biblatex bibliography style (PK/MW)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
 
@@ -583,18 +583,22 @@ File: standard.bbx 2020/08/23 v3.15a biblatex bibliography style (PK/MW)
 \c@bbx:relatedcount=\count410
 \c@bbx:relatedtotal=\count411
 ))
-Package biblatex Info: Trying to load citation style 'authoryear'...
-Package biblatex Info: ... file 'authoryear.cbx' found.
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
 
-("C:\Program Files\MiKTeX\tex/latex/biblatex/cbx\authoryear.cbx"
-File: authoryear.cbx 2020/08/23 v3.15a biblatex citation style (PK/MW)
+("C:\Program Files\MiKTeX\tex/latex/biblatex/cbx\numeric.cbx"
+File: numeric.cbx 2020/08/23 v3.15a biblatex citation style (PK/MW)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
 Package biblatex Info: Redefining '\footcitetext'.
 Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
 Package biblatex Info: Redefining '\textcite'.
 Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
 )
 Package biblatex Info: Trying to load configuration file...
 Package biblatex Info: ... file 'biblatex.cfg' found.
@@ -831,6 +835,19 @@ Package caption Info: End \AtBeginDocument code.
 
 Package scrlayer Info: Setting magic \footheight to \baselineskip while
 (scrlayer)             \begin{document} on input line 90.
+
+Package scrlayer-scrpage Warning: Very small head height detected!
+(scrlayer-scrpage)                Using scrlayer-scrpage the head height
+(scrlayer-scrpage)                should be at least \baselineskip, which is
+(scrlayer-scrpage)                23.99748pt currently.
+(scrlayer-scrpage)                But head height is currently 20.66162pt only.
+
+(scrlayer-scrpage)                You may use
+(scrlayer-scrpage)                geometry option `head=23.99748pt'
+(scrlayer-scrpage)                or load package `scrlayer-scrpage' with
+(scrlayer-scrpage)                option `singlespacing=true'
+(scrlayer-scrpage)                to avoid this warning.
+
 Package scrbase Info: activating english \abbrevname on input line 90.
 Package scrbase Info: activating english \byname on input line 90.
 Package scrbase Info: activating english \acknowledgementname on input line 90.
@@ -854,12 +871,17 @@ Package biblatex Info: Data encoding 'utf8' specified.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
- (main.bbl)
+ (main.bbl
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'landau_2019':
+(biblatex)                - Invalid format of field 'month'.
+
+)
 Package biblatex Info: Reference section=0 on input line 90.
 Package biblatex Info: Reference segment=0 on input line 90.
 Package hyperref Info: Link coloring ON on input line 90.
-
-("C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty"
+ ("C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty"
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
 ("C:\Program Files\MiKTeX\tex/latex/refcount\refcount.sty"
@@ -917,68 +939,67 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
  Declaration of Authorship
 --------------------
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
-49.
+48.
 ("C:\Program Files\MiKTeX\tex/latex/psnfss\ts1ppl.fd"
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 154--155
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
 
  []
 
 1: section
+
+Package scrlayer-scrpage Warning: \headheight to low.
+(scrlayer-scrpage)                At least 23.99747pt needed,
+(scrlayer-scrpage)                but only 20.66162pt found.
+(scrlayer-scrpage)                I'll enlarge \headheight, for further
+(scrlayer-scrpage)                processing, but you should do this yourself,
+(scrlayer-scrpage)                e.g., setting geometry's option
+(scrlayer-scrpage)                `head=23.99747pt'.
+(scrlayer-scrpage)                I'll also decrease \topmargin on input line 1
+68.
+
+
+Overfull \vbox (3.33585pt too high) has occurred while \output is active []
+
+
 [1
 
 ]
 --------------------
  Abstract
 --------------------
-
-Overfull \hbox (3.01862pt too wide) in paragraph at lines 170--171
-\T1/ppl/m/n/12 Lorem ip-sum do-lor sit amet, con-secte-tur adip-isc-ing elit. N
-am hen-drerit massa
- []
-
 1: section
 [2
 
-]
+] [3]
 --------------------
  Acknowledgements
 --------------------
-
-Overfull \hbox (3.01862pt too wide) in paragraph at lines 181--182
-\T1/ppl/m/n/12 Lorem ip-sum do-lor sit amet, con-secte-tur adip-isc-ing elit. N
-am hen-drerit massa
- []
-
 1: section
-[3
+[4
 
 ] (main.toc
 1: section
-[4
+[5
 
 ])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- [5] (main.lof)
+ [6] (main.lof)
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
 
 1: section
-[6
+[7
 
 ] (main.lot)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
 
-1: section
-[7
-
-]
 1: section
 [8
 
@@ -992,65 +1013,64 @@ am hen-drerit massa
 
 ]
 1: section
+[11
+
+]
+1: section
 \openout2 = `Chapters/Chapter1.aux'.
 
 (Chapters/Chapter1.tex
 Chapter 1.
-)
 1: section
 [1
 
 
 
-] [2]
+] [2]) [3]
 \openout2 = `Chapters/Chapter2.aux'.
 
  (Chapters/Chapter2.tex
 Chapter 2.
-)
 1: section
-[3
+[4
 
 
 
 
-] [4]
+]) [5]
 \openout2 = `Chapters/Chapter3.aux'.
 
  (Chapters/Chapter3.tex
 Chapter 3.
-)
 1: section
-[5
+[6
 
 
 
 
-] [6]
+]) [7]
 \openout2 = `Chapters/Chapter4.aux'.
 
  (Chapters/Chapter4.tex
 Chapter 4.
-)
 1: section
-[7
+[8
 
 
 
 
-] [8]
+]) [9]
 \openout2 = `Chapters/Chapter5.aux'.
 
  (Chapters/Chapter5.tex
 Chapter 5.
-)
 1: section
-[9
+[10
 
 
 
 
-] [10]
+]) [11]
 \openout2 = `Appendices/AppendixA.aux'.
 
  (Appendices/AppendixA.tex
@@ -1061,19 +1081,25 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ))
 1: section
-[11
+[12
 
 
 
 
 ]
-Overfull \hbox (4.0734pt too wide) in paragraph at lines 274--274
-[][]\T1/ppl/m/n/12 Wieman, Carl E. and Leo Holl-berg (Jan. 1991).   Us-ing Dio
-de Lasers for Atomic
+Overfull \hbox (6.34796pt too wide) in paragraph at lines 278--278
+[]\T1/ppl/m/n/12 Eclipse. \T1/ppl/m/sc/12 url\T1/ppl/m/n/12 : [][]$\T1/cmtt/m/n
+/12 https : / / www . eclipse . org / downloads / packages / release /
+ []
+
+
+Overfull \hbox (15.38377pt too wide) in paragraph at lines 278--278
+[]\T1/ppl/m/n/12 Xhoni Robo. \T1/ppl/m/it/12 XhRobo / Finite-Difference-Time-Do
+main-Method-Implementation-
  []
 
 1: section
-[12
+[13
 
 
 
@@ -1081,19 +1107,19 @@ de Lasers for Atomic
 (Chapters/Chapter3.aux) (Chapters/Chapter4.aux) (Chapters/Chapter5.aux)
 (Appendices/AppendixA.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 1D28FA4D9DC67FA6E982BD49500ACFFC;4249.
+(rerunfilecheck)             Checksum: 8B6EED5BD5426EDD467AFD30AB6A36D2;4959.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26513 strings out of 479697
- 545412 string characters out of 2877009
- 1072858 words of memory out of 3000000
- 43146 multiletter control sequences out of 15000+200000
+ 26530 strings out of 479697
+ 545735 string characters out of 2877009
+ 1068921 words of memory out of 3000000
+ 43156 multiletter control sequences out of 15000+200000
  447826 words of font info for 103 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,20n,98p,1820b,2460s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 94i,19n,98p,1820b,2473s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\xhoni\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt
 1200.pk> <C:\Users\xhoni\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ectt1095.pk>{C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Program 
@@ -1103,9 +1129,9 @@ public/mathpazo/fplmri.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/up
 lb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Progr
 am Files/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX/fo
 nts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (23 pages, 167112 bytes).
+Output written on main.pdf (25 pages, 183722 bytes).
 PDF statistics:
- 382 PDF objects out of 1000 (max. 8388607)
- 67 named destinations out of 1000 (max. 500000)
- 249 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 427 PDF objects out of 1000 (max. 8388607)
+ 74 named destinations out of 1000 (max. 500000)
+ 265 words of extra memory for PDF output out of 10000 (max. 10000000)
 

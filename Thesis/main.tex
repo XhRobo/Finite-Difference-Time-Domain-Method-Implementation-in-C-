@@ -26,7 +26,7 @@
 12pt, % The default document font size, options: 10pt, 11pt, 12pt
 oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
 english, % ngerman for German
-onehalfspacing, % Single line spacing, alternatives: singlespacing or doublespacing
+doublespacing, % Single line spacing, alternatives: singlespacing or onehalfspacing
 %draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
 %nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
 %liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
@@ -43,7 +43,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 \usepackage{mathpazo} % Use the Palatino font by default
 
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{example.bib} % The filename of the bibliography
 
@@ -100,13 +100,12 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 \begin{titlepage}
 \begin{center}
 
-\vspace*{.01\textheight}
 {\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
 \textsc{\Large Master Thesis}\\[0.5cm] % Thesis type
 
-\HRule \\[0.4cm] % Horizontal line
+\HRule \\ % Horizontal line
 {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
-\HRule \\[1.5cm] % Horizontal line
+\HRule \\ % Horizontal line
  
 \begin{minipage}[t]{0.4\textwidth}
 \begin{flushleft} \large
@@ -121,12 +120,12 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 \emph{Assistant Supervisor:} \\
 {\examname} % Examiner name - remove the \href bracket to remove the link  
 \end{flushright}
-\end{minipage}\\[1.5cm]
+\end{minipage}\\[1.0cm]
 
 
 \large \textit{A thesis submitted in fulfillment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
 \textit{in}\\[0.4cm]
-\groupname\\\facname\\[1cm] % Research group name and department name
+\groupname\\\facname\\[0.5cm] % Research group name and department name
  
 \vfill
 
@@ -167,24 +166,29 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit massa id mattis sagittis. Sed viverra pharetra lacus, non pretium tellus commodo sit amet. Integer mattis, eros ac posuere auctor, sem neque congue velit, in lacinia ex augue sit amet justo. Pellentesque ultricies gravida ullamcorper. Nam posuere venenatis euismod. Etiam quis lacus malesuada, volutpat lorem at, ultricies enim. Sed id lectus non justo convallis vestibulum. Etiam consequat nunc a maximus auctor. Suspendisse maximus accumsan sollicitudin. Donec fermentum ac dolor eu porta. Aliquam sodales imperdiet dui, sit amet finibus sapien elementum tristique. Phasellus tristique lectus et ligula facilisis viverra.
+This thesis is the final documentation for a project in the Master of Science degree of High Integrity Systems supervised by Prof. Dr. Peter Thoma and Prof. Dr. Egbert Falkenberg. In this thesis, the author will explain the basics of electromagnetic simulation and demonstrate a simple application that will produce both electric and magnetic field data, which can then be visualized through the help of third party applications such as Paraview\textsuperscript{\cite{paraview}}. 
 
-Vestibulum feugiat, enim nec consectetur semper, purus leo bibendum sem, eu semper felis orci bibendum nibh. Ut nunc mi, faucibus eget feugiat eget, tincidunt ac ante. Nam nec viverra leo. Nam facilisis dictum vulputate. Sed nisi sem, viverra at orci vel, dictum posuere odio. Sed rhoncus, quam id volutpat malesuada, justo tellus aliquet lacus, sed auctor turpis dolor et orci. Suspendisse potenti. Nunc vitae gravida diam, sit amet gravida tortor. Aliquam erat volutpat.
+This thesis is heavily focused on theoretical aspect of such an application, and as such the code will be simplistic and not use any advanced external libraries not included by default in the basic C++ package. The application will not have a User Interface (UI), therefore the only way to customize the initial values of the code variables would be through an Integrated Development Environment (IDE) that can handle C++, such as Eclipse \textsuperscript{\cite{eclipse}}. The benefit of not relying on any external open source libraries is the ability for this code to be used by any machine regardless of operating system and easy integration into applications that need such simulations.
+
+Alongside this document, the project also included the code files found in the GitHub repository\textsuperscript{\cite{robo}}. As the base \LaTeX \space template of this thesis was found online\textsuperscript{\cite{template}}, these files are also included, with the license allowing viewing and modification so long as it is for a non-commercial use. After the official deadline of January 5th 2021, this project will be considered complete and no further changes will be made.
 \end{abstract}
-
+\textbf{Keywords:} \textit{\keywordnames}
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
 
 \begin{acknowledgements}
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit massa id mattis sagittis. Sed viverra pharetra lacus, non pretium tellus commodo sit amet. Integer mattis, eros ac posuere auctor, sem neque congue velit, in lacinia ex augue sit amet justo. Pellentesque ultricies gravida ullamcorper. Nam posuere venenatis euismod. Etiam quis lacus malesuada, volutpat lorem at, ultricies enim. Sed id lectus non justo convallis vestibulum. Etiam consequat nunc a maximus auctor. Suspendisse maximus accumsan sollicitudin. Donec fermentum ac dolor eu porta. Aliquam sodales imperdiet dui, sit amet finibus sapien elementum tristique. Phasellus tristique lectus et ligula facilisis viverra.
+First and foremost I would like to thank my academic supervisor, Prof. Dr. Peter Thoma. It is only due to his patience, perseverance, and willingness to spend his time aiding me, that I was able to complete this project. Even before that, I would like to thank him for his course of Simulation Methods in the High Integrity Systems M.Sc. degree, that convinced me that such a subject would make an interesting thesis for me.
 
-Vestibulum feugiat, enim nec consectetur semper, purus leo bibendum sem, eu semper felis orci bibendum nibh. Ut nunc mi, faucibus eget feugiat eget, tincidunt ac ante. Nam nec viverra leo. Nam facilisis dictum vulputate. Sed nisi sem, viverra at orci vel, dictum posuere odio. Sed rhoncus, quam id volutpat malesuada, justo tellus aliquet lacus, sed auctor turpis dolor et orci. Suspendisse potenti. Nunc vitae gravida diam, sit amet gravida tortor. Aliquam erat volutpat.
+I would also like to the Prof. Dr. Falkenberg, not only for his assistance throughout my higher academic studies, but also because I would not be able to officially start working on this thesis without his acceptance.
 
-Maecenas felis nisi, consequat sed neque vitae, faucibus aliquet dui. Quisque fermentum lorem vitae efficitur pretium. Sed rhoncus odio et ipsum sollicitudin dictum. Phasellus a tellus sed quam rhoncus auctor at venenatis odio. Cras ultricies euismod mauris, sed consectetur lorem porta in. Aliquam aliquet massa sit amet tempus faucibus. Praesent imperdiet dignissim aliquam. Morbi ac orci ut purus tempus molestie a nec mi. Morbi lobortis nisl aliquet lectus tincidunt ullamcorper. Maecenas fermentum lorem massa, in commodo leo blandit vitae. Praesent sed sapien nulla. Phasellus sodales scelerisque orci ut tincidunt. Nam molestie nisi sapien, sed varius enim venenatis a. Quisque purus tortor, suscipit sed rhoncus sit amet, maximus ut dolor. Nulla facilisi.
+Thank you to my friends, who although far away have helped me keep my spirits high during a rather dark year not just for me, but for the world as a whole. It would have been difficult to push through to the end of this degree otherwise, if not impossible.
 
-Vestibulum gravida sagittis euismod. In hac habitasse platea dictumst. Nullam egestas efficitur diam sagittis porttitor. Praesent pulvinar metus dolor, et condimentum erat commodo nec. Sed iaculis orci urna, a ullamcorper arcu vehicula ac. Etiam ultricies justo mi, ut tincidunt enim bibendum a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+And lastly, my deepest thanks to my parents, who taught me discipline, and also acceptance. They did their best to set me up for a rich academic life, by straining themselves physically, mentally, and economically just so that I could have the best possibilities available to me. It will take an eternity to repay them back for their sacrifices, but hopefully this is, at the very least, a step in the right direction.
+
+Sincerely,\\
+Xhoni Robo
 \end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
@@ -203,7 +207,7 @@ Vestibulum gravida sagittis euismod. In hac habitasse platea dictumst. Nullam eg
 
 \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
 
-\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere\\
+\textbf{FDTD} & \textbf{F}inite \textbf{D}ifference \textbf{T}ime \textbf{D}omain (Method)\\
 \textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
 
 \end{abbreviations}
