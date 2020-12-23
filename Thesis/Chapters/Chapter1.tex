@@ -84,7 +84,22 @@ The equations above are shown in their derivative form, but they can also be sho
 %-----------------------------------
 
 \subsection{Solving the Wave Equation}
-Morbi rutrum odio eget arcu adipiscing sodales. Aenean et purus a est pulvinar pellentesque. Cras in elit neque, quis varius elit. Phasellus fringilla, nibh eu tempus venenatis, dolor elit posuere quam, quis adipiscing urna leo nec orci. Sed nec nulla auctor odio aliquet consequat. Ut nec nulla in ante ullamcorper aliquam at sed dolor. Phasellus fermentum magna in augue gravida cursus. Cras sed pretium lorem. Pellentesque eget ornare odio. Proin accumsan, massa viverra cursus pharetra, ipsum nisi lobortis velit, a malesuada dolor lorem eu neque.
+Using the formulas above, we can derive the electromagnetic wave equation, which is needed to proceed with the implementation further. Firstly for convenience, we will assume that the environment is the vacuum of space. Secondly, we will also assume that there is no charge in this space. This means that $\epsilon(\vec{r})=\epsilon_{0}$ and $\mu(\vec{r})=\mu_{0}$. This allows us to simplify the above equations and give us the numerical solution for the wave equation
+
+\begin{equation}
+	\label{eqn:waveEquation}
+	\Delta\vec{E}(\vec{r},t) - \frac{1}{c^2} \frac{\partial^2 \vec{E}(\vec{r},t)}{\partial t^2} = \mu_{0} \frac{\partial \vec{J}(\vec{r},t)}{\partial t},
+\end{equation}
+
+where: $$c = \frac{1}{\sqrt{\mu_{0}\epsilon_{0}}}$$
+
+This equation is useful because it will be used to derive the formulas that are going to be needed for the simulations. Going forwards, this will be used as a basis to adapt our solution to every environment, regardless of dimensionality. From this point, there are many ways to proceed. Some of the most notable are the Finite Element Method (FEM), the Finite Integration Technique (FIT), and the Finite Difference Time Domain Method (FDTD). All of them are also known as Approximation Methods.
+
+FEM is a well known numerical method used to obtain an approximation for a given boundary value problem. The basic principle is to divide a system into smaller subsets, called finite elements (hence the name), which are much simpler to solve. This is done by discretizing the given space for each of its dimensions, and then constructing a mesh of the object. As a result, from the initial boundary value problem we get a system of equations that are further used to approximate each singular simplified function over the given domain. These equations are then compiled together into a system of equations that is then used to model the initial problem. The solution is then approximated by solving this system and minimizing the error function.\textsuperscript{\cite{logan2011first}}
+
+The finite integration technique (FIT) is a bit more straightforward. It can help numerically solve electromagnetic field problems by disctretizing in both the time and frequency domain. The first to introduce this technique was Thomas Weiland in 1977.\textsuperscript{\cite{weiland1977discretization}} It has later seen continuous improvements and can now cover all electromagnetic problems and applications. This approach works by using the Maxwell equations above and applying their integral form to a set of staggered grids (e.g. Cartesian grid). This allows for a memory efficient implementation as well as giving the ability to handle different boundary conditions and variable material properties.
+
+Finally we have a well known computational electromagnetic technique used for approximation, the Finite Difference Time Domain Method. It is arguably the easiest method out of the three to understand and implement, which is surprising when considering the capabilities it has in solving wave equations. This simplicity is also the reason it was chosen for this thesis, as it is the only technique that one person can realistically implement by themselves in a reasonable time frame.\textsuperscript{\cite{davidson2010computational}} As the name implies this is a time-domain method, meaning that a wide range of frequencies can be covered with a single simulation run. The only caveat is that the time step needs to be small enough to not cause any instabilities in the system.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -92,7 +107,9 @@ Morbi rutrum odio eget arcu adipiscing sodales. Aenean et purus a est pulvinar p
 
 \section{Finite Difference Time Domain Method}
 
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+FDTD belongs in the general class of grid-based differential time-domain numerical modeling methods. Maxwell's equations (in partial differential form) are modified to central-difference equations, discretized, and implemented in software. The equations are solved in a cyclic manner: the electric field is solved at a given instant in time, then the magnetic field is solved at the next instant in time, and the process is repeated over and over again.
+
+The basic FDTD algorithm traces back to a seminal 1966 paper by Kane Yee in IEEE Transactions on Antennas and Propagation. Allen Taflove originated the descriptor "Finite-difference time-domain" and its corresponding "FDTD" acronym in a 1980 paper in IEEE Trans. Electromagn. Compat.. Since about 1990, FDTD techniques have emerged as the primary means to model many scientific and engineering problems addressing electromagnetic wave interactions with material structures. An effective technique based on a time-domain finite-volume discretization procedure was introduced by Mohammadian et al. in 1991.[12] Current FDTD modeling applications range from near-DC (ultralow-frequency geophysics involving the entire Earth-ionosphere waveguide) through microwaves (radar signature technology, antennas, wireless communications devices, digital interconnects, biomedical imaging/treatment) to visible light (photonic crystals, nanoplasmonics, solitons, and biophotonics). Approximately 30 commercial and university-developed software suites are available.
 
 \section{FDTD Implementation}
 

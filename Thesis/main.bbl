@@ -93,6 +93,29 @@
     \field{year}{2005}
   \endentry
 
+  \entry{davidson2010computational}{book}{}
+    \name{author}{1}{}{%
+      {{hash=DDB}{%
+         family={Davidson},
+         familyi={D\bibinitperiod},
+         given={David\bibnamedelima B},
+         giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press}%
+    }
+    \strng{namehash}{DDB1}
+    \strng{fullhash}{DDB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{Computational electromagnetics for RF and microwave
+  engineering}
+    \field{year}{2010}
+  \endentry
+
   \entry{eclipse}{misc}{}
     \name{author}{1}{}{%
       {{hash=E}{%
@@ -146,6 +169,26 @@
     \field{journaltitle}{Nasa.gov}
     \field{year}{2019}
     \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{logan2011first}{article}{}
+    \name{author}{1}{}{%
+      {{hash=LDL}{%
+         family={Logan},
+         familyi={L\bibinitperiod},
+         given={Daryl\bibnamedelima L},
+         giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LDL1}
+    \strng{fullhash}{LDL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{title}{First course in finite element method, si}
+    \field{journaltitle}{Mason, OH: South-Western, Cengage Learning}
+    \field{year}{2011}
   \endentry
 
   \entry{paraview}{misc}{}
@@ -351,6 +394,27 @@
     \field{title}{Femto-photography: capturing and visualizing the propagation
   of light}
     \field{year}{2013}
+  \endentry
+
+  \entry{weiland1977discretization}{article}{}
+    \name{author}{1}{}{%
+      {{hash=WT}{%
+         family={Weiland},
+         familyi={W\bibinitperiod},
+         given={T},
+         giveni={T},
+      }}%
+    }
+    \strng{namehash}{WT1}
+    \strng{fullhash}{WT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{A discretization method for the solution of Maxwell's
+  equations for six-component fields.-Electronics and Communication,(AE{\"U}),
+  Vol. 31}
+    \field{year}{1977}
   \endentry
 \enddatalist
 \endinput

@@ -7,33 +7,33 @@
 \contentsline {section}{\numberline {1.1}Electromagnetic Simulations}{1}{section.14}%
 \contentsline {subsection}{\numberline {1.1.1}Maxwell Equations}{2}{subsection.15}%
 \contentsline {subsection}{\numberline {1.1.2}Solving the Wave Equation}{5}{subsection.24}%
-\contentsline {section}{\numberline {1.2}Finite Difference Time Domain Method}{5}{section.25}%
-\contentsline {section}{\numberline {1.3}FDTD Implementation}{6}{section.26}%
-\contentsline {subsection}{\numberline {1.3.1}Project Plan, Requirements, and Tools Used}{6}{subsection.27}%
-\contentsline {subsection}{\numberline {1.3.2}Computational Limitations and Inaccuracies Explained}{7}{subsection.28}%
-\contentsline {chapter}{\numberline {2}FDTD - 1 Dimensional Scenario}{8}{chapter.29}%
-\contentsline {section}{\numberline {2.1}Main Section 1}{8}{section.30}%
-\contentsline {subsection}{\numberline {2.1.1}Subsection 1}{8}{subsection.31}%
-\contentsline {subsection}{\numberline {2.1.2}Subsection 2}{8}{subsection.32}%
-\contentsline {section}{\numberline {2.2}C++ Implementation}{9}{section.33}%
-\contentsline {section}{\numberline {2.3}Data Visualization}{12}{section.34}%
-\contentsline {chapter}{\numberline {3}FDTD - 2 Dimensional Scenario}{14}{chapter.35}%
-\contentsline {section}{\numberline {3.1}Main Section 1}{14}{section.36}%
-\contentsline {subsection}{\numberline {3.1.1}Subsection 1}{14}{subsection.37}%
-\contentsline {subsection}{\numberline {3.1.2}Subsection 2}{14}{subsection.38}%
-\contentsline {section}{\numberline {3.2}C++ Implementation}{15}{section.39}%
-\contentsline {section}{\numberline {3.3}Data Visualization}{20}{section.40}%
-\contentsline {chapter}{\numberline {4}FDTD - 3 Dimensional Scenario}{21}{chapter.41}%
-\contentsline {section}{\numberline {4.1}Main Section 1}{21}{section.42}%
-\contentsline {subsection}{\numberline {4.1.1}Subsection 1}{21}{subsection.43}%
-\contentsline {subsection}{\numberline {4.1.2}Subsection 2}{21}{subsection.44}%
-\contentsline {section}{\numberline {4.2}C++ Implementation}{22}{section.45}%
-\contentsline {section}{\numberline {4.3}Data Visualization}{29}{section.46}%
-\contentsline {chapter}{\numberline {5}Conclusion}{30}{chapter.47}%
-\contentsline {section}{\numberline {5.1}Main Section 1}{30}{section.48}%
-\contentsline {subsection}{\numberline {5.1.1}Subsection 1}{30}{subsection.49}%
-\contentsline {subsection}{\numberline {5.1.2}Subsection 2}{30}{subsection.50}%
-\contentsline {section}{\numberline {5.2}Main Section 2}{31}{section.51}%
-\contentsline {chapter}{\numberline {A}Frequently Asked Questions}{32}{appendix.52}%
-\contentsline {section}{\numberline {A.1}How do I change the colors of links?}{32}{section.53}%
-\contentsline {chapter}{Bibliography}{33}{appendix*.54}%
+\contentsline {section}{\numberline {1.2}Finite Difference Time Domain Method}{7}{section.26}%
+\contentsline {section}{\numberline {1.3}FDTD Implementation}{7}{section.27}%
+\contentsline {subsection}{\numberline {1.3.1}Project Plan, Requirements, and Tools Used}{8}{subsection.28}%
+\contentsline {subsection}{\numberline {1.3.2}Computational Limitations and Inaccuracies Explained}{8}{subsection.29}%
+\contentsline {chapter}{\numberline {2}FDTD - 1 Dimensional Scenario}{10}{chapter.30}%
+\contentsline {section}{\numberline {2.1}Main Section 1}{10}{section.31}%
+\contentsline {subsection}{\numberline {2.1.1}Subsection 1}{10}{subsection.32}%
+\contentsline {subsection}{\numberline {2.1.2}Subsection 2}{10}{subsection.33}%
+\contentsline {section}{\numberline {2.2}C++ Implementation}{11}{section.34}%
+\contentsline {section}{\numberline {2.3}Data Visualization}{14}{section.35}%
+\contentsline {chapter}{\numberline {3}FDTD - 2 Dimensional Scenario}{16}{chapter.36}%
+\contentsline {section}{\numberline {3.1}Main Section 1}{16}{section.37}%
+\contentsline {subsection}{\numberline {3.1.1}Subsection 1}{16}{subsection.38}%
+\contentsline {subsection}{\numberline {3.1.2}Subsection 2}{16}{subsection.39}%
+\contentsline {section}{\numberline {3.2}C++ Implementation}{17}{section.40}%
+\contentsline {section}{\numberline {3.3}Data Visualization}{22}{section.41}%
+\contentsline {chapter}{\numberline {4}FDTD - 3 Dimensional Scenario}{23}{chapter.42}%
+\contentsline {section}{\numberline {4.1}Main Section 1}{23}{section.43}%
+\contentsline {subsection}{\numberline {4.1.1}Subsection 1}{23}{subsection.44}%
+\contentsline {subsection}{\numberline {4.1.2}Subsection 2}{23}{subsection.45}%
+\contentsline {section}{\numberline {4.2}C++ Implementation}{24}{section.46}%
+\contentsline {section}{\numberline {4.3}Data Visualization}{31}{section.47}%
+\contentsline {chapter}{\numberline {5}Conclusion}{32}{chapter.48}%
+\contentsline {section}{\numberline {5.1}Main Section 1}{32}{section.49}%
+\contentsline {subsection}{\numberline {5.1.1}Subsection 1}{32}{subsection.50}%
+\contentsline {subsection}{\numberline {5.1.2}Subsection 2}{32}{subsection.51}%
+\contentsline {section}{\numberline {5.2}Main Section 2}{33}{section.52}%
+\contentsline {chapter}{\numberline {A}Frequently Asked Questions}{34}{appendix.53}%
+\contentsline {section}{\numberline {A.1}How do I change the colors of links?}{34}{section.54}%
+\contentsline {chapter}{Bibliography}{35}{appendix*.55}%
