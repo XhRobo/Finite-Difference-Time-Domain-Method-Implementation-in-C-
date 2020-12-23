@@ -17,6 +17,82 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{cao2005first}{article}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{10}{}{%
+      {{hash=CJ}{%
+         family={Cao},
+         familyi={C\bibinitperiod},
+         given={JB},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LZ}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={ZX},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=YJ}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={JY},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=YC}{%
+         family={Yian},
+         familyi={Y\bibinitperiod},
+         given={CX},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=WZ}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={ZG},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=ZX}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={XH},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=WS}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={SR},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CS}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={SW},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=BW}{%
+         family={Bian},
+         familyi={B\bibinitperiod},
+         given={W},
+         giveni={W},
+      }}%
+      {{hash=DW}{%
+         family={Dong},
+         familyi={D\bibinitperiod},
+         given={W},
+         giveni={W},
+      }}%
+    }
+    \strng{namehash}{CJ+1}
+    \strng{fullhash}{CJLZYJYCWZZXWSCSBWDW+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{First results of low frequency electromagnetic wave detector
+  of TC-2/Double Star program}
+    \field{year}{2005}
+  \endentry
+
   \entry{eclipse}{misc}{}
     \name{author}{1}{}{%
       {{hash=E}{%
@@ -92,6 +168,30 @@
     \endverb
   \endentry
 
+  \entry{poyser1918magnetism}{book}{}
+    \name{author}{1}{}{%
+      {{hash=PAW}{%
+         family={Poyser},
+         familyi={P\bibinitperiod},
+         given={Arthur\bibnamedelima William},
+         giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {Longmans, Green}%
+      {Company}%
+    }
+    \strng{namehash}{PAW1}
+    \strng{fullhash}{PAW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{Magnetism and electricity: A manual for students in advanced
+  classes}
+    \field{year}{1918}
+  \endentry
+
   \entry{robo}{misc}{}
     \name{author}{1}{}{%
       {{hash=RX}{%
@@ -116,6 +216,29 @@
     \verb https://github.com/XhRobo/Finite-Difference-Time-Domain-Method-Implem
     \verb entation-in-C-
     \endverb
+  \endentry
+
+  \entry{stratton2007electromagnetic}{book}{}
+    \name{author}{1}{}{%
+      {{hash=SJA}{%
+         family={Stratton},
+         familyi={S\bibinitperiod},
+         given={Julius\bibnamedelima Adams},
+         giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {John Wiley \& Sons}%
+    }
+    \strng{namehash}{SJA1}
+    \strng{fullhash}{SJA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Electromagnetic theory}
+    \field{volume}{33}
+    \field{year}{2007}
   \endentry
 
   \entry{template}{article}{}

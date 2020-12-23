@@ -38,6 +38,9 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 %consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
+\usepackage{lmodern} % for bold teletype font
+\usepackage{minted}
+
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 
@@ -207,8 +210,14 @@ Xhoni Robo
 
 \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
 
-\textbf{FDTD} & \textbf{F}inite \textbf{D}ifference \textbf{T}ime \textbf{D}omain (Method)\\
-\textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
+\textbf{FDTD}	 & \textbf{F}inite \textbf{D}ifference \textbf{T}ime \textbf{D}omain (Method)\\
+\textbf{E} 	 	 & Electric Field Intenensity\\
+\textbf{D}  	 & Electric Displacement (Electric Divergence)\\
+\textbf{H}   	 & Magnetic Field Intenensity\\
+\textbf{B}    	 & Magnetic Induction (Magnetic Divergence)\\
+\textbf{J}    	 &  Current Density\\ 
+\textbf{$\rho$}  & Density of charge\\
+\textbf{EMF}     & \textbf{E}lectro\textbf{m}otive \textbf{F}orce\\
 
 \end{abbreviations}
 
@@ -220,7 +229,8 @@ Xhoni Robo
 
 % The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
 
-Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
+Vacuum permeability & $\mu_{0}$      & \SI{1.25663706212(19)e-6}{\henry\per\meter}\\
+Vacuum permitivity  & $\epsilon_{0}$ & \SI{8.8541878128(13)e-12}{\farad\per\meter}\\
 %Constant Name & $Symbol$ & $Constant Value$ with units\\
 
 \end{constants}
