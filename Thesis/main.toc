@@ -13,31 +13,35 @@
 \contentsline {subsection}{\numberline {1.3.2}Computational Limitations and Inaccuracies Explained}{12}{subsection.44}%
 \contentsline {chapter}{\numberline {2}FDTD - One-Dimensional Scenario}{14}{chapter.46}%
 \contentsline {section}{\numberline {2.1}1D Discretization}{14}{section.47}%
-\contentsline {subsection}{\numberline {2.1.1}Subsection 1}{14}{subsection.48}%
-\contentsline {subsection}{\numberline {2.1.2}Subsection 2}{14}{subsection.49}%
-\contentsline {section}{\numberline {2.2}C++ Implementation}{14}{section.50}%
-\contentsline {section}{\numberline {2.3}Data Visualization}{17}{section.51}%
-\contentsline {chapter}{\numberline {3}FDTD - Two-Dimensional Scenario}{20}{chapter.54}%
-\contentsline {section}{\numberline {3.1}Main Section 1}{20}{section.55}%
-\contentsline {subsection}{\numberline {3.1.1}Subsection 1}{20}{subsection.56}%
-\contentsline {subsection}{\numberline {3.1.2}Subsection 2}{20}{subsection.57}%
-\contentsline {section}{\numberline {3.2}C++ Implementation}{20}{section.58}%
-\contentsline {section}{\numberline {3.3}Data Visualization}{24}{section.59}%
-\contentsline {chapter}{\numberline {4}FDTD - Three-Dimensional Scenario}{26}{chapter.62}%
-\contentsline {section}{\numberline {4.1}Main Section 1}{26}{section.63}%
-\contentsline {subsection}{\numberline {4.1.1}Subsection 1}{26}{subsection.64}%
-\contentsline {subsection}{\numberline {4.1.2}Subsection 2}{26}{subsection.65}%
-\contentsline {section}{\numberline {4.2}C++ Implementation}{26}{section.66}%
-\contentsline {section}{\numberline {4.3}Data Visualization}{33}{section.67}%
-\contentsline {chapter}{\numberline {5}Conclusion}{34}{chapter.70}%
-\contentsline {section}{\numberline {5.1}Main Section 1}{34}{section.71}%
-\contentsline {subsection}{\numberline {5.1.1}Subsection 1}{34}{subsection.72}%
-\contentsline {subsection}{\numberline {5.1.2}Subsection 2}{34}{subsection.73}%
-\contentsline {section}{\numberline {5.2}Main Section 2}{34}{section.74}%
-\contentsline {chapter}{\numberline {A}Appendix}{35}{appendix.75}%
-\contentsline {section}{\numberline {A.1}Tools Used}{35}{section.76}%
-\contentsline {section}{\numberline {A.2}Troubleshooting the implementation}{35}{section.77}%
-\contentsline {section}{\numberline {A.3}Integration into a bigger program}{35}{section.78}%
-\contentsline {section}{\numberline {A.4}Using a domain with different environments}{35}{section.79}%
-\contentsline {section}{\numberline {A.5}Improving performance with CUDA}{35}{section.80}%
-\contentsline {chapter}{Bibliography}{36}{appendix*.81}%
+\contentsline {subsection}{\numberline {2.1.1}Spatial and Temporal Shift}{15}{subsection.48}%
+\contentsline {subsection}{\numberline {2.1.2}Electromagnetic Curls}{15}{subsection.50}%
+\contentsline {section}{\numberline {2.2}C++ Implementation}{20}{section.71}%
+\contentsline {section}{\numberline {2.3}Data Visualization}{21}{section.72}%
+\contentsline {chapter}{\numberline {3}FDTD - Two-Dimensional Scenario}{23}{chapter.75}%
+\contentsline {section}{\numberline {3.1}Main Section 1}{23}{section.76}%
+\contentsline {subsection}{\numberline {3.1.1}Subsection 1}{23}{subsection.77}%
+\contentsline {subsection}{\numberline {3.1.2}Subsection 2}{23}{subsection.78}%
+\contentsline {section}{\numberline {3.2}C++ Implementation}{23}{section.79}%
+\contentsline {section}{\numberline {3.3}Data Visualization}{23}{section.80}%
+\contentsline {chapter}{\numberline {4}FDTD - Three-Dimensional Scenario}{25}{chapter.83}%
+\contentsline {section}{\numberline {4.1}Main Section 1}{25}{section.84}%
+\contentsline {subsection}{\numberline {4.1.1}Subsection 1}{25}{subsection.85}%
+\contentsline {subsection}{\numberline {4.1.2}Subsection 2}{25}{subsection.86}%
+\contentsline {section}{\numberline {4.2}C++ Implementation}{25}{section.87}%
+\contentsline {section}{\numberline {4.3}Data Visualization}{25}{section.88}%
+\contentsline {chapter}{\numberline {5}Conclusion}{27}{chapter.91}%
+\contentsline {section}{\numberline {5.1}Main Section 1}{27}{section.92}%
+\contentsline {subsection}{\numberline {5.1.1}Subsection 1}{27}{subsection.93}%
+\contentsline {subsection}{\numberline {5.1.2}Subsection 2}{27}{subsection.94}%
+\contentsline {section}{\numberline {5.2}Main Section 2}{27}{section.95}%
+\contentsline {chapter}{\numberline {A}Appendix}{28}{appendix.96}%
+\contentsline {section}{\numberline {A.1}Tools Used}{28}{section.97}%
+\contentsline {section}{\numberline {A.2}Full Code Files}{28}{section.98}%
+\contentsline {subsection}{\numberline {A.2.1}FDTD 1D}{28}{subsection.99}%
+\contentsline {subsection}{\numberline {A.2.2}FDTD 2D}{30}{subsection.100}%
+\contentsline {subsection}{\numberline {A.2.3}FDTD 3D}{34}{subsection.101}%
+\contentsline {section}{\numberline {A.3}Troubleshooting the implementation}{39}{section.102}%
+\contentsline {section}{\numberline {A.4}Integration into a bigger program}{39}{section.103}%
+\contentsline {section}{\numberline {A.5}Using a domain with different environments}{39}{section.104}%
+\contentsline {section}{\numberline {A.6}Improving performance with CUDA}{39}{section.105}%
+\contentsline {chapter}{Bibliography}{40}{appendix*.106}%
