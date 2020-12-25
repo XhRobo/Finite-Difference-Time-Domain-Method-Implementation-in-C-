@@ -181,7 +181,7 @@ Finally, we are ready to proceed into the code implementation.
 
 \section{C++ Implementation}
 
-Calculating the update equations is by far the most difficult part of implementing FDTD. However, translating equations into code is not always straightforward. Before we begin the implementation, we need to prepare our coding environment. For this project, the author is using the Eclipse IDE for C++ Development\textsuperscript{\cite{eclipse}}. After creating a new project, we will start off with an empty skeleton that features the \textit{main()} method. Due to not needing any other classes, this is where we will place our code. Before that, we will need to include some packages so that we can use their methods.
+Calculating the update equations is by far the most difficult part of implementing FDTD. However, translating equations into code is not always straightforward. Before we begin the implementation, we need to prepare our coding environment. For this project, the author is using the Eclipse IDE for C++ Development\textsuperscript{\cite{eclipse}}. After creating a new project, we will start off with an empty skeleton that features the \textit{main()} method. Due to not needing any other classes, this is where we will place our code. Before that, we will need to include some packages so that we can use their methods, data types, and variables.
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 #define _USE_MATH_DEFINES
@@ -207,21 +207,170 @@ To shortly explain what each line does:
 	\item \textbf{string} - Includes the string datatype. A string is basically an array of characters. Not only can we use this to format our output more easily, it can also be very useful for printing debugging messages.
 \end{itemize}
 
+Next, we will need to initialize some variables. To begin with, we need to set the permittivity $\epsilon$ and permeability $\mu$ of the domain that we are going to simulate. For our scenario, we are going to use $\epsilon_{0}$ and $\mu_{0}$, which are the values for vacuum.
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+const double permitivity = 8.854e-12;  // vacuum permitivity
+const double permeability = 1.256e-6;  // vacuum permeability
+\end{minted}
+
+These numbers are normally infinite, therefore we are already introducing inaccuracies into our simulation. For greater precision, we could include more decimals, though the difference would not be easily visible. Please note that although the units are not mentioned, we are using SI units for all calculations. This is important, as using the wrong unit could make the simulation inaccurate at best, or utterly unstable at worst.
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+double L = 5;
+int N = 200;
+int iterNum = 800;
+double deltaZ = L / N;
+double deltaT = (deltaZ * sqrt(permitivity*permeability));
+\end{minted}
+
+\textbf{L} is the length of the domain in SI units, namely meters. \textbf{N} is the number of steps, or in the one-dimensional scenario the number of times we have sliced our domain. \textbf{iterNum} is the number of iterations. \textbf{deltaZ} ($\Delta z$) is the difference between the current step and the next one in meters. This can be set to anything, but we want to evenly split our domain and the best way to do so would be to set this to anything that is $x \cdot L/N$.
+
+Special attention should be brought to \textbf{deltaT} ($\Delta t$). If this value is too big, the simulation will quickly grow unstable. While picking any arbitrary value would work, so long as it is small enough, we can choose a value that will always work through the equation below:
+
+\begin{equation}
+	\label{eqn:deltaTcode}
+	\Delta t = \Delta z \cdot \sqrt{\epsilon \mu}
+\end{equation}
+
+This is the one-dimensional version of this equation. We will see how it changes later on when discussing the two-dimensional and three-dimensional scenarios. Now that our testing environment is ready, we will need to initialize the variables that will be used in our loops.
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+// variables needed for Gaussian Pulse excitation
+double eps = 1e-3;
+double Teps = 50 * deltaT;
+double beta = -(pow((2/Teps), 2) * log(eps));
+
+
+vector<double> E;
+vector<double> H;
+vector<double> tE;
+vector<double> tH;
+\end{minted}
+
+\textbf{E} and \textbf{H} are the electric and magnetic field vectors that will hold our data for each time step. For the one-dimensional scenario, in order to display the simulated data we will use what is called a time graph. A time graph is a graph of the values that an arbitrary point $n$ has during the simulation. We will choose the midpoint of the domain $N/2$ for our scenario, and the vectors \textbf{tE} and \textbf{tH} will contain the data of the electric and magnetic time graph respectively. We also initialize some helpful values that will be used by the Gaussian pulse excitation, with the equation \ref{eqn:gaussianPulse} mentioned in chapter \ref{Chapter1}: \textbf{eps} ($\varepsilon$), \textbf{Teps} ($T_\varepsilon$), and \textbf{beta} ($\beta$), with equation \ref{eqn:gaussianBeta} that was discussed in the same chapter.
+
+We are done setting up the variables we will need for the simulation, therefore it is time to actually move on to the \textit{main()} method where we will implement the FDTD algorithm. First, we will need to populate our magnetic and electric field vectors, since we have not done so yet. Since we want our simulation to have no initial charge in it, we will have to set everything to $0$. Luckily there is a quick way to do so:
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+E.assign(N, 0);
+H.assign(N, 0);
+\end{minted}
+
+This will push N zeros to our vectors. Now we will need to start looping for \mint{c++}{int i = 0; i < iterNum; i++} values. We will also start off our Gaussian pulse here, by applying it to the beginning of the electric vector like so:
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+double t = i * deltaT;
+double gamma = Teps / 2;
+
+E[0] = exp(-(beta * pow((t - gamma), 2)));
+\end{minted}
+
+Afterwards, we use the update equations that we derived above to get the values for the magnetic and electric fields:
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+// loop for values
+for (int z = 0; z < N-2; z++) {
+	H[z] = H[z] - (deltaT / permeability / deltaZ) * (E[z] - E[z+1]);
+}
+
+for (int z = 1; z < N-1; z++) {
+	E[z] = E[z] + (deltaT / permitivity / deltaZ) * (H[z] - H[z-1]);
+}
+\end{minted}
+
+Please note that the starting index of a vector is zero, therefore when adding N values to our vectors, the index of the last value is going to be $N-1$. In our loops, we need to be certain that we never surpass this number. For the magnetic vector H loop, we need to make sure that the loop stops when $z + 1 = N - 1 \Leftrightarrow z = N - 2$. Alternatively, we could also populate $N + 1$ values, and extend our domain one unit past our boundaries.
+
+After the above update loops, but while still inside the main loop, we will store the middle values into the respective time graph vectors for each time step:
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+// time graph
+tE.push_back(E[100]);
+tH.push_back(H[100]);
+\end{minted}
+
+As mentioned previously, we can pick any point for this and it would still work. This is also another reasons why vectors are incredibly useful: we did not populate \textbf{tE} or \textbf{tH} with any values previously, therefore they had a length of zero. However, using the \textit{push\_back()} method, we can dynamically add values dynamically, therefore allowing us to change the number of iterations at will. 
+
+After running the main loop \textbf{iterNum} times, we finally print our values to the console as a comma separated list:
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+cout << "\n\ntE\n";
+
+// print E values
+for (int n = 0; n < iterNum; n++) {
+	cout << to_string(tE[n]) + ",";
+}
+
+cout << "\n\ntH\n";
+
+// print H values
+for (int n = 0; n < iterNum; n++) {
+	cout << to_string(tH[n]) + ",";
+}
+\end{minted}
+
+The result is shown in figure \ref{fig:fdtd1dconsole}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{Figures/fdtd1dconsole}
+	\decoRule
+	\caption[1D Console Output]{The console output of our FDTD one-dimensional algorithm}
+	\label{fig:fdtd1dconsole}
+\end{figure}
+
+Now that we generated the data, we can proceed by choosing how to visualize it.
+
 \section{Data Visualization}
 
-\begin{figure}
+Generating the data is the difficult part. In order to visualize it into a form that is easily understandable by humans, we can use a variety of programs. An easy solution for this is Microsoft Office Excel\textsuperscript{\cite{excel}}. While this software requires a license, there are viable alternatives to it that should be able to achieve the same results.
+
+For starters, we will need to copy the comma separated list that is in our console output to the first column, in the second row for the electric data and the third row for the magnetic data. This will populate the first cell for both rows. After that, we can go to \textbf{Data > Text to Columns} and then split our one cell list into multiple columns (\ref{fig:fdtd1dexcel1}).
+
+\begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.65]{Figures/1DtimeGraph1}
-	\includegraphics[scale=0.7]{Figures/1DtimeGraph2}
+	\includegraphics{Figures/fdtd1dexcel1}
+	\decoRule
+	\caption[1D Excel - Text to Columns]{Transforming data from a single cell containing the whole list, into separate columns for each value.}
+	\label{fig:fdtd1dexcel1}
+\end{figure}
+
+After doing that for both electric and magnetic values, we can add a row of numbers above them for the timesteps. The result will look like so:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{Figures/fdtd1dexcel2}
+	\decoRule
+	\caption[1D Excel - Text to Columns]{Transforming data from a single cell containing the whole list, into separate columns for each value.}
+	\label{fig:fdtd1dexcel2}
+\end{figure}
+
+With this, we can visualize the data however we desire. For the purposes of this demostration, we shall use line graphs. In Figure \ref{fig:emTimeGraph}, we have colored the time graph of the electric field orange, and the magnetic field blue.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.33]{Figures/1DtimeGraph}
 	\decoRule
 	\caption[1D Electromagnetic Time Graph]{The time graph of the electromagnetic data generated by our 1D application.}
 	\label{fig:emTimeGraph}
 \end{figure}
 
-\begin{figure}
+Please note that both lines were shown in the same plane due to convenience. The waves themselves move as they did during the discretization we did prior: electric waves move in the \textbf{X-Z} plane while the magnetic waves move in the \textbf{Y-Z} plane. Also, we can note that there is an enormous difference in the values of the electric and magnetic fields. We can easily tell that the electric wave is moving, but it is difficult to notice the magnetic wave movement. Here is one of those values zoomed in (Fig. \ref{fig:mTimeSnippet}):
+
+\begin{figure}[h!]
 	\centering
 	\includegraphics{Figures/1DmagneticTimeSnippet}
 	\decoRule
 	\caption[1D Magnetic Time Snippet]{A snippet of the time graph shown in Figure \ref{fig:emTimeGraph} zoomed in}
 	\label{fig:mTimeSnippet}
 \end{figure}
+
+The reason for this difference being so big is due to the medium we chose for our domain: free space or otherwise known as vacuum. Also known as the impedance of free space, this value is commonly known as $Z_0 = $ \SI{376.730313668(57)}{\ohm}. This is also the ratio between the electric field and the magnetic one in free space. The value can also be calculated by using the permittivity and permeability:
+
+\begin{equation}
+	\label{eqn:impedance}
+	Z_0 = \frac{E}{H} = \sqrt{\frac{\mu_0}{\epsilon_{0}}}
+\end{equation}
+
+With that done, let us take a look at the two-dimensional scenario.
+	

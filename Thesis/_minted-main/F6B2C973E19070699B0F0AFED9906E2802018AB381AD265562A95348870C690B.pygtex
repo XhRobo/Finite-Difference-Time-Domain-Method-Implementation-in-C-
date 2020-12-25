@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k+kt}{double} \PYG{n}{a} \PYG{o}{=} \PYG{l+m+mf}{1.0}\PYG{o}{/}\PYG{l+m+mf}{9.0}\PYG{p}{;}
+	\PYG{k}{if} \PYG{p}{(}\PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{+} \PYG{n}{a} \PYG{o}{==} \PYG{l+m+mf}{1.0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Equal to 1\PYGZdq{}}\PYG{p}{;}
+	\PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+		\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Not equal\PYGZdq{}}\PYG{p}{;}
+	\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

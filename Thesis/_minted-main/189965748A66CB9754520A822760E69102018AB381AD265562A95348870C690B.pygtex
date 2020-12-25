@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{const} \PYG{k+kt}{double} \PYG{n}{permitivity} \PYG{o}{=} \PYG{l+m+mf}{8.854e\PYGZhy{}12}\PYG{p}{;}  \PYG{c+c1}{// vacuum permitivity}
+\PYG{k}{const} \PYG{k+kt}{double} \PYG{n}{permeability} \PYG{o}{=} \PYG{l+m+mf}{1.256e\PYGZhy{}6}\PYG{p}{;}  \PYG{c+c1}{// vacuum permeability}
+\end{Verbatim}

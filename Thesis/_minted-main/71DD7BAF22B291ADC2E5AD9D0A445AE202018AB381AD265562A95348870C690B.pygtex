@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// variables needed for Gaussian Pulse excitation}
+\PYG{k+kt}{double} \PYG{n}{eps} \PYG{o}{=} \PYG{l+m+mf}{1e\PYGZhy{}3}\PYG{p}{;}
+\PYG{k+kt}{double} \PYG{n}{Teps} \PYG{o}{=} \PYG{l+m+mi}{50} \PYG{o}{*} \PYG{n}{deltaT}\PYG{p}{;}
+\PYG{k+kt}{double} \PYG{n}{beta} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{n}{pow}\PYG{p}{((}\PYG{l+m+mi}{2}\PYG{o}{/}\PYG{n}{Teps}\PYG{p}{),} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{*} \PYG{n}{log}\PYG{p}{(}\PYG{n}{eps}\PYG{p}{));}
+
+
+\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{E}\PYG{p}{;}
+\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{H}\PYG{p}{;}
+\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{tE}\PYG{p}{;}
+\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{tH}\PYG{p}{;}
+\end{Verbatim}

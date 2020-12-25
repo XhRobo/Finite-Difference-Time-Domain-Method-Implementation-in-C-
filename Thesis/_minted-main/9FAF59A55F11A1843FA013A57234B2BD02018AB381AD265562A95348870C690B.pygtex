@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{tE}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{;}
+
+\PYG{c+c1}{// print E values}
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{n} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{n} \PYG{o}{\PYGZlt{}} \PYG{n}{iterNum}\PYG{p}{;} \PYG{n}{n}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+	\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{to\PYGZus{}string}\PYG{p}{(}\PYG{n}{tE}\PYG{p}{[}\PYG{n}{n}\PYG{p}{])} \PYG{o}{+} \PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{tH}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{;}
+
+\PYG{c+c1}{// print H values}
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{n} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{n} \PYG{o}{\PYGZlt{}} \PYG{n}{iterNum}\PYG{p}{;} \PYG{n}{n}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+	\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{to\PYGZus{}string}\PYG{p}{(}\PYG{n}{tH}\PYG{p}{[}\PYG{n}{n}\PYG{p}{])} \PYG{o}{+} \PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

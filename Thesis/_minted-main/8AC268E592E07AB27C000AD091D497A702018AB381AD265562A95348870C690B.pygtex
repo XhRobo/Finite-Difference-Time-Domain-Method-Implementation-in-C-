@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{double} \PYG{n}{L} \PYG{o}{=} \PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{N} \PYG{o}{=} \PYG{l+m+mi}{200}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{iterNum} \PYG{o}{=} \PYG{l+m+mi}{800}\PYG{p}{;}
+\PYG{k+kt}{double} \PYG{n}{deltaZ} \PYG{o}{=} \PYG{n}{L} \PYG{o}{/} \PYG{n}{N}\PYG{p}{;}
+\PYG{k+kt}{double} \PYG{n}{deltaT} \PYG{o}{=} \PYG{p}{(}\PYG{n}{deltaZ} \PYG{o}{*} \PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{permitivity}\PYG{o}{*}\PYG{n}{permeability}\PYG{p}{));}
+\end{Verbatim}

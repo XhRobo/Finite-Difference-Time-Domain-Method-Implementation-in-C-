@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.8)  24 DEC 2020 22:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.8)  25 DEC 2020 21:59
 entering extended mode
 **./main.tex
 (main.tex
@@ -1278,13 +1278,13 @@ Chapter 1.
 
 
 ] [2]
-<Figures/faradayexp.png, id=352, 290.08376pt x 219.82124pt>
+<Figures/faradayexp.png, id=359, 290.08376pt x 219.82124pt>
 File: Figures/faradayexp.png Graphic file (type png)
 <use Figures/faradayexp.png>
 Package pdftex.def Info: Figures/faradayexp.png  used on input line 58.
 (pdftex.def)             Requested size: 290.08304pt x 219.8207pt.
  [3]
-<Figures/magneticdivergence.png, id=367, 464.73625pt x 248.93pt>
+<Figures/magneticdivergence.png, id=374, 464.73625pt x 248.93pt>
 File: Figures/magneticdivergence.png Graphic file (type png)
 <use Figures/magneticdivergence.png>
 Package pdftex.def Info: Figures/magneticdivergence.png  used on input line 70.
@@ -1321,7 +1321,7 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2.
  [12])
-<Figures/finiteprecision.png, id=442, 425.33907pt x 67.75313pt>
+<Figures/finiteprecision.png, id=448, 425.33907pt x 67.75313pt>
 File: Figures/finiteprecision.png Graphic file (type png)
 <use Figures/finiteprecision.png>
 Package pdftex.def Info: Figures/finiteprecision.png  used on input line 237.
@@ -1336,7 +1336,7 @@ Overfull \hbox (21.30893pt too wide) in paragraph at lines 237--239
 
  (Chapters/Chapter2.tex
 Chapter 2.
-<Figures/fdtd1dDiscretized.png, id=454, 459.21562pt x 388.45125pt>
+<Figures/fdtd1dDiscretized.png, id=460, 459.21562pt x 388.45125pt>
 File: Figures/fdtd1dDiscretized.png Graphic file (type png)
 <use Figures/fdtd1dDiscretized.png>
 Package pdftex.def Info: Figures/fdtd1dDiscretized.png  used on input line 26.
@@ -1354,20 +1354,20 @@ l shift of a one-
 
 
 ]
-<Figures/fdtd1dHcurl.png, id=460, 469.755pt x 397.485pt>
+<Figures/fdtd1dHcurl.png, id=466, 469.755pt x 397.485pt>
 File: Figures/fdtd1dHcurl.png Graphic file (type png)
 <use Figures/fdtd1dHcurl.png>
 Package pdftex.def Info: Figures/fdtd1dHcurl.png  used on input line 44.
 (pdftex.def)             Requested size: 328.82626pt x 278.2376pt.
  [15 <./Figures/fdtd1dDiscretized.png>] [16 <./Figures/fdtd1dHcurl.png>]
-<Figures/fdtd1dEcurl.png, id=480, 526.21594pt x 400.49625pt>
+<Figures/fdtd1dEcurl.png, id=486, 526.21594pt x 400.49625pt>
 File: Figures/fdtd1dEcurl.png Graphic file (type png)
 <use Figures/fdtd1dEcurl.png>
 Package pdftex.def Info: Figures/fdtd1dEcurl.png  used on input line 87.
 (pdftex.def)             Requested size: 368.34865pt x 280.34546pt.
 
 [17 <./Figures/fdtd1dEcurl.png>]
-<Figures/fdtd1dLeapfrog.png, id=492, 526.21594pt x 151.3153pt>
+<Figures/fdtd1dLeapfrog.png, id=498, 526.21594pt x 151.3153pt>
 File: Figures/fdtd1dLeapfrog.png Graphic file (type png)
 <use Figures/fdtd1dLeapfrog.png>
 Package pdftex.def Info: Figures/fdtd1dLeapfrog.png  used on input line 118.
@@ -1393,123 +1393,185 @@ m/n/12 #define _USE_MATH_DEFINES
  []
 
 [20]
-<Figures/1DtimeGraph1.png, id=526, 613.54219pt x 286.06876pt>
-File: Figures/1DtimeGraph1.png Graphic file (type png)
-<use Figures/1DtimeGraph1.png>
-Package pdftex.def Info: Figures/1DtimeGraph1.png  used on input line 214.
-(pdftex.def)             Requested size: 398.7977pt x 185.94247pt.
-<Figures/1DtimeGraph2.png, id=527, 574.39594pt x 293.59688pt>
-File: Figures/1DtimeGraph2.png Graphic file (type png)
-<use Figures/1DtimeGraph2.png>
-Package pdftex.def Info: Figures/1DtimeGraph2.png  used on input line 215.
-(pdftex.def)             Requested size: 402.0744pt x 205.5164pt.
-<Figures/1DmagneticTimeSnippet.png, id=528, 405.76593pt x 129.48375pt>
-File: Figures/1DmagneticTimeSnippet.png Graphic file (type png)
-<use Figures/1DmagneticTimeSnippet.png>
-Package pdftex.def Info: Figures/1DmagneticTimeSnippet.png  used on input line 
-223.
-(pdftex.def)             Requested size: 405.76494pt x 129.48341pt.
+\openout3 = `main.pyg'.
 
-Overfull \hbox (1.73586pt too wide) in paragraph at lines 223--225
+
+(_minted-main/189965748A66CB9754520A822760E69102018AB381AD265562A95348870C690B.
+pygtex)
+\openout3 = `main.pyg'.
+
+
+(_minted-main/8AC268E592E07AB27C000AD091D497A702018AB381AD265562A95348870C690B.
+pygtex) [21]
+Overfull \hbox (3.82275pt too wide) in paragraph at lines 236--237
+\T1/ppl/m/n/12 changes later on when dis-cussing the two-dimensional and three-
+dimensional
+ []
+
+\openout3 = `main.pyg'.
+
+
+(_minted-main/71DD7BAF22B291ADC2E5AD9D0A445AE202018AB381AD265562A95348870C690B.
+pygtex) [22]
+\openout3 = `main.pyg'.
+
+
+(_minted-main/F6A04093C43CCC065FDD6F0988339ED602018AB381AD265562A95348870C690B.
+pygtex)
+\openout4 = `main.pyg'.
+
+
+(_minted-main/E9510385AE88320E4CD7AF5E07ACF43A02018AB381AD265562A95348870C690B.
+pygtex)
+\openout3 = `main.pyg'.
+
+
+(_minted-main/D429B08B8C7C2FF87FA9080C85A7348102018AB381AD265562A95348870C690B.
+pygtex)
+\openout3 = `main.pyg'.
+
+
+(_minted-main/0EC60507C72491DA0118F67624D63C6A02018AB381AD265562A95348870C690B.
+pygtex [23])
+\openout3 = `main.pyg'.
+
+
+(_minted-main/E14785CEFE157CDF295E7B06AB4D190302018AB381AD265562A95348870C690B.
+pygtex)
+\openout3 = `main.pyg'.
+
+
+(_minted-main/9FAF59A55F11A1843FA013A57234B2BD02018AB381AD265562A95348870C690B.
+pygtex [24])
+<Figures/fdtd1dconsole.png, id=553, 240.14719pt x 65.49469pt>
+File: Figures/fdtd1dconsole.png Graphic file (type png)
+<use Figures/fdtd1dconsole.png>
+Package pdftex.def Info: Figures/fdtd1dconsole.png  used on input line 316.
+(pdftex.def)             Requested size: 240.14658pt x 65.4945pt.
+ [25 <./Figures/fdtd1dconsole.png>]
+<Figures/fdtd1dexcel1.png, id=563, 287.57437pt x 94.10156pt>
+File: Figures/fdtd1dexcel1.png Graphic file (type png)
+<use Figures/fdtd1dexcel1.png>
+Package pdftex.def Info: Figures/fdtd1dexcel1.png  used on input line 332.
+(pdftex.def)             Requested size: 287.57367pt x 94.10132pt.
+<Figures/fdtd1dexcel2.png, id=564, 427.5975pt x 45.16875pt>
+File: Figures/fdtd1dexcel2.png Graphic file (type png)
+<use Figures/fdtd1dexcel2.png>
+Package pdftex.def Info: Figures/fdtd1dexcel2.png  used on input line 342.
+(pdftex.def)             Requested size: 427.59645pt x 45.16862pt.
+
+Overfull \hbox (23.56737pt too wide) in paragraph at lines 342--344
  [][] 
  []
 
-) [21] [22 <./Figures/1DtimeGraph1.png> <./Figures/1DtimeGraph2.png> <./Figures
-/1DmagneticTimeSnippet.png>]
+<Figures/1DtimeGraph.png, id=566, 1224.07312pt x 295.1025pt>
+File: Figures/1DtimeGraph.png Graphic file (type png)
+<use Figures/1DtimeGraph.png>
+Package pdftex.def Info: Figures/1DtimeGraph.png  used on input line 352.
+(pdftex.def)             Requested size: 403.94539pt x 97.38411pt.
+[26 <./Figures/fdtd1dexcel1.png> <./Figures/fdtd1dexcel2.png> <./Figures/1Dtime
+Graph.png>]
+<Figures/1DmagneticTimeSnippet.png, id=575, 396.7322pt x 96.36pt>
+File: Figures/1DmagneticTimeSnippet.png Graphic file (type png)
+<use Figures/1DmagneticTimeSnippet.png>
+Package pdftex.def Info: Figures/1DmagneticTimeSnippet.png  used on input line 
+362.
+(pdftex.def)             Requested size: 396.73122pt x 96.35974pt.
+) [27 <./Figures/1DmagneticTimeSnippet.png>]
 \openout2 = `Chapters/Chapter3.aux'.
 
  (Chapters/Chapter3.tex
 Chapter 3.
-<Figures/FDTD2DE1.jpg, id=542, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DE1.jpg, id=584, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DE1.jpg Graphic file (type jpg)
 <use Figures/FDTD2DE1.jpg>
 Package pdftex.def Info: Figures/FDTD2DE1.jpg  used on input line 34.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
-<Figures/FDTD2DE2.jpg, id=543, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DE2.jpg, id=585, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DE2.jpg Graphic file (type jpg)
 <use Figures/FDTD2DE2.jpg>
 Package pdftex.def Info: Figures/FDTD2DE2.jpg  used on input line 39.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
-<Figures/FDTD2DE3.jpg, id=544, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DE3.jpg, id=586, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DE3.jpg Graphic file (type jpg)
 <use Figures/FDTD2DE3.jpg>
 Package pdftex.def Info: Figures/FDTD2DE3.jpg  used on input line 44.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
-<Figures/FDTD2DE4.jpg, id=545, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DE4.jpg, id=587, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DE4.jpg Graphic file (type jpg)
 <use Figures/FDTD2DE4.jpg>
 Package pdftex.def Info: Figures/FDTD2DE4.jpg  used on input line 49.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
-<Figures/FDTD2DH1.jpg, id=546, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DH1.jpg, id=588, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DH1.jpg Graphic file (type jpg)
 <use Figures/FDTD2DH1.jpg>
 Package pdftex.def Info: Figures/FDTD2DH1.jpg  used on input line 61.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
-<Figures/FDTD2DH2.jpg, id=547, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DH2.jpg, id=589, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DH2.jpg Graphic file (type jpg)
 <use Figures/FDTD2DH2.jpg>
 Package pdftex.def Info: Figures/FDTD2DH2.jpg  used on input line 66.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
-<Figures/FDTD2DH3.jpg, id=548, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DH3.jpg, id=590, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DH3.jpg Graphic file (type jpg)
 <use Figures/FDTD2DH3.jpg>
 Package pdftex.def Info: Figures/FDTD2DH3.jpg  used on input line 71.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
-<Figures/FDTD2DH4.jpg, id=549, 1927.2pt x 1084.05pt>
+<Figures/FDTD2DH4.jpg, id=591, 1927.2pt x 1084.05pt>
 File: Figures/FDTD2DH4.jpg Graphic file (type jpg)
 <use Figures/FDTD2DH4.jpg>
 Package pdftex.def Info: Figures/FDTD2DH4.jpg  used on input line 76.
 (pdftex.def)             Requested size: 188.07703pt x 105.78128pt.
 )
 1: section
-[23
+[28
 
 
 
 
-] [24 <./Figures/FDTD2DE1.jpg> <./Figures/FDTD2DE2.jpg> <./Figures/FDTD2DE3.jpg
+] [29 <./Figures/FDTD2DE1.jpg> <./Figures/FDTD2DE2.jpg> <./Figures/FDTD2DE3.jpg
 > <./Figures/FDTD2DE4.jpg> <./Figures/FDTD2DH1.jpg> <./Figures/FDTD2DH2.jpg> <.
 /Figures/FDTD2DH3.jpg> <./Figures/FDTD2DH4.jpg>]
 \openout2 = `Chapters/Chapter4.aux'.
 
  (Chapters/Chapter4.tex
 Chapter 4.
-<Figures/FDTD3DE1.jpg, id=558, 1465.475pt x 630.355pt>
+<Figures/FDTD3DE1.jpg, id=600, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DE1.jpg Graphic file (type jpg)
 <use Figures/FDTD3DE1.jpg>
 Package pdftex.def Info: Figures/FDTD3DE1.jpg  used on input line 38.
 (pdftex.def)             Requested size: 188.07703pt x 80.89099pt.
-<Figures/FDTD3DE2.jpg, id=559, 1465.475pt x 630.355pt>
+<Figures/FDTD3DE2.jpg, id=601, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DE2.jpg Graphic file (type jpg)
 <use Figures/FDTD3DE2.jpg>
 Package pdftex.def Info: Figures/FDTD3DE2.jpg  used on input line 43.
 (pdftex.def)             Requested size: 188.07703pt x 80.89099pt.
-<Figures/FDTD3DE3.jpg, id=560, 1465.475pt x 630.355pt>
+<Figures/FDTD3DE3.jpg, id=602, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DE3.jpg Graphic file (type jpg)
 <use Figures/FDTD3DE3.jpg>
 Package pdftex.def Info: Figures/FDTD3DE3.jpg  used on input line 48.
 (pdftex.def)             Requested size: 188.07703pt x 80.89099pt.
-<Figures/FDTD3DE4.jpg, id=561, 1465.475pt x 630.355pt>
+<Figures/FDTD3DE4.jpg, id=603, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DE4.jpg Graphic file (type jpg)
 <use Figures/FDTD3DE4.jpg>
 Package pdftex.def Info: Figures/FDTD3DE4.jpg  used on input line 53.
 (pdftex.def)             Requested size: 188.07703pt x 80.89099pt.
-<Figures/FDTD3DH1.jpg, id=562, 1465.475pt x 630.355pt>
+<Figures/FDTD3DH1.jpg, id=604, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DH1.jpg Graphic file (type jpg)
 <use Figures/FDTD3DH1.jpg>
 Package pdftex.def Info: Figures/FDTD3DH1.jpg  used on input line 65.
 (pdftex.def)             Requested size: 188.07703pt x 80.89099pt.
-<Figures/FDTD3DH2.jpg, id=563, 1465.475pt x 630.355pt>
+<Figures/FDTD3DH2.jpg, id=605, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DH2.jpg Graphic file (type jpg)
 <use Figures/FDTD3DH2.jpg>
 Package pdftex.def Info: Figures/FDTD3DH2.jpg  used on input line 70.
 (pdftex.def)             Requested size: 188.07703pt x 80.89099pt.
-<Figures/FDTD3DH3.jpg, id=564, 1465.475pt x 630.355pt>
+<Figures/FDTD3DH3.jpg, id=606, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DH3.jpg Graphic file (type jpg)
 <use Figures/FDTD3DH3.jpg>
 Package pdftex.def Info: Figures/FDTD3DH3.jpg  used on input line 75.
 (pdftex.def)             Requested size: 188.07703pt x 80.89099pt.
-<Figures/FDTD3DH4.jpg, id=565, 1465.475pt x 630.355pt>
+<Figures/FDTD3DH4.jpg, id=607, 1465.475pt x 630.355pt>
 File: Figures/FDTD3DH4.jpg Graphic file (type jpg)
 <use Figures/FDTD3DH4.jpg>
 Package pdftex.def Info: Figures/FDTD3DH4.jpg  used on input line 80.
@@ -1519,13 +1581,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 )
 1: section
-[25
+[30
 
 
 
 
  <./Figures/FDTD3DE1.jpg> <./Figures/FDTD3DE2.jpg> <./Figures/FDTD3DE3.jpg> <./
-Figures/FDTD3DE4.jpg>] [26 <./Figures/FDTD3DH1.jpg> <./Figures/FDTD3DH2.jpg> <.
+Figures/FDTD3DE4.jpg>] [31 <./Figures/FDTD3DH1.jpg> <./Figures/FDTD3DH2.jpg> <.
 /Figures/FDTD3DH3.jpg> <./Figures/FDTD3DH4.jpg>]
 \openout2 = `Chapters/Chapter5.aux'.
 
@@ -1533,7 +1595,7 @@ Figures/FDTD3DE4.jpg>] [26 <./Figures/FDTD3DH1.jpg> <./Figures/FDTD3DH2.jpg> <.
 Chapter 5.
 )
 1: section
-[27
+[32
 
 
 
@@ -1549,54 +1611,54 @@ Appendix A.
 (_minted-main/186B2DFCD96474231D89D175BAF8C51C02018AB381AD265562A95348870C690B.
 pygtex
 1: section
-[28
+[33
 
 
 
 
-] [29])
+] [34])
 \openout3 = `main.pyg'.
 
 
 (_minted-main/7FDE1695D94D79C3A9E8F5E768C31B9902018AB381AD265562A95348870C690B.
-pygtex [30]
+pygtex [35]
 Overfull \hbox (190.7692pt too wide) in paragraph at lines 17--17
 []\T1/lmtt/m/n/10 8.854e-12[];[][][][][][][][][][][][][]\T1/lmtt/m/it/10 // 
  []
 
-[31] [32] [33])
+[36] [37] [38])
 \openout3 = `main.pyg'.
 
 
 (_minted-main/B38A8B8D5C8D1DD0CADDC739C8C46EF902018AB381AD265562A95348870C690B.
-pygtex [34] [35] [36] [37])) [38] [39]
-Overfull \hbox (2.5965pt too wide) in paragraph at lines 293--293
+pygtex [39] [40] [41] [42])) [43] [44]
+Overfull \hbox (2.5965pt too wide) in paragraph at lines 294--294
 []\T1/ppl/m/n/12 Elizabeth Lan-dau.   Black Hole Im-age Makes His-tory; NASA T
 ele-scopes
  []
 
 
-Overfull \hbox (21.38377pt too wide) in paragraph at lines 293--293
+Overfull \hbox (21.38377pt too wide) in paragraph at lines 294--294
 []\T1/ppl/m/n/12 Xhoni Robo. \T1/ppl/m/it/12 XhRobo / Finite-Difference-Time-Do
 main-Method-Implementation-
  []
 
 1: section
-[40
+[45
 
 
 
 ]
-Overfull \hbox (3.3251pt too wide) in paragraph at lines 293--293
+Overfull \hbox (3.3251pt too wide) in paragraph at lines 294--294
 []\T1/ppl/m/n/12 T Wei-land.   A dis-cretiza-tion method for the so-lu-tion of
  Maxwell's equa-
  []
 
-[41] (main.aux (Chapters/Chapter1.aux) (Chapters/Chapter2.aux)
+[46] (main.aux (Chapters/Chapter1.aux) (Chapters/Chapter2.aux)
 (Chapters/Chapter3.aux) (Chapters/Chapter4.aux) (Chapters/Chapter5.aux)
 (Appendices/AppendixA.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A33A5B6905B4021ADA142C4A51F2A6E5;7000.
+(rerunfilecheck)             Checksum: 239BBE17371187B67F243CCC20E1C65E;7014.
 runsystem(del main.pyg)...executed.
 
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -1604,11 +1666,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30852 strings out of 479697
- 632054 string characters out of 2877009
- 1218861 words of memory out of 3000000
- 47201 multiletter control sequences out of 15000+200000
- 495843 words of font info for 166 fonts, out of 3000000 for 9000
+ 30933 strings out of 479697
+ 636926 string characters out of 2877009
+ 1219830 words of memory out of 3000000
+ 47242 multiletter control sequences out of 15000+200000
+ 496774 words of font info for 167 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,1820b,2488s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTe
@@ -1624,9 +1686,9 @@ e1/public/lm/lmtti10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplb
 8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program
  Files/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX/font
 s/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (53 pages, 15860662 bytes).
+Output written on main.pdf (58 pages, 15896208 bytes).
 PDF statistics:
- 731 PDF objects out of 1000 (max. 8388607)
- 172 named destinations out of 1000 (max. 500000)
- 491 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 778 PDF objects out of 1000 (max. 8388607)
+ 183 named destinations out of 1000 (max. 500000)
+ 501 words of extra memory for PDF output out of 10000 (max. 10000000)
 

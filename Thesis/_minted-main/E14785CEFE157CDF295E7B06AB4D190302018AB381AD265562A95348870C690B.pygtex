@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// time graph}
+\PYG{n}{tE}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{E}\PYG{p}{[}\PYG{l+m+mi}{100}\PYG{p}{]);}
+\PYG{n}{tH}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{H}\PYG{p}{[}\PYG{l+m+mi}{100}\PYG{p}{]);}
+\end{Verbatim}

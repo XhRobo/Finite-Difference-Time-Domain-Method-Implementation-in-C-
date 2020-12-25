@@ -191,6 +191,26 @@
     \field{year}{2011}
   \endentry
 
+  \entry{excel}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=M}{%
+         family={Microsoft},
+         familyi={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Microsoft}%
+    }
+    \strng{namehash}{M1}
+    \strng{fullhash}{M1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \verb{url}
+    \verb https://www.microsoft.com/en/microsoft-365/excel
+    \endverb
+  \endentry
+
   \entry{paraview}{misc}{}
     \name{author}{1}{}{%
       {{hash=P}{%
