@@ -6,329 +6,332 @@
 
 \section{Tools Used}
 
-\section{Full Code Files}
-\subsection{FDTD 1D}
-\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
-#define _USE_MATH_DEFINES
-
-#include <iostream>
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <cmath>
-#include <vector>
-#include <string>
-
-using namespace std;
-
-const double permitivity = 8.854e-12;
-const double permeability = 1.256e-6;
-
-double L = 5;
-int N = 200;
-int iterNum = 800;
-//double deltaX = L / N;
-//double deltaY = L / N;
-double deltaZ = L / N;
-double deltaT = (deltaZ * sqrt(permitivity*permeability));
-
-// variables needed for Gaussian Pulse excitation
-double eps = 1e-3;
-double Teps = 50 * deltaT;
-double beta = -(pow((2/Teps), 2) * log(eps));
-
-vector<double> E;
-vector<double> H;
-vector<double> tE;
-vector<double> tH;
-
-int main()
-{
-	E.assign(N, 0);
-	H.assign(N, 0);
-	
-	
-	for(int i = 0; i < iterNum; i++) {
-		
-		double t = i * deltaT;
-		double gamma = Teps / 2;
-		
-		E[0] = exp(-(beta * pow((t - gamma), 2)));
-		
-		// loop for values
-		for (int z = 0; z < N-1; z++) {
-			H[z] = H[z] - (deltaT / permeability / deltaZ) * (E[z] - E[z+1]);
-		}
-		
-		for (int z = 1; z < N-1; z++) {
-			E[z] = E[z] + (deltaT / permitivity / deltaZ) * (H[z] - H[z-1]);
-		}
-		
-		// time graph
-		tE.push_back(E[100]);
-		tH.push_back(H[100]);
-	}
-	cout << "\n\ntE\n";
-	
-	// print E values
-	for (int n = 0; n < iterNum; n++) {
-		cout << to_string(tE[n]) + ",";
-	}
-	
-	cout << "\n\ntH\n";
-	
-	// print H values
-	for (int n = 0; n < iterNum; n++) {
-		cout << to_string(tH[n]) + ",";
-	}
-}	
-\end{minted}
-
-\subsection{FDTD 2D}
-
-\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
-#define _USE_MATH_DEFINES
-
-#include <iostream>
-#include <stdio.h>
-#include <io.h>
-#include <math.h>
-#include <stdlib.h>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <cstdarg>
-
-using namespace std;
-
-const double permitivity = 8.854e-12;												// vacuum permitivity
-const double permeability = 1.256e-6; 								                // vacuum permeability
-
-double L = 5;
-int N = 200;
-int iterNum = 800;
-double deltaX = L / N;
-double deltaY = L / N;
-double deltaZ = L / N;
-double deltaT = (deltaZ * sqrt(permitivity*permeability)  * (1/sqrt(2))); // 1/C * 1/sqrt2 * deltaZ
-
-// variables needed for Gaussian Pulse excitation
-double eps = 1e-3;
-double Teps = 50 * deltaT;
-double beta = -(pow((2/Teps), 2) * log(eps));
-
-
-vector<vector<double>> Ex(N, vector<double> (N, 0));
-vector<vector<double>> Ey(N, vector<double> (N, 0));
-vector<vector<double>> Hz(N, vector<double> (N, 0));
-
-const string filePath = "./Out/";
-
-void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vector<double>> Ey){
-	
-	//	"x","y",Ex,Ey
-	//	0,0,Ex[x,y],Ey[x,y]
-	
-	ofstream csvFile(filename);
-	csvFile << "x,y,z,Ex,Ey\n";
-	
-	for (int x = 0; x < Ex[0].size(); x++) {
-		for (int y = 0; y < Ex[x].size(); y++) {
-			csvFile << to_string(x) + "," + to_string(y) + ",0," + to_string(Ex[x][y]) + "," + to_string(Ey[x][y]) + "\n";
-		}
-	}
-	
-	csvFile.close();
-}
-
-void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
-	
-	//	"x","y",Hz
-	//	0,0,Hz[x,y]
-	
-	ofstream csvFile(filename);
-	csvFile << "x,y,z,Hz\n";
-	
-	for (int x = 0; x < Hz[0].size(); x++) {
-		for (int y = 0; y < Ex[x].size(); y++) {
-			csvFile << to_string(x) + "," + to_string(y) + ",0," + to_string(Hz[x][y]) + "\n";
-		}
-	}
-	
-	csvFile.close();
-}
-
-int main()
-{
-	for(int i = 0; i < iterNum; i++) {
-		
-		double t = i * deltaT;
-		double gamma = Teps / 2;
-		
-		// reducing the magnitude since in free space
-		Hz[99][99] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;  //TO-DO: Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
-		
-		for (int i = 0; i < N-1; i++) {
-			for (int j = 1; j < N-2; j++) {
-				Ex[i][j] = Ex[i][j] + (deltaT / permitivity / deltaZ) * (Hz[i][j] - Hz[i][j-1]);
-			}
-		}
-		
-		for (int i = 1; i < N-2; i++) {
-			for (int j = 0; j < N-1; j++) {
-				Ey[i][j] = Ey[i][j] - ((deltaT / permitivity / deltaZ) * (Hz[i][j] - Hz[i-1][j]));
-			}
-		}
-		
-		writeEDataToCsvFile((filePath + "E/E.csv." + to_string(i)), Ex, Ey);
-		
-		// loop for values
-		for (int i = 0; i < N-1; i++) {
-			for (int j = 0; j < N-1; j++) {
-				Hz[i][j] = Hz[i][j] - ((deltaT / permeability / deltaZ) * (Ex[i][j] - Ex[i][j+1] + Ey[i+1][j] - Ey[i][j]));
-			}
-		}
-		
-		
-		writeHDataToCsvFile((filePath + "H/H.csv." + to_string(i)), Hz);
-		
-	}
-}
-\end{minted}
-
-
-\subsection{FDTD 3D}
-\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
-#define _USE_MATH_DEFINES
-
-#include <iostream>
-#include <stdio.h>
-#include <io.h>
-#include <math.h>
-#include <stdlib.h>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <cstdarg>
-
-using namespace std;
-
-const double permitivity = 8.854e-12;
-const double permeability = 1.256e-6;
-
-double L = 5;
-int N = 50;
-int iterNum = 200;
-double deltaX = L / N;
-double deltaY = L / N;
-double deltaZ = L / N;
-double deltaT = (deltaZ * sqrt(permitivity*permeability)  * (1/sqrt(3))); // 1/C * 1/sqrt2 * deltaZ
-
-// variables needed for Gaussian Pulse excitation
-double eps = 1e-3;
-double Teps = 50 * deltaT;
-double beta = -(pow((2/Teps), 2) * log(eps));
-
-
-vector<vector<vector<double>>> Ex(N, vector<vector<double>>(N, vector<double>(N, 0)));
-vector<vector<vector<double>>> Ey(N, vector<vector<double>>(N, vector<double>(N, 0)));
-vector<vector<vector<double>>> Ez(N, vector<vector<double>>(N, vector<double>(N, 0)));
-vector<vector<vector<double>>> Hx(N, vector<vector<double>>(N, vector<double>(N, 0)));
-vector<vector<vector<double>>> Hy(N, vector<vector<double>>(N, vector<double>(N, 0)));
-vector<vector<vector<double>>> Hz(N, vector<vector<double>>(N, vector<double>(N, 0)));
-
-const string filePath = "./Out/";
-
-void writeDataToCsvFile(string filename, vector<vector<vector<double>>> Vx, vector<vector<vector<double>>> Vy, vector<vector<vector<double>>> Vz){
-	ofstream csvFile(filename);
-	csvFile << "x,y,z,Vx,Vy,Vz\n";
-	
-	for (unsigned  x = 0; x < Vx[0][0].size(); x++) {
-		for (unsigned  y = 0; y < Vy[x][0].size(); y++) {
-			for (unsigned  z = 0; z < Vz[x][y].size(); z++) {
-				csvFile << x << "," << y << "," << z << "," << Vx[x][y][z] << "," << Vy[x][y][z] << "," << Vz[x][y][z] << "\n";
-			}
-		}
-	}
-	
-	csvFile.close();
-}
-
-int main()
-{
-	for(int i = 0; i < iterNum; i++) {
-		
-		double t = i * deltaT;
-		double gamma = Teps / 2;
-		
-		// reducing the magnitude since in free space
-		Ex[24][24][24] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;  //TO-DO: Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
-		//Ey[9][9][9] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
-		//Ez[9][9][9] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
-		
-		// loop for values
-		for (int i = 0; i < N-1; i++) {
-			for (int j = 0; j < N-2; j++) {
-				for (int k = 0; k < N-2; k++) {
-					Hx[i][j][k] = Hx[i][j][k] + (deltaT / permeability / deltaZ) * (Ey[i][j][k+1] - Ey[i][j][k] - Ez[i][j+1][k] + Ez[i][j][k]);
-				}
-			}
-		}
-		
-		for (int i = 0; i < N-2; i++) {
-			for (int j = 0; j < N-1; j++) {
-				for (int k = 0; k < N-2; k++) {
-					Hy[i][j][k] = Hy[i][j][k] + (deltaT / permeability / deltaZ) * (Ez[i+1][j][k] - Ez[i][j][k] - Ex[i][j][k+1] + Ex[i][j][k]);
-				}
-			}
-		}
-		
-		for (int i = 0; i < N-2; i++) {
-			for (int j = 0; j < N-2; j++) {
-				for (int k = 0; k < N-1; k++) {
-					Hz[i][j][k] = Hz[i][j][k] + (deltaT / permeability / deltaZ) * (Ex[i][j+1][k] - Ex[i][j][k] - Ey[i+1][j][k] + Ey[i][j][k]);
-				}
-			}
-		}
-		
-		writeDataToCsvFile((filePath + "H/H.csv." + to_string(i)), Hx, Hy, Hz);
-		
-		for (int i = 0; i < N-2; i++) {
-			for (int j = 1; j < N-2; j++) {
-				for (int k = 1; k < N-2; k++) {
-					Ex[i][j][k] = Ex[i][j][k] + (deltaT / permitivity / deltaZ) * (Hz[i][j][k] - Hz[i][j-1][k] - Hy[i][j][k] + Hy[i][j][k-1]);
-				}
-			}
-		}
-		
-		for (int i = 1; i < N-2; i++) {
-			for (int j = 0; j < N-2; j++) {
-				for (int k = 1; k < N-2; k++) {
-					Ey[i][j][k] = Ey[i][j][k] + (deltaT / permitivity / deltaZ) * (Hx[i][j][k] - Hx[i][j][k-1] - Hz[i][j][k] + Hz[i-1][j][k]);
-				}
-			}
-		}
-		
-		for (int i = 1; i < N-2; i++) {
-			for (int j = 1; j < N-2; j++) {
-				for (int k = 0; k < N-2; k++) {
-					Ez[i][j][k] = Ez[i][j][k] + (deltaT / permitivity / deltaZ) * (Hy[i][j][k] - Hy[i-1][j][k] - Hx[i][j][k] + Hx[i][j-1][k]);
-				}
-			}
-		}
-		
-		writeDataToCsvFile((filePath + "E/E.csv." + to_string(i)), Ex, Ey, Ez);
-	}
-}
-\end{minted}
-
 \section{Troubleshooting the implementation}
 
 \section{Integration into a bigger program}
 
 \section{Using a domain with different environments}
 
-\section{Improving performance with CUDA}
+\section{General Improvements}
+\subsection{Improvements for Symmetric Cases}
+\subsection{Using CUDA}
+
+
+\section{Full Code Files}
+\subsection{FDTD 1D}
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+	#define _USE_MATH_DEFINES
+	
+	#include <iostream>
+	#include <stdio.h>
+	#include <math.h>
+	#include <stdlib.h>
+	#include <cmath>
+	#include <vector>
+	#include <string>
+	
+	using namespace std;
+	
+	const double permitivity = 8.854e-12;
+	const double permeability = 1.256e-6;
+	
+	double L = 5;
+	int N = 200;
+	int iterNum = 800;
+	//double deltaX = L / N;
+	//double deltaY = L / N;
+	double deltaZ = L / N;
+	double deltaT = (deltaZ * sqrt(permitivity*permeability));
+	
+	// variables needed for Gaussian Pulse excitation
+	double eps = 1e-3;
+	double Teps = 50 * deltaT;
+	double beta = -(pow((2/Teps), 2) * log(eps));
+	
+	vector<double> E;
+	vector<double> H;
+	vector<double> tE;
+	vector<double> tH;
+	
+	int main()
+	{
+		E.assign(N, 0);
+		H.assign(N, 0);
+		
+		
+		for(int i = 0; i < iterNum; i++) {
+			
+			double t = i * deltaT;
+			double gamma = Teps / 2;
+			
+			E[0] = exp(-(beta * pow((t - gamma), 2)));
+			
+			// loop for values
+			for (int z = 0; z < N-1; z++) {
+				H[z] = H[z] - (deltaT / permeability / deltaZ) * (E[z] - E[z+1]);
+			}
+			
+			for (int z = 1; z < N-1; z++) {
+				E[z] = E[z] + (deltaT / permitivity / deltaZ) * (H[z] - H[z-1]);
+			}
+			
+			// time graph
+			tE.push_back(E[100]);
+			tH.push_back(H[100]);
+		}
+		cout << "\n\ntE\n";
+		
+		// print E values
+		for (int n = 0; n < iterNum; n++) {
+			cout << to_string(tE[n]) + ",";
+		}
+		
+		cout << "\n\ntH\n";
+		
+		// print H values
+		for (int n = 0; n < iterNum; n++) {
+			cout << to_string(tH[n]) + ",";
+		}
+	}	
+\end{minted}
+
+\subsection{FDTD 2D}
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+	#define _USE_MATH_DEFINES
+	
+	#include <iostream>
+	#include <stdio.h>
+	#include <io.h>
+	#include <math.h>
+	#include <stdlib.h>
+	#include <cmath>
+	#include <vector>
+	#include <string>
+	#include <fstream>
+	#include <cstdarg>
+	
+	using namespace std;
+	
+	const double permitivity = 8.854e-12;												// vacuum permitivity
+	const double permeability = 1.256e-6; 								                // vacuum permeability
+	
+	double L = 5;
+	int N = 200;
+	int iterNum = 800;
+	double deltaX = L / N;
+	double deltaY = L / N;
+	double deltaZ = L / N;
+	double deltaT = (deltaZ * sqrt(permitivity*permeability)  * (1/sqrt(2))); // 1/C * 1/sqrt2 * deltaZ
+	
+	// variables needed for Gaussian Pulse excitation
+	double eps = 1e-3;
+	double Teps = 50 * deltaT;
+	double beta = -(pow((2/Teps), 2) * log(eps));
+	
+	
+	vector<vector<double>> Ex(N, vector<double> (N, 0));
+	vector<vector<double>> Ey(N, vector<double> (N, 0));
+	vector<vector<double>> Hz(N, vector<double> (N, 0));
+	
+	const string filePath = "./Out/";
+	
+	void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vector<double>> Ey){
+		
+		//	"x","y",Ex,Ey
+		//	0,0,Ex[x,y],Ey[x,y]
+		
+		ofstream csvFile(filename);
+		csvFile << "x,y,z,Ex,Ey\n";
+		
+		for (int x = 0; x < Ex[0].size(); x++) {
+			for (int y = 0; y < Ex[x].size(); y++) {
+				csvFile << to_string(x) + "," + to_string(y) + ",0," + to_string(Ex[x][y]) + "," + to_string(Ey[x][y]) + "\n";
+			}
+		}
+		
+		csvFile.close();
+	}
+	
+	void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
+		
+		//	"x","y",Hz
+		//	0,0,Hz[x,y]
+		
+		ofstream csvFile(filename);
+		csvFile << "x,y,z,Hz\n";
+		
+		for (int x = 0; x < Hz[0].size(); x++) {
+			for (int y = 0; y < Ex[x].size(); y++) {
+				csvFile << to_string(x) + "," + to_string(y) + ",0," + to_string(Hz[x][y]) + "\n";
+			}
+		}
+		
+		csvFile.close();
+	}
+	
+	int main()
+	{
+		for(int i = 0; i < iterNum; i++) {
+			
+			double t = i * deltaT;
+			double gamma = Teps / 2;
+			
+			// reducing the magnitude since in free space
+			Hz[99][99] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;  //TO-DO: Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
+			
+			for (int i = 0; i < N-1; i++) {
+				for (int j = 1; j < N-2; j++) {
+					Ex[i][j] = Ex[i][j] + (deltaT / permitivity / deltaZ) * (Hz[i][j] - Hz[i][j-1]);
+				}
+			}
+			
+			for (int i = 1; i < N-2; i++) {
+				for (int j = 0; j < N-1; j++) {
+					Ey[i][j] = Ey[i][j] - ((deltaT / permitivity / deltaZ) * (Hz[i][j] - Hz[i-1][j]));
+				}
+			}
+			
+			writeEDataToCsvFile((filePath + "E/E.csv." + to_string(i)), Ex, Ey);
+			
+			// loop for values
+			for (int i = 0; i < N-1; i++) {
+				for (int j = 0; j < N-1; j++) {
+					Hz[i][j] = Hz[i][j] - ((deltaT / permeability / deltaZ) * (Ex[i][j] - Ex[i][j+1] + Ey[i+1][j] - Ey[i][j]));
+				}
+			}
+			
+			
+			writeHDataToCsvFile((filePath + "H/H.csv." + to_string(i)), Hz);
+			
+		}
+	}
+\end{minted}
+
+
+\subsection{FDTD 3D}
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+	#define _USE_MATH_DEFINES
+	
+	#include <iostream>
+	#include <stdio.h>
+	#include <io.h>
+	#include <math.h>
+	#include <stdlib.h>
+	#include <cmath>
+	#include <vector>
+	#include <string>
+	#include <fstream>
+	#include <cstdarg>
+	
+	using namespace std;
+	
+	const double permitivity = 8.854e-12;
+	const double permeability = 1.256e-6;
+	
+	double L = 5;
+	int N = 50;
+	int iterNum = 200;
+	double deltaX = L / N;
+	double deltaY = L / N;
+	double deltaZ = L / N;
+	double deltaT = (deltaZ * sqrt(permitivity*permeability)  * (1/sqrt(3))); // 1/C * 1/sqrt2 * deltaZ
+	
+	// variables needed for Gaussian Pulse excitation
+	double eps = 1e-3;
+	double Teps = 50 * deltaT;
+	double beta = -(pow((2/Teps), 2) * log(eps));
+	
+	
+	vector<vector<vector<double>>> Ex(N, vector<vector<double>>(N, vector<double>(N, 0)));
+	vector<vector<vector<double>>> Ey(N, vector<vector<double>>(N, vector<double>(N, 0)));
+	vector<vector<vector<double>>> Ez(N, vector<vector<double>>(N, vector<double>(N, 0)));
+	vector<vector<vector<double>>> Hx(N, vector<vector<double>>(N, vector<double>(N, 0)));
+	vector<vector<vector<double>>> Hy(N, vector<vector<double>>(N, vector<double>(N, 0)));
+	vector<vector<vector<double>>> Hz(N, vector<vector<double>>(N, vector<double>(N, 0)));
+	
+	const string filePath = "./Out/";
+	
+	void writeDataToCsvFile(string filename, vector<vector<vector<double>>> Vx, vector<vector<vector<double>>> Vy, vector<vector<vector<double>>> Vz){
+		ofstream csvFile(filename);
+		csvFile << "x,y,z,Vx,Vy,Vz\n";
+		
+		for (unsigned  x = 0; x < Vx[0][0].size(); x++) {
+			for (unsigned  y = 0; y < Vy[x][0].size(); y++) {
+				for (unsigned  z = 0; z < Vz[x][y].size(); z++) {
+					csvFile << x << "," << y << "," << z << "," << Vx[x][y][z] << "," << Vy[x][y][z] << "," << Vz[x][y][z] << "\n";
+				}
+			}
+		}
+		
+		csvFile.close();
+	}
+	
+	int main()
+	{
+		for(int i = 0; i < iterNum; i++) {
+			
+			double t = i * deltaT;
+			double gamma = Teps / 2;
+			
+			// reducing the magnitude since in free space
+			Ex[24][24][24] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;  //TO-DO: Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
+			//Ey[9][9][9] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
+			//Ez[9][9][9] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
+			
+			// loop for values
+			for (int i = 0; i < N-1; i++) {
+				for (int j = 0; j < N-2; j++) {
+					for (int k = 0; k < N-2; k++) {
+						Hx[i][j][k] = Hx[i][j][k] + (deltaT / permeability / deltaZ) * (Ey[i][j][k+1] - Ey[i][j][k] - Ez[i][j+1][k] + Ez[i][j][k]);
+					}
+				}
+			}
+			
+			for (int i = 0; i < N-2; i++) {
+				for (int j = 0; j < N-1; j++) {
+					for (int k = 0; k < N-2; k++) {
+						Hy[i][j][k] = Hy[i][j][k] + (deltaT / permeability / deltaZ) * (Ez[i+1][j][k] - Ez[i][j][k] - Ex[i][j][k+1] + Ex[i][j][k]);
+					}
+				}
+			}
+			
+			for (int i = 0; i < N-2; i++) {
+				for (int j = 0; j < N-2; j++) {
+					for (int k = 0; k < N-1; k++) {
+						Hz[i][j][k] = Hz[i][j][k] + (deltaT / permeability / deltaZ) * (Ex[i][j+1][k] - Ex[i][j][k] - Ey[i+1][j][k] + Ey[i][j][k]);
+					}
+				}
+			}
+			
+			writeDataToCsvFile((filePath + "H/H.csv." + to_string(i)), Hx, Hy, Hz);
+			
+			for (int i = 0; i < N-2; i++) {
+				for (int j = 1; j < N-2; j++) {
+					for (int k = 1; k < N-2; k++) {
+						Ex[i][j][k] = Ex[i][j][k] + (deltaT / permitivity / deltaZ) * (Hz[i][j][k] - Hz[i][j-1][k] - Hy[i][j][k] + Hy[i][j][k-1]);
+					}
+				}
+			}
+			
+			for (int i = 1; i < N-2; i++) {
+				for (int j = 0; j < N-2; j++) {
+					for (int k = 1; k < N-2; k++) {
+						Ey[i][j][k] = Ey[i][j][k] + (deltaT / permitivity / deltaZ) * (Hx[i][j][k] - Hx[i][j][k-1] - Hz[i][j][k] + Hz[i-1][j][k]);
+					}
+				}
+			}
+			
+			for (int i = 1; i < N-2; i++) {
+				for (int j = 1; j < N-2; j++) {
+					for (int k = 0; k < N-2; k++) {
+						Ez[i][j][k] = Ez[i][j][k] + (deltaT / permitivity / deltaZ) * (Hy[i][j][k] - Hy[i-1][j][k] - Hx[i][j][k] + Hx[i][j-1][k]);
+					}
+				}
+			}
+			
+			writeDataToCsvFile((filePath + "E/E.csv." + to_string(i)), Ex, Ey, Ez);
+		}
+	}
+\end{minted}
 

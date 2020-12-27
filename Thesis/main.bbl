@@ -93,6 +93,126 @@
     \field{year}{2005}
   \endentry
 
+  \entry{cmath}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=c}{%
+         family={cplusplus.com},
+         familyi={c\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {cplusplus.com}%
+    }
+    \strng{namehash}{c1}
+    \strng{fullhash}{c1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{url}
+    \verb http://www.cplusplus.com/reference/cmath/
+    \endverb
+  \endentry
+
+  \entry{iostream}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=c}{%
+         family={cplusplus.com},
+         familyi={c\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {cplusplus.com}%
+    }
+    \strng{namehash}{c1}
+    \strng{fullhash}{c1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{url}
+    \verb http://www.cplusplus.com/reference/iostream/
+    \endverb
+  \endentry
+
+  \entry{cstdlib}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=c}{%
+         family={cplusplus.com},
+         familyi={c\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {cplusplus.com}%
+    }
+    \strng{namehash}{c1}
+    \strng{fullhash}{c1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{url}
+    \verb http://www.cplusplus.com/reference/cstdlib/
+    \endverb
+  \endentry
+
+  \entry{vector}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=c}{%
+         family={cplusplus.com},
+         familyi={c\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {cplusplus.com}%
+    }
+    \strng{namehash}{c1}
+    \strng{fullhash}{c1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{url}
+    \verb http://www.cplusplus.com/reference/vector/
+    \endverb
+  \endentry
+
+  \entry{string}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=c}{%
+         family={cplusplus.com},
+         familyi={c\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {cplusplus.com}%
+    }
+    \strng{namehash}{c1}
+    \strng{fullhash}{c1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{url}
+    \verb http://www.cplusplus.com/reference/string/
+    \endverb
+  \endentry
+
+  \entry{fstream}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=c}{%
+         family={cplusplus.com},
+         familyi={c\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {cplusplus.com}%
+    }
+    \strng{namehash}{c1}
+    \strng{fullhash}{c1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{url}
+    \verb https://www.cplusplus.com/reference/fstream/fstream/
+    \endverb
+  \endentry
+
   \entry{davidson2010computational}{book}{}
     \name{author}{1}{}{%
       {{hash=DDB}{%
@@ -134,6 +254,27 @@
     \verb{url}
     \verb https://www.eclipse.org/downloads/packages/release/kepler/sr2/eclipse
     \verb -ide-cc-developers
+    \endverb
+  \endentry
+
+  \entry{io.h}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={GCC},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Free Software Foundation, Inc}%
+    }
+    \strng{namehash}{G1}
+    \strng{fullhash}{G1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \verb{url}
+    \verb https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a00782_source.
+    \verb html
     \endverb
   \endentry
 

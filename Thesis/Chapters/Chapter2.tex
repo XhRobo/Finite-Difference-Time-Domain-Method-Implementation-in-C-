@@ -12,7 +12,7 @@ In this chapter, we will go more in depth into developing an application that ca
 
 \section{1D Discretization}
 
-In the previous chapter, we ended up with the equations \ref{eqn:electricUpdateIntegral} and \ref{eqn:magneticUpdateIntegral}. They will now be used to do a FDTD discretization for the one-dimensional electromagnetic wave scenario. At the end of this section, we will have the update equations that we will use in our loops. Before moving on, we must first briefly discuss tranverse modes. A tranverse mode is the type of pattern that an electromagnetic field, which is perpendicular with respect to the direction of the wave's propagation, has. For electromagnetic waves, the most relevant modes are TE (Tranverse Electric) and TM (Tranverse Magnetic). In our scenario, we will be using TE mode for discretization.
+In the previous chapter, we ended up with the equations \ref{eqn:electricUpdateIntegral} and \ref{eqn:magneticUpdateIntegral}. They will now be used to do a FDTD discretization for the one-dimensional electromagnetic wave scenario. At the end of this section, we will have the update equations that we will use in our loops. Before moving on, we must first briefly discuss Transverse modes. A transverse mode is the type of pattern that an electromagnetic field, which is perpendicular with respect to the direction of the wave's propagation, has. For electromagnetic waves, the most relevant modes are TE (Transverse Electric) and TM (Transverse Magnetic). In our scenario, we will be using TEM mode for discretization, meaning neither electric nor the magnetic field are moving in the direction of propagation.
 
 %-----------------------------------
 %	SUBSECTION 1
@@ -25,7 +25,7 @@ The first step of the FDTD discretization is a shift in spacetime of the electri
 	\centering
 	\includegraphics[scale=0.7]{Figures/fdtd1dDiscretized}
 	\decoRule
-	\caption[1D Spatial and Temporal Shift - TE Mode]{The spatial and temporal shift of a one-dimensional electromagnetic scenario.}
+	\caption[1D Spatial and Temporal Shift - TEM Mode]{The spatial and temporal shift of a one-dimensional electromagnetic scenario.}
 	\label{fig:fdtd1dDiscretized}
 \end{figure}
 
@@ -200,11 +200,11 @@ using namespace std;
 To shortly explain what each line does:
 
 \begin{itemize}
-	\item \textbf{cmath, math.h} - Packages that allow the use of various helpful math related commands and constants. Requires having \space \verb!#define _USE_MATH_DEFINES! set in order for everything to work properly
-	\item \textbf{iostream, stdio.h} - Allows for the usage of input and output stream objects and commands. In the 1D implementation, we will print our data to the console by using \verb!cout!
-	\item \textbf{stdlib.h} - Provides helpful data types, especially when dealing with vectors
-	\item \textbf{vector} - Arrays in C++ are not dynamic. Once populated, they can no longer be modified. That is why for this implementation we need to use vectors.
-	\item \textbf{string} - Includes the string datatype. A string is basically an array of characters. Not only can we use this to format our output more easily, it can also be very useful for printing debugging messages.
+	\item \textbf{cmath, math.h}\textsuperscript{\cite{cmath}} - Packages that allow the use of various helpful math related commands and constants. Requires having \space \verb!#define _USE_MATH_DEFINES! set in order for everything to work properly
+	\item \textbf{iostream, stdio.h}\textsuperscript{\cite{iostream}} - Allows for the usage of input and output stream objects and commands. In the 1D implementation, we will print our data to the console by using \verb!cout!
+	\item \textbf{stdlib.h}\textsuperscript{\cite{cstdlib}} - Provides helpful data types, especially when dealing with vectors
+	\item \textbf{vector}\textsuperscript{\cite{vector}} - Arrays in C++ are not dynamic. Once populated, they can no longer be modified. That is why for this implementation we need to use vectors.
+	\item \textbf{string}\textsuperscript{\cite{string}} - Includes the string datatype. A string is basically an array of characters. Not only can we use this to format our output more easily, it can also be very useful for printing debugging messages.
 \end{itemize}
 
 Next, we will need to initialize some variables. To begin with, we need to set the permittivity $\epsilon$ and permeability $\mu$ of the domain that we are going to simulate. For our scenario, we are going to use $\epsilon_{0}$ and $\mu_{0}$, which are the values for vacuum.

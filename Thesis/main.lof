@@ -5,7 +5,7 @@
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Magnetic Divergence}}{5}{figure.caption.21}%
 \contentsline {figure}{\numberline {1.3}{\ignorespaces Code Result}}{13}{figure.caption.45}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces 1D Spatial and Temporal Shift - TE Mode}}{15}{figure.caption.49}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces 1D Spatial and Temporal Shift - TEM Mode}}{15}{figure.caption.49}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces 1D Curl around $H_y$}}{16}{figure.caption.51}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces 1D Curl around $E_x$}}{17}{figure.caption.57}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Leapfrog Time Scheme}}{18}{figure.caption.62}%
@@ -15,10 +15,18 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces 1D Electromagnetic Time Graph}}{26}{figure.caption.77}%
 \contentsline {figure}{\numberline {2.9}{\ignorespaces 1D Magnetic Time Snippet}}{27}{figure.caption.78}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces 2D Electric Field Simulation}}{29}{figure.caption.86}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 2D Magnetic Field Simulation}}{29}{figure.caption.87}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 2D TE Mode - $H_z$ vector curl}}{29}{figure.caption.84}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 2D TE Mode - $E_x$ vector curl}}{31}{figure.caption.91}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 2D TE Mode - $E_y$ vector curl}}{32}{figure.caption.93}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 2D TE Mode - $E_x$ vector curl}}{37}{figure.caption.97}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 2D Electric Field Simulation}}{38}{figure.caption.98}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 2D Magnetic Field Simulation}}{38}{figure.caption.99}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces 3D Electric Field Simulation}}{30}{figure.caption.94}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 3D Magnetic Field Simulation}}{31}{figure.caption.95}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 3D Electric Discretization}}{39}{figure.caption.102}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 3D $H_x$ vector curl}}{40}{figure.caption.104}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 3D $H_y$ vector curl}}{40}{figure.caption.105}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 3D $E_z$ vector curl}}{41}{figure.caption.106}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 3D Electric Field Simulation}}{41}{figure.caption.109}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 3D Magnetic Field Simulation}}{42}{figure.caption.110}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
