@@ -4,27 +4,22 @@
 
 \label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-%----------------------------------------------------------------------------------------
-%	SECTION 1
-%----------------------------------------------------------------------------------------
+Through the help of many scientists and researchers, we were able to simulate electromagnetic wave data for three scenarios using a simple implementation that is easy to adapt and expand upon. At first, we explained the value of simulations in research, but also in various industries. We showed examples of capturing the movement of a light particle\textsuperscript{\cite{velten2013femto}}, or being able to capture an image of a black hole\textsuperscript{\cite{landau_2019}}, something that NASA achieved quite recently.
 
-\section{Main Section 1}
+In both examples above, these achievements would not be possible without having a basic idea of what to look for. It is thanks to Einstein and his theory of relativity that we were able to know the existence of black holes to begin with\textsuperscript{\cite{Eling_2010}}. And it was computers that compiled multiple small images into one. Indeed the development of technology has allowed us to not only achieve such feats, but also create simulations of various phenomena from scratch, which imitate nature closely, but not quite perfectly.
 
+Unless we are able to create computers that can achieve infinite precision, something that right now is not possible, we will always have a degree of error introduced into simulations that rely on infinite values. Even finite values will have to be truncated, provided they are large enough. Despite that, by using algorithms such as FDTD, we can minimize this error to a point where it is negligible. 
 
-%-----------------------------------
-%	SUBSECTION 1
-%-----------------------------------
-\subsection{Subsection 1}
+For electromagnetic waves specifically, simulating their behavior gives us far more data than observation can and far easier. This holds especially true when considering theoretical scenarios, such as comparing the electromagnetic properties of two different kinds of metals, or how these waves would behave in a vacuum. Such a simulation is only possible through knowledge of the basics, which in the case of electromagnetic phenomena would be Maxwell's Equations.
 
+These equations were derived by James Maxwell from the work of previous fellow physicists: Gauss and his laws for electricity and magnetism, Faraday and his law of induction, and Ampère with his circuital law. Maxwell took these laws and created equations that are believed to govern all electromagnetic phenomena. We adapted these equations in our FDTD implementation to create three C++ programs, capable of simulating electromagnetic phenomena in one-dimensional, two-dimensional, and three-dimensional cases.
 
-%-----------------------------------
-%	SUBSECTION 2
-%-----------------------------------
+We began by first deriving the numerical solution to the Wave Equation. With that, we could choose from many algorithms as to how to proceed. We chose FDTD due to how simple it is and how it can be implemented in a realistic amount of time by only one person\textsuperscript{\cite{davidson2010computational}}. 
 
-\subsection{Subsection 2}
+FDTD, initially called the Yee algorithm because it was proposed by Kane Yee, was modified by fellow researchers to become a staple of simulations for the wave equation. It can be implemented by following a number of steps, the first one being the transformation of Maxwell's Equations into finite differences. After that, we discretize the domain and formulate what are called update equations: formulas that allow us to derive the next step of the respective field.
 
-%----------------------------------------------------------------------------------------
-%	SECTION 2
-%----------------------------------------------------------------------------------------
+We followed this process for all three scenarios, making changes where they are needed to account for dimensions. We used electromagnetic curls to derive the update equations, which we could then use in our implementations. After the programs generated the necessary data, we used it to visualize our simulations in real time, by using a program called Paraview\textsuperscript{\cite{paraview}}.
 
-\section{Main Section 2}
+With that, this project is officially over. However, the implementation is fairly simplistic. It was left this way on purpose so that it can be modified easily. In the Appendix (\ref{AppendixA}) we will go over some possible improvements. There we can also find the tools used during this project, how to adapt this implementation to fit into another application, and how to change the program so that it can support domains that are formed of more than one material. Included is also a short guide to troubleshooting possible issues with the implementation, as well as the full code for each scenario.
+
+Hopefully, this will prove helpful to anyone that will want to work further on this project, or to integrate it into their own.

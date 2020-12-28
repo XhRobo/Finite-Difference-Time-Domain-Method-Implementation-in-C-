@@ -257,6 +257,53 @@
     \endverb
   \endentry
 
+  \entry{Eling_2010}{article}{}
+    \name{author}{2}{}{%
+      {{hash=EC}{%
+         family={Eling},
+         familyi={E\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=JT}{%
+         family={Jacobson},
+         familyi={J\bibinitperiod},
+         given={Ted},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{IOP} Publishing}%
+    }
+    \strng{namehash}{ECJT1}
+    \strng{fullhash}{ECJT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{abstract}{%
+    1) The signs of all terms on the right-hand side of equation (6) should be
+  reversed. The results are unchanged, since expression is equal to zero in
+  spherical symmetry. 2) The signs of all but the last term on the right-hand
+  side of equation (12) should be reversed. The results are unchanged, since
+  the correct expression was used in the calculations.%
+    }
+    \verb{doi}
+    \verb 10.1088/0264-9381/27/4/049802
+    \endverb
+    \field{number}{4}
+    \field{pages}{049802}
+    \field{title}{Spherical solutions in Einstein-aether theory: static aether
+  and stars}
+    \verb{url}
+    \verb https://doi.org/10.1088/0264-9381/27/4/049802
+    \endverb
+    \field{volume}{27}
+    \field{journaltitle}{Classical and Quantum Gravity}
+    \field{year}{2010}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
   \entry{io.h}{misc}{}
     \name{author}{1}{}{%
       {{hash=G}{%
