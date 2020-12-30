@@ -175,7 +175,7 @@ In a similar way, the update equation for the electric element can be gotten by 
 
 Before moving on, it is critical to discuss the stability of the simulation, which relies on the value of $\Delta t$.
 
-\subsection{Stability and Energy Conservation}
+\subsection{Stability and Energy Conservation}\label{sec:stability}
 Deciding the mesh size for a given domain is heavily based on the computational capabilities of the instruments that are being used, rather than the implementation itself. Therefore, it is fairly straightforward most of the time: one should make the mesh as small as possible, provided the implementation can finish computing within an amount of time that can be considered reasonable.
 
 Unfortunately, this is not the case for the time step size, $\Delta t$. While it can be chosen arbitrarily, picking a number that is too large can cause the implementation to grow unstable (Figure \ref{fig:fdtd1dinstability}).

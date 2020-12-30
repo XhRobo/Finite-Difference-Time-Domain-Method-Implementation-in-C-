@@ -17,6 +17,40 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{archer1990dielectric}{article}{}
+    \name{author}{2}{}{%
+      {{hash=ADG}{%
+         family={Archer},
+         familyi={A\bibinitperiod},
+         given={Donald\bibnamedelima G},
+         giveni={D\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=WP}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Peiming},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {American Institute of Physics for the National Institute of Standards
+  and~…}%
+    }
+    \strng{namehash}{ADGWP1}
+    \strng{fullhash}{ADGWP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{number}{2}
+    \field{pages}{371\bibrangedash 411}
+    \field{title}{The dielectric constant of water and Debye-H{\"u}ckel
+  limiting law slopes}
+    \field{volume}{19}
+    \field{journaltitle}{Journal of physical and chemical reference data}
+    \field{year}{1990}
+  \endentry
+
   \entry{cao2005first}{article}{}
     \true{moreauthor}
     \true{morelabelname}
@@ -417,6 +451,51 @@
     \endverb
   \endentry
 
+  \entry{kirk2006libmesh}{article}{}
+    \name{author}{4}{}{%
+      {{hash=KBS}{%
+         family={Kirk},
+         familyi={K\bibinitperiod},
+         given={Benjamin\bibnamedelima S},
+         giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=PJW}{%
+         family={Peterson},
+         familyi={P\bibinitperiod},
+         given={John\bibnamedelima W},
+         giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=SRH}{%
+         family={Stogner},
+         familyi={S\bibinitperiod},
+         given={Roy\bibnamedelima H},
+         giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=CGF}{%
+         family={Carey},
+         familyi={C\bibinitperiod},
+         given={Graham\bibnamedelima F},
+         giveni={G\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{KBS+1}
+    \strng{fullhash}{KBSPJWSRHCGF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{number}{3-4}
+    \field{pages}{237\bibrangedash 254}
+    \field{title}{libMesh: a C++ library for parallel adaptive mesh
+  refinement/coarsening simulations}
+    \field{volume}{22}
+    \field{journaltitle}{Engineering with Computers}
+    \field{year}{2006}
+  \endentry
+
   \entry{landau_2019}{article}{}
     \name{author}{1}{}{%
       {{hash=LE}{%
@@ -449,6 +528,26 @@
     \field{journaltitle}{Nasa.gov}
     \field{year}{2019}
     \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{quda}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=l}{%
+         family={lattice},
+         familyi={l\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {lattice}%
+    }
+    \strng{namehash}{l1}
+    \strng{fullhash}{l1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \verb{url}
+    \verb http://lattice.github.io/quda/
+    \endverb
   \endentry
 
   \entry{logan2011first}{article}{}
@@ -489,6 +588,27 @@
     \verb{url}
     \verb https://www.microsoft.com/en/microsoft-365/excel
     \endverb
+  \endentry
+
+  \entry{mohr2014quantum}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MA}{%
+         family={Mohr},
+         familyi={M\bibinitperiod},
+         given={Austin},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MA1}
+    \strng{fullhash}{MA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{Quantum computing in complexity theory and theory of
+  computation}
+    \field{journaltitle}{Carbondale, IL}
+    \field{year}{2014}
   \endentry
 
   \entry{paraview}{misc}{}
@@ -605,6 +725,47 @@
     \field{title}{Electromagnetic theory}
     \field{volume}{33}
     \field{year}{2007}
+  \endentry
+
+  \entry{gcc}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=TG}{%
+         family={Team},
+         familyi={T\bibinitperiod},
+         given={GCC},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Free Software Foundation, Inc.}%
+    }
+    \strng{namehash}{TG1}
+    \strng{fullhash}{TG1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \verb{url}
+    \verb https://gcc.gnu.org/
+    \endverb
+  \endentry
+
+  \entry{gimp}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=TTG}{%
+         family={Team},
+         familyi={T\bibinitperiod},
+         given={The\bibnamedelima GIMP},
+         giveni={T\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TTG1}
+    \strng{fullhash}{TTG1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \verb{url}
+    \verb https://www.gimp.org/
+    \endverb
   \endentry
 
   \entry{template}{article}{}
@@ -738,6 +899,65 @@
   equations for six-component fields.-Electronics and Communication,(AE{\"U}),
   Vol. 31}
     \field{year}{1977}
+  \endentry
+
+  \entry{texstudio}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=vdZB}{%
+         prefix={van\bibnamedelima der},
+         prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod},
+         family={Zander},
+         familyi={Z\bibinitperiod},
+         given={Benito},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Sundermeyer},
+         familyi={S\bibinitperiod},
+         given={Jan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BD}{%
+         family={Braun},
+         familyi={B\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=HT}{%
+         family={Hoffmann},
+         familyi={H\bibinitperiod},
+         given={Tim},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZBvd+1}
+    \strng{fullhash}{ZBvdSJBDHT1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \verb{url}
+    \verb https://www.texstudio.org/
+    \endverb
+  \endentry
+
+  \entry{diagrameditor}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=Z}{%
+         family={Zygomatic},
+         familyi={Z\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Zygomatic}%
+    }
+    \strng{namehash}{Z1}
+    \strng{fullhash}{Z1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \verb{url}
+    \verb https://www.diagrameditor.com/
+    \endverb
   \endentry
 \enddatalist
 \endinput

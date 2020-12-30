@@ -33,18 +33,19 @@
 \contentsline {section}{\numberline {4.3}Data Visualization}{60}{section.141}%
 \contentsline {chapter}{\numberline {5}Conclusion}{62}{chapter.144}%
 \contentsline {chapter}{\numberline {A}Appendix}{65}{appendix.145}%
-\contentsline {section}{\numberline {A.1}Tools Used}{66}{section.146}%
-\contentsline {subsection}{\numberline {A.1.1}Hardware}{66}{subsection.147}%
+\contentsline {section}{\numberline {A.1}Tools Used}{65}{section.146}%
+\contentsline {subsection}{\numberline {A.1.1}Hardware}{65}{subsection.147}%
 \contentsline {subsection}{\numberline {A.1.2}Software}{66}{subsection.148}%
-\contentsline {section}{\numberline {A.2}Troubleshooting the implementation}{66}{section.149}%
-\contentsline {section}{\numberline {A.3}Integration into a bigger program}{66}{section.150}%
-\contentsline {section}{\numberline {A.4}Using a domain with different environments}{66}{section.151}%
-\contentsline {section}{\numberline {A.5}General Improvements}{66}{section.152}%
-\contentsline {subsection}{\numberline {A.5.1}Performance Improvements}{66}{subsection.153}%
-\contentsline {subsection}{\numberline {A.5.2}Improvements for Symmetric Cases}{66}{subsection.154}%
-\contentsline {subsection}{\numberline {A.5.3}Using CUDA}{66}{subsection.155}%
-\contentsline {section}{\numberline {A.6}Full Code Files}{66}{section.156}%
-\contentsline {subsection}{\numberline {A.6.1}FDTD 1D}{66}{subsection.157}%
-\contentsline {subsection}{\numberline {A.6.2}FDTD 2D}{69}{subsection.158}%
-\contentsline {subsection}{\numberline {A.6.3}FDTD 3D}{73}{subsection.159}%
-\contentsline {chapter}{Bibliography}{79}{appendix*.160}%
+\contentsline {section}{\numberline {A.2}Troubleshooting the implementation}{67}{section.149}%
+\contentsline {section}{\numberline {A.3}Integration into a bigger program}{68}{section.150}%
+\contentsline {section}{\numberline {A.4}Using a domain with different environments}{69}{section.151}%
+\contentsline {section}{\numberline {A.5}Using non uniform meshes}{71}{section.152}%
+\contentsline {section}{\numberline {A.6}General Improvements}{74}{section.153}%
+\contentsline {subsection}{\numberline {A.6.1}Performance Improvements}{74}{subsection.154}%
+\contentsline {subsection}{\numberline {A.6.2}Improvements for Symmetric Cases}{75}{subsection.155}%
+\contentsline {subsection}{\numberline {A.6.3}Using CUDA}{77}{subsection.156}%
+\contentsline {section}{\numberline {A.7}Full Code Files}{78}{section.157}%
+\contentsline {subsection}{\numberline {A.7.1}FDTD 1D}{78}{subsection.158}%
+\contentsline {subsection}{\numberline {A.7.2}FDTD 2D}{80}{subsection.159}%
+\contentsline {subsection}{\numberline {A.7.3}FDTD 3D}{84}{subsection.160}%
+\contentsline {chapter}{Bibliography}{89}{appendix*.161}%
