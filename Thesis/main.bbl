@@ -236,6 +236,29 @@
     \field{year}{2010}
   \endentry
 
+  \entry{dow_1998}{article}{}
+    \name{author}{1}{}{%
+      {{hash=DJ}{%
+         family={Dow},
+         familyi={D\bibinitperiod},
+         given={Julian},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DJ1}
+    \strng{fullhash}{DJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{pages}{xiv}
+    \field{title}{A Unified Approach to the Finite Element Method and Error
+  Analysis Procedures}
+    \field{volume}{1st Edition}
+    \field{year}{1998}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
   \entry{eclipse}{misc}{}
     \name{author}{1}{}{%
       {{hash=E}{%
@@ -302,6 +325,75 @@
     \field{journaltitle}{Classical and Quantum Gravity}
     \field{year}{2010}
     \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{engle_skeel_drees_2005}{article}{}
+    \name{author}{3}{}{%
+      {{hash=ERD}{%
+         family={Engle},
+         familyi={E\bibinitperiod},
+         given={Robert\bibnamedelima D.},
+         giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=SRD}{%
+         family={Skeel},
+         familyi={S\bibinitperiod},
+         given={Robert\bibnamedelima D.},
+         giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=DM}{%
+         family={Drees},
+         familyi={D\bibinitperiod},
+         given={Matthew},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ERDSRDDM1}
+    \strng{fullhash}{ERDSRDDM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{number}{2}
+    \field{pages}{432–452}
+    \field{title}{Monitoring energy drift with shadow Hamiltonians}
+    \field{volume}{206}
+    \field{journaltitle}{Journal of Computational Physics}
+    \field{year}{2005}
+  \endentry
+
+  \entry{gao2013optimal}{article}{}
+    \name{author}{2}{}{%
+      {{hash=GL}{%
+         family={Gao},
+         familyi={G\bibinitperiod},
+         given={LiPing},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=ZB}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Bo},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{GLZB1}
+    \strng{fullhash}{GLZB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{number}{8}
+    \field{pages}{1705\bibrangedash 1726}
+    \field{title}{Optimal error estimates and modified energy conservation
+  identities of the ADI-FDTD scheme on staggered grids for 3D Maxwell’s
+  equations}
+    \field{volume}{56}
+    \field{journaltitle}{Science China Mathematics}
+    \field{year}{2013}
   \endentry
 
   \entry{io.h}{misc}{}
@@ -467,6 +559,29 @@
     \verb https://github.com/XhRobo/Finite-Difference-Time-Domain-Method-Implem
     \verb entation-in-C-
     \endverb
+  \endentry
+
+  \entry{roy2010review}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=RC}{%
+         family={Roy},
+         familyi={R\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RC1}
+    \strng{fullhash}{RC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{booktitle}{48th AIAA Aerospace Sciences Meeting Including the New
+  Horizons Forum and Aerospace Exposition}
+    \field{pages}{126}
+    \field{title}{Review of discretization error estimators in scientific
+  computing}
+    \field{year}{2010}
   \endentry
 
   \entry{stratton2007electromagnetic}{book}{}

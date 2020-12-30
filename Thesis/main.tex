@@ -122,9 +122,9 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 \end{minipage}
 \begin{minipage}[t]{0.4\textwidth}
 \begin{flushright} \large
-\emph{Supervisor:} \\
+\emph{First Supervisor:} \\
 {\supname} \\ % Supervisor name - remove the \href bracket to remove the link
-\emph{Assistant Supervisor:} \\
+\emph{Second Supervisor:} \\
 {\examname} % Examiner name - remove the \href bracket to remove the link  
 \end{flushright}
 \end{minipage}\\[1.0cm]
@@ -173,11 +173,7 @@ chapterinoneline, % Uncomment to place the chapter title next to the number on o
 
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-This thesis is the final documentation for a project in the Master of Science degree of High Integrity Systems supervised by Prof. Dr. Peter Thoma and Prof. Dr. Egbert Falkenberg. In this thesis, the author will explain the basics of electromagnetic simulation and demonstrate a simple application that will produce both electric and magnetic field data, which can then be visualized through the help of third party applications such as Paraview\textsuperscript{\cite{paraview}}. 
-
-This thesis is heavily focused on theoretical aspect of such an application, and as such the code will be simplistic and not use any advanced external libraries not included by default in the basic C++ package. The application will not have a User Interface (UI), therefore the only way to customize the initial values of the code variables would be through an Integrated Development Environment (IDE) that can handle C++, such as Eclipse \textsuperscript{\cite{eclipse}}. The benefit of not relying on any external open source libraries is the ability for this code to be used by any machine regardless of operating system and easy integration into applications that need such simulations.
-
-Alongside this document, the project also included the code files found in the GitHub repository\textsuperscript{\cite{robo}}. As the base \LaTeX \space template of this thesis was found online\textsuperscript{\cite{template}}, these files are also included, with the license allowing viewing and modification so long as it is for a non-commercial use. After the official deadline of January 5th 2021, this project will be considered complete and no further changes will be made.
+In this thesis, the author discusses the implementation of a Finite Difference Time Domain Method using the C++ programming language, to generate data for simulations of electromagnetic waves. This thesis aims to use terms that are as simple as possible, so that it can be understood easily by those who, like the author, have studied primarily computer science rather than physics. Three scenarios will be discussed here: the first with a one-dimensional domain, then a two-dimensional one, and lastly the three-dimensional implementation, which would have the most real-life applications. None of this would be possible however without the work of previous researchers and scientists. In particular, this project relies heavily on Maxwell's Equations for electromagnetics, which dictate the behavior of all electromagnetic waves in a static environment. After first discretizing the domain, the formulas are adapted to the specific scenario, resulting in update equations that calculate the value of the next step of the simulation. While doing so, the thesis goes over transverse modes and electromagnetic vector curls. After each scenario is discretized properly, it is possible to proceed to the code implementation, where each of the equations is adapted and added inside a loop. The result is then processed with the help of an external program to visualize the simulation in a way that is more easily understandable to humans. In the end, an appendix holds useful information that one can use should they intend to further work on this project, or implement it into their own work.
 \end{abstract}
 \textbf{Keywords:} \textit{\keywordnames}
 %----------------------------------------------------------------------------------------
@@ -186,13 +182,13 @@ Alongside this document, the project also included the code files found in the G
 
 \begin{acknowledgements}
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-First and foremost I would like to thank my academic supervisor, Prof. Dr. Peter Thoma. It is only due to his patience, perseverance, and willingness to spend his time aiding me, that I was able to complete this project. Even before that, I would like to thank him for his course of Simulation Methods in the High Integrity Systems M.Sc. degree, that convinced me that such a subject would make an interesting thesis for me.
+First and foremost I would like to thank my academic supervisor, Prof. Dr. Peter Thoma. It is only due to his patience, perseverance, and willingness to spend his time aiding me, that I was able to complete this project. Even before that, I would like to thank him for his course of Simulation Methods in the High Integrity Systems M.Sc. degree, which convinced me that such a subject would make an interesting thesis for me.
 
-I would also like to the Prof. Dr. Falkenberg, not only for his assistance throughout my higher academic studies, but also because I would not be able to officially start working on this thesis without his acceptance.
+I would also like to thank Prof. Dr. Falkenberg, not only for his assistance throughout my higher academic studies but also because I would not be able to officially start working on this thesis without his acceptance.
 
 Thank you to my friends, who although far away have helped me keep my spirits high during a rather dark year not just for me, but for the world as a whole. It would have been difficult to push through to the end of this degree otherwise, if not impossible.
 
-And lastly, my deepest thanks to my parents, who taught me discipline, and also acceptance. They did their best to set me up for a rich academic life, by straining themselves physically, mentally, and economically just so that I could have the best possibilities available to me. It will take an eternity to repay them back for their sacrifices, but hopefully this is, at the very least, a step in the right direction.
+And lastly my deepest thanks to my parents, who taught me discipline and also self-acceptance. They did their best to set me up for a rich academic life, by straining themselves physically, mentally, and economically just so that I could have the best possibilities available to me. It will take an eternity to repay them for their sacrifices, but hopefully, this is, at the very least, a step in the right direction.
 
 Sincerely,\\
 Xhoni Robo
@@ -202,7 +198,9 @@ Xhoni Robo
 %	LIST OF CONTENTS/FIGURES/TABLES PAGES
 %----------------------------------------------------------------------------------------
 
+\small
 \tableofcontents % Prints the main table of contents
+\normalsize
 
 \listoffigures % Prints the list of figures
 

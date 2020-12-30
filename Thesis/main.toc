@@ -4,44 +4,47 @@
 \contentsline {chapter}{Abstract}{iii}{section*.2}%
 \contentsline {chapter}{Acknowledgements}{iv}{section*.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.10}%
-\contentsline {section}{\numberline {1.1}Electromagnetic Simulations}{2}{section.11}%
-\contentsline {subsection}{\numberline {1.1.1}Maxwell Equations}{3}{subsection.12}%
-\contentsline {subsection}{\numberline {1.1.2}Solving the Wave Equation}{5}{subsection.21}%
-\contentsline {section}{\numberline {1.2}Finite Difference Time Domain Method}{7}{section.23}%
-\contentsline {section}{\numberline {1.3}FDTD Implementation}{8}{section.29}%
-\contentsline {subsection}{\numberline {1.3.1}Application Requirements}{9}{subsection.38}%
-\contentsline {subsection}{\numberline {1.3.2}Computational Limitations and Inaccuracies Explained}{12}{subsection.41}%
-\contentsline {chapter}{\numberline {2}FDTD - One-Dimensional Scenario}{14}{chapter.43}%
-\contentsline {section}{\numberline {2.1}1D Discretization}{14}{section.44}%
-\contentsline {subsection}{\numberline {2.1.1}Spatial and Temporal Shift}{15}{subsection.45}%
-\contentsline {subsection}{\numberline {2.1.2}Electromagnetic Curls}{15}{subsection.47}%
-\contentsline {section}{\numberline {2.2}C++ Implementation}{20}{section.68}%
-\contentsline {section}{\numberline {2.3}Data Visualization}{25}{section.71}%
-\contentsline {chapter}{\numberline {3}FDTD - Two-Dimensional Scenario}{28}{chapter.77}%
-\contentsline {section}{\numberline {3.1}2D Discretization}{28}{section.78}%
-\contentsline {subsection}{\numberline {3.1.1}2D Transverse Modes}{28}{subsection.79}%
-\contentsline {subsection}{\numberline {3.1.2}2D TE Electromagnetic Curls}{29}{subsection.80}%
-\contentsline {section}{\numberline {3.2}C++ Implementation}{32}{section.92}%
-\contentsline {section}{\numberline {3.3}Data Visualization}{36}{section.93}%
-\contentsline {chapter}{\numberline {4}FDTD - Three-Dimensional Scenario}{39}{chapter.97}%
-\contentsline {section}{\numberline {4.1}3D Discretization}{40}{section.98}%
-\contentsline {subsection}{\numberline {4.1.1}3D Electromagnetic Curls}{41}{subsection.101}%
-\contentsline {section}{\numberline {4.2}C++ Implementation}{48}{section.131}%
-\contentsline {section}{\numberline {4.3}Data Visualization}{53}{section.132}%
-\contentsline {chapter}{\numberline {5}Conclusion}{55}{chapter.135}%
-\contentsline {chapter}{\numberline {A}Appendix}{58}{appendix.136}%
-\contentsline {section}{\numberline {A.1}Tools Used}{59}{section.137}%
-\contentsline {subsection}{\numberline {A.1.1}Hardware}{59}{subsection.138}%
-\contentsline {subsection}{\numberline {A.1.2}Software}{59}{subsection.139}%
-\contentsline {section}{\numberline {A.2}Troubleshooting the implementation}{59}{section.140}%
-\contentsline {section}{\numberline {A.3}Integration into a bigger program}{59}{section.141}%
-\contentsline {section}{\numberline {A.4}Using a domain with different environments}{59}{section.142}%
-\contentsline {section}{\numberline {A.5}General Improvements}{59}{section.143}%
-\contentsline {subsection}{\numberline {A.5.1}Performance Improvements}{59}{subsection.144}%
-\contentsline {subsection}{\numberline {A.5.2}Improvements for Symmetric Cases}{59}{subsection.145}%
-\contentsline {subsection}{\numberline {A.5.3}Using CUDA}{59}{subsection.146}%
-\contentsline {section}{\numberline {A.6}Full Code Files}{59}{section.147}%
-\contentsline {subsection}{\numberline {A.6.1}FDTD 1D}{59}{subsection.148}%
-\contentsline {subsection}{\numberline {A.6.2}FDTD 2D}{62}{subsection.149}%
-\contentsline {subsection}{\numberline {A.6.3}FDTD 3D}{66}{subsection.150}%
-\contentsline {chapter}{Bibliography}{72}{appendix*.151}%
+\contentsline {section}{\numberline {1.1}Motivation}{2}{section.11}%
+\contentsline {section}{\numberline {1.2}Electromagnetic Simulations}{3}{section.12}%
+\contentsline {subsection}{\numberline {1.2.1}Maxwell Equations}{3}{subsection.13}%
+\contentsline {subsection}{\numberline {1.2.2}Solving the Wave Equation}{6}{subsection.22}%
+\contentsline {section}{\numberline {1.3}Finite Difference Time Domain Method}{8}{section.24}%
+\contentsline {section}{\numberline {1.4}FDTD Implementation}{9}{section.30}%
+\contentsline {subsection}{\numberline {1.4.1}Application Requirements}{10}{subsection.39}%
+\contentsline {subsection}{\numberline {1.4.2}Computational Limitations and Inaccuracies Explained}{13}{subsection.42}%
+\contentsline {subsection}{\numberline {1.4.3}Discretization Error\textsuperscript {\cite {roy2010review}}}{15}{subsection.44}%
+\contentsline {chapter}{\numberline {2}FDTD - One-Dimensional Scenario}{17}{chapter.46}%
+\contentsline {section}{\numberline {2.1}1D Discretization}{17}{section.47}%
+\contentsline {subsection}{\numberline {2.1.1}Spatial and Temporal Shift}{18}{subsection.48}%
+\contentsline {subsection}{\numberline {2.1.2}Electromagnetic Curls}{18}{subsection.50}%
+\contentsline {subsection}{\numberline {2.1.3}Stability and Energy Conservation}{22}{subsection.71}%
+\contentsline {section}{\numberline {2.2}C++ Implementation}{24}{section.77}%
+\contentsline {section}{\numberline {2.3}Data Visualization}{30}{section.80}%
+\contentsline {chapter}{\numberline {3}FDTD - Two-Dimensional Scenario}{35}{chapter.86}%
+\contentsline {section}{\numberline {3.1}2D Discretization}{35}{section.87}%
+\contentsline {subsection}{\numberline {3.1.1}2D Transverse Modes}{35}{subsection.88}%
+\contentsline {subsection}{\numberline {3.1.2}2D TE Electromagnetic Curls}{36}{subsection.89}%
+\contentsline {section}{\numberline {3.2}C++ Implementation}{39}{section.101}%
+\contentsline {section}{\numberline {3.3}Data Visualization}{43}{section.102}%
+\contentsline {chapter}{\numberline {4}FDTD - Three-Dimensional Scenario}{46}{chapter.106}%
+\contentsline {section}{\numberline {4.1}3D Discretization}{47}{section.107}%
+\contentsline {subsection}{\numberline {4.1.1}3D Electromagnetic Curls}{48}{subsection.110}%
+\contentsline {section}{\numberline {4.2}C++ Implementation}{55}{section.140}%
+\contentsline {section}{\numberline {4.3}Data Visualization}{60}{section.141}%
+\contentsline {chapter}{\numberline {5}Conclusion}{62}{chapter.144}%
+\contentsline {chapter}{\numberline {A}Appendix}{65}{appendix.145}%
+\contentsline {section}{\numberline {A.1}Tools Used}{66}{section.146}%
+\contentsline {subsection}{\numberline {A.1.1}Hardware}{66}{subsection.147}%
+\contentsline {subsection}{\numberline {A.1.2}Software}{66}{subsection.148}%
+\contentsline {section}{\numberline {A.2}Troubleshooting the implementation}{66}{section.149}%
+\contentsline {section}{\numberline {A.3}Integration into a bigger program}{66}{section.150}%
+\contentsline {section}{\numberline {A.4}Using a domain with different environments}{66}{section.151}%
+\contentsline {section}{\numberline {A.5}General Improvements}{66}{section.152}%
+\contentsline {subsection}{\numberline {A.5.1}Performance Improvements}{66}{subsection.153}%
+\contentsline {subsection}{\numberline {A.5.2}Improvements for Symmetric Cases}{66}{subsection.154}%
+\contentsline {subsection}{\numberline {A.5.3}Using CUDA}{66}{subsection.155}%
+\contentsline {section}{\numberline {A.6}Full Code Files}{66}{section.156}%
+\contentsline {subsection}{\numberline {A.6.1}FDTD 1D}{66}{subsection.157}%
+\contentsline {subsection}{\numberline {A.6.2}FDTD 2D}{69}{subsection.158}%
+\contentsline {subsection}{\numberline {A.6.3}FDTD 3D}{73}{subsection.159}%
+\contentsline {chapter}{Bibliography}{79}{appendix*.160}%

@@ -4,26 +4,34 @@
 
 \label{Chapter1} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-As humanity strives to better understand the world and universe around it, the physical limitations of our species become more and more apparent. While we have made considerable progress in our struggles to move forward, such as being able to record the movement of a light particle on camera despite it being the fastest moving object we know of so far\textsuperscript{\cite{velten2013femto}}, or being able to capture an image of a black hole\textsuperscript{\cite{landau_2019}}, such achievements would not have been possible if our scientists did not have realistic expectations of how they should approach these challenges, or the expected results. 
+This thesis is the final documentation for a project in the Master of Science degree of High Integrity Systems supervised by Prof. Dr. Peter Thoma and Prof. Dr. Egbert Falkenberg. In this thesis, the author will explain the basics of electromagnetic simulation and demonstrate a simple application that will produce both electric and magnetic field data, which can then be visualized through the help of third party applications such as Paraview\textsuperscript{\cite{paraview}}. 
+
+This thesis is heavily focused on theoretical aspect of such an application, and as such the code will be simplistic and not use any advanced external libraries not included by default in standard C++. The application will not have a User Interface (UI), therefore the only way to customize the initial values of the code variables would be through an Integrated Development Environment (IDE) that can handle C++, such as Eclipse \textsuperscript{\cite{eclipse}}. The benefit of not relying on any external open source libraries is the ability for this code to be used by any machine regardless of operating system and easy integration into applications that need such simulations.
+
+Alongside this document, the project also included the code files found in the GitHub repository\textsuperscript{\cite{robo}}. As the base \LaTeX \space template of this thesis was found online\textsuperscript{\cite{template}}, these files are also included, with the license allowing viewing and modification so long as it is for a non-commercial use. After the official deadline of January 5th 2021, this project will be considered complete and no further changes will be made.
+
+\section{Motivation}
+
+As humanity strives to better understand the world and universe around it, the physical limitations become more and more apparent. While people have made considerable progress in their struggles to move forward, such as being able to record the movement of a light particle on camera despite it being the fastest moving object known of so far\textsuperscript{\cite{velten2013femto}}, or being able to capture an image of a black hole\textsuperscript{\cite{landau_2019}}, such achievements would not have been possible if scientists did not have realistic expectations of how they should approach these challenges, or the expected results. 
 
 In order to achieve what they have, scientists needed to first understand the phenomena they were studying: the light having the particular properties of both particle and wave and the ability of black holes to distort space around them. All of this would not have been possible without simulations. 
 
 This thesis is going to describe the implementation of a C++ algorithm that uses the FDTD method to simulate how an electromagnetic field behaves in vacuum. The goal of the app is to be able to generate data that can then be used by a third party visualization program. This project features three standalone implementations, for one-dimensional, two-dimensional, and three-dimensional cases.
 
-The basis for all of these calculations are the well known Maxwell Equations, which govern all electromagnetic phenomena. They will be used alongside the FDTD method to create update equations that will run in a loop for a certain amount of time. The initial values, domain size, domain environment, and simulation time can all be changed in code. To start off the simulation, we will need a starting impulse. For this project we will adapt the Gaussian pulse equation to our needs and use it to add an excitation to our simulation that would otherwise be static.
+The basis for all of these calculations are the well known Maxwell Equations, which govern all electromagnetic phenomena. They will be used alongside the FDTD method to create update equations that will run in a loop for a certain amount of time. The initial values, domain size, domain environment, and simulation time can all be changed in code. To begin off the simulation, a starting impulse will be eeded. For this project, the Gaussian pulse equation will be adapted used to add an excitation to the simulation that would otherwise be static. 
 
-At the end, we will conclude our findings and discuss uses for this application as well as further improvements. Anyone that would like to use this project as a basis for their own work should take a look at the \ref{AppendixA} should they have any issues.
+At the end, one can find the conclusion where uses for this application as well as further improvements are discussed. Anyone that would like to use this project as a basis for their own work should take a look at the \ref{AppendixA} should they have any issues.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
 \section{Electromagnetic Simulations}
-With the fast development of technology came new opportunities for gaining a better understanding of vast natural phenomena. We will be focusing on one of them, that being Electromagnetic Wave Propagation. 
+With the fast development of technology came new opportunities for gaining a better understanding of vast natural phenomena. This thesis will be focusing on one of them, that being Electromagnetic Wave Propagation. 
 
-As one can imagine, analyzing electromagnetic fields through plain observation is near impossible, with only a few exceptions\textsuperscript{\cite{cao2005first}}. Even if we supposed that it was possible to easily achieve an acceptable amount of information from observing experiments, the cost and quality of the resulting data would mostly be of scientific use, with little to no practical use whatsoever. Considering that electromagnetic waves are widely used in almost every industry, either as part of the building process or as a finished product, having data that cannot be used practically does not help. 
+As one can imagine, analyzing electromagnetic fields through plain observation is near impossible, with only a few exceptions\textsuperscript{\cite{cao2005first}}. Even if one supposed that it was possible to easily achieve an acceptable amount of information from observing experiments, the cost and quality of the resulting data would mostly be of scientific use, with little to no practical use whatsoever. Considering that electromagnetic waves are widely used in almost every industry, either as part of the building process or as a finished product, having data that cannot be used practically does not help. 
 
-That is why, thanks to the progress made in the computational capabilities of computers so far and the use of the theories and formulas gathered from past scientific endeavors, one can create data that is a close approximate of reality. Both shall be discussed in this chapter, but we cannot proceed without first going into what is believed by scientists to be the equations that govern large-scale electromagnetic phenomena\textsuperscript{\cite{stratton2007electromagnetic}}: Maxwell Equations.
+That is why, thanks to the progress made in the computational capabilities of computers so far and the use of the theories and formulas gathered from past scientific endeavors, one can create data that is a close approximate of reality. Both shall be discussed in this chapter, but one cannot proceed without first going into the equations that govern large-scale electromagnetic phenomena in static mediums\textsuperscript{\cite{stratton2007electromagnetic}}: Maxwell Equations.
 
 %-----------------------------------
 %	SUBSECTION 1
@@ -63,7 +71,7 @@ Equation \ref{eqn:electricinduction} explains the effects of the electric field 
 
 Equation \ref{eqn:amperesLaw} is also known as Ampère–Maxwell law, because although it originated from Ampère, the current form was derived by Maxwell to include the magnetic current density $\vec{J}$. The equation explains the effects of the magnetic field on the electric current.
 
-Equation \ref{eqn:magneticDivergence}, otherwise known as Gauss's law for magnetism, talks about the divergence of the magnetic field. According to this law the divergence is always 0. What this means is that in a magnetic field there is no such thing as a source (positive divergence) or a sink (negative divergence), rather a magnetic field can be more closely compared to a closed loop that flows in one direction. That is why every magnet that we know of has two poles. To translate this into something more easily understandable, it basically means that, if we were to pick any subset of the area of a magnetic field, no matter what area we pick, we would have vector fields going inside this area, and vector fields going outside in equal number. A simple representation of this rule can be seen in \ref{fig:magneticdivergence}, where it can be noted that the number of vectors heading towards the north pole are equal to the vectors going outside of it. Interestingly enough, if the bar magnet were to be cut in half, then the result would be two smaller bar magnets with 2 poles each and the exact same vector field.
+Equation \ref{eqn:magneticDivergence}, otherwise known as Gauss's law for magnetism, talks about the divergence of the magnetic field. According to this law the divergence is always 0. What this means is that in a magnetic field there is no such thing as a source (positive divergence) or a sink (negative divergence), rather a magnetic field can be more closely compared to a closed loop that flows in one direction. That is why every magnet that is known so far, at least under normal conditions, of has two poles. To translate this into something more easily understandable, it basically means that, if one was to pick any subset of the area of a magnetic field, no matter what area was picked, it would have the same number of vector fields going inside and out. A simple representation of this rule can be seen in \ref{fig:magneticdivergence}, where it can be noted that the number of vectors heading towards the north pole are equal to the vectors going outside of it. Interestingly enough, if the bar magnet were to be cut in half, then the result would be two smaller bar magnets with 2 poles each and the exact same vector field.
 
 \begin{figure}
 	\centering
@@ -75,7 +83,7 @@ Equation \ref{eqn:magneticDivergence}, otherwise known as Gauss's law for magnet
 
 Equation \ref{eqn:gausslaw}, is the main Gauss law for electric currents. It looks rather similar to his law of magnetism on the left hand side; the previous magnetic divergence is now replaced with the electric divergence. The bigger difference is the $\rho$ on the right hand side, which is the density of charge of the electric field. In basic terms, it means that the divergence of the electric field is equal to the charge density for that point.
 
-For the above equations, we also have the following material relations which will be useful later on:
+For the above equations, the following material relations will be useful later on:
 \begin{equation}
 	 \vec{D}(\vec{r},t) = \epsilon(\vec{r}) \cdot \vec{E}(\vec{r},t)
 \end{equation}
@@ -90,7 +98,7 @@ The equations above are shown in their derivative form, but they can also be sho
 %-----------------------------------
 
 \subsection{Solving the Wave Equation}
-Using the formulas above, we can derive the electromagnetic wave equation, which is needed to proceed with the implementation further. Firstly for convenience, we will assume that the environment is the vacuum of space. Secondly, we will also assume that there is no charge in this space. This means that $\epsilon(\vec{r})=\epsilon_{0}$ and $\mu(\vec{r})=\mu_{0}$. This allows us to simplify the above equations and give us the numerical solution for the wave equation
+Using the formulas above, one can derive the electromagnetic wave equation, which is needed to proceed with the implementation further. Firstly for convenience, an assumption will be made that the environment is the vacuum of space. Secondly, it can also be assumed that there is no initial charge in this space or loss of energy. This means that $\epsilon(\vec{r})=\epsilon_{0}$ and $\mu(\vec{r})=\mu_{0}$. This allows for the simplification of the above equations and gives the numerical solution for the wave equation:
 
 \begin{equation}
 	\label{eqn:waveEquation}
@@ -99,15 +107,15 @@ Using the formulas above, we can derive the electromagnetic wave equation, which
 
 where: $$c = \frac{1}{\sqrt{\mu_{0}\epsilon_{0}}}$$
 
-This equation is useful because it will be used to derive the formulas that are going to be needed for the simulations. Going forwards, this will be used as a basis to adapt our solution to every environment, regardless of dimensionality. From this point, there are many ways to proceed. Some of the most notable are the Finite Element Method (FEM), the Finite Integration Technique (FIT), and the Finite Difference Time Domain Method (FDTD). All of them are also known as Approximation Methods.
+This equation is useful because it will be used to derive the formulas that are going to be needed for the simulations. Going forwards, this will be used as a basis to adapt the solution to every environment, regardless of dimensionality. From this point, there are many ways to proceed. Some of the most notable are the Finite Element Method (FEM), the Finite Integration Technique (FIT), and the Finite Difference Time Domain Method (FDTD). All of them are also known as Approximation Methods.
 
-FEM is a well known numerical method used to obtain an approximation for a given boundary value problem. The basic principle is to divide a system into smaller subsets, called finite elements (hence the name), which are much simpler to solve. This is done by discretizing the given space for each of its dimensions, and then constructing a mesh of the object. As a result, from the initial boundary value problem we get a system of equations that are further used to approximate each singular simplified function over the given domain. These equations are then compiled together into a system of equations that is then used to model the initial problem. The solution is then approximated by solving this system and minimizing the error function.\textsuperscript{\cite{logan2011first}}
+FEM is a well known numerical method used to obtain an approximation for a given boundary value problem. The basic principle is to divide a system into smaller subsets, called finite elements (hence the name), which are much simpler to solve. This is done by discretizing the given space for each of its dimensions, and then constructing a mesh of the object. As a result, from the initial boundary value problem one can get a system of equations that are further used to approximate each singular simplified function over the given domain. These equations are then compiled together into a system of equations that is then used to model the initial problem. The solution is then approximated by solving this system and minimizing the error function.\textsuperscript{\cite{logan2011first}}
 
 The finite integration technique (FIT) is a bit more straightforward. It can help numerically solve electromagnetic field problems by disctretizing in both the time and frequency domain. The first to introduce this technique was Thomas Weiland in 1977.\textsuperscript{\cite{weiland1977discretization}} It has later seen continuous improvements and can now cover all electromagnetic problems and applications. This approach works by using the Maxwell equations above and applying their integral form to a set of staggered grids (e.g. Cartesian grid). This allows for a memory efficient implementation as well as giving the ability to handle different boundary conditions and variable material properties.
 
-Finally we have a well known computational electromagnetic technique used for approximation, the Finite Difference Time Domain Method. It is arguably the easiest method out of the three to understand and implement, which is surprising when considering the capabilities it has in solving wave equations. 
+Finally there exists a well known computational electromagnetic technique used for approximation, the Finite Difference Time Domain Method. It is arguably the easiest method out of the three to understand and implement, which is surprising when considering the capabilities it has in solving wave equations. 
 
-This simplicity is also the reason it was chosen for this thesis, as it is the only technique that one person can realistically implement by themselves in a reasonable time frame.\textsuperscript{\cite{davidson2010computational}} As the name implies this is a time-domain method, meaning that a wide range of frequencies can be covered with a single simulation run. The only caveat is that the time step needs to be small enough to not cause any instabilities in the system.
+This simplicity is also the reason it was chosen for this thesis, as it is the only technique that one person can realistically implement by themselves in a reasonable time frame.\textsuperscript{\cite{davidson2010computational}} It is also worth noting that FIT can be used for deriving the update equations that will be used in the FDTD algorithm. As the name implies this is a time-domain method, meaning that a wide range of frequencies can be covered with a single simulation run. The only caveat is that the time step needs to be small enough to not cause any instabilities in the system.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -125,11 +133,11 @@ FDTD was first proposed by Kane Yee in a 1966 paper and was initially called the
 	\item Repeat the step above throughout the set duration
 \end{enumerate}
 
-The most important steps are 2 and 3, as the rest are relatively easy to do and it is highly unlikely for any mistakes to occur, especially once this is implemented in code. In the next section we will go quickly through the first step, which will the basis that will be used moving forward. Steps 2-5 are implementation specific and vary depending on the domain. As such, they will be explained for each scenario in their respective chapters.
+The most important steps are 2 and 3, as the rest are relatively easy to do and it is highly unlikely for any mistakes to occur, especially once this is implemented in code. The next section will go quickly through the first step, which will the basis that will be used moving forward. Steps 2-5 are implementation specific and vary depending on the domain. As such, they will be explained for each scenario in their respective chapters.
 
 \section{FDTD Implementation}
 
-Before beginning with the discretization, we mentioned previously that Maxwell's Equations can be shown in both their differential form and their integral form:
+Before beginning with the discretization, it was mentioned previously that Maxwell's Equations can be shown in both their differential form and their integral form. Using this form has the benefit that the equations are easier to work with and follow. Using integrals instead of derivatives, however, does mean that, at least for the derivation, FIT is being used instead of FDTD. Despite that, the final equations will be the same. Here is the integral form of Maxwell's Equations:
 
 
 \begin{equation}
@@ -149,7 +157,7 @@ Before beginning with the discretization, we mentioned previously that Maxwell's
 	\int B \cdot dA = 0
 \end{equation}
 
-The material relations would look as follows:
+The material relations will look as follows:
 
 \begin{equation}
 	\label{eqn:dIntegral}
@@ -160,7 +168,7 @@ The material relations would look as follows:
 	B = \mu \cdot H
 \end{equation}
 
-By plugging \ref{eqn:bIntegral} and \ref{eqn:dIntegral} into equations \ref{eqn:electricinductionintegral} and \ref{eqn:amperesLawintegral} respectively, we get:
+By plugging \ref{eqn:bIntegral} and \ref{eqn:dIntegral} into equations \ref{eqn:electricinductionintegral} and \ref{eqn:amperesLawintegral} respectively:
 
 \begin{equation}
 	\label{eqn:electricUpdateIntegral}
@@ -171,7 +179,7 @@ By plugging \ref{eqn:bIntegral} and \ref{eqn:dIntegral} into equations \ref{eqn:
 	\oint H \cdot ds = \frac{d}{dt} \iint \epsilon \cdot E \cdot dA
 \end{equation}
 
-Equations \ref{eqn:electricUpdateIntegral} and \ref{eqn:magneticUpdateIntegral} are going to be used later on during the implementation to derive the specific update equations. With all that, the general theoretical part is finished. For this project, we will need to implement the above functions into a program that can generate approximate data on electromagnetic waves, which will be discussed in the next section.
+Equations \ref{eqn:electricUpdateIntegral} and \ref{eqn:magneticUpdateIntegral} are going to be used later on during the implementation to derive the specific update equations. With all that, the general theoretical part is finished. For this project, the above functions will need to be implemented into a program that can generate approximate data on electromagnetic waves, which will be discussed in the next section.
 
 \subsection{Application Requirements}
 
@@ -180,18 +188,18 @@ The result of this project is not only this documentation, but also a relatively
 \begin{itemize}
 	\item Allow for the generation of electromagnetic data in a set environment (e.g. vacuum)
 	\item Have a smooth impulse to start off the simulation
-	\item Use only the default C++ libraries, no external dependencies
+	\item Use only the standard C++, no external dependencies
 	\item Support one dimensional, two dimensional, and three dimensional domains.
 	\item Be simple and compact, so that it can be adapted to a bigger application if necessary
 \end{itemize}
 
-The first requirement is understandably the most basic functionality, the goal of the whole project. This data will be generated from scratch, using the environment variables of permittivity $\epsilon$ and permeability $\mu$. These values can be changed depending on the environment, which can be vacuum, copper, etc. The examples here will use the values for free space $\epsilon_{0}$ and $\mu_{0}$. Also, these values are going to be constant throughout the simulation, meaning we will have one material through out the whole domain. 
+The first requirement is understandably the most basic functionality, the goal of the whole project. This data will be generated from scratch, using the environment variables of permittivity $\epsilon$ and permeability $\mu$. These values can be changed depending on the environment, which can be vacuum, copper, etc. The examples here will use the values for free space $\epsilon_{0}$ and $\mu_{0}$. Also, these values are going to be constant throughout the simulation, meaning it will feature one material through out the whole domain. 
 
-Without a starting impulse, there would be nothing to simulate, as the data would simply keep its initial value of zero. If we were to add an immediate pulse of an arbitrary value to a single point, it would prove sufficient. However, this would result in a sudden explosion of a single electromagnetic pulse that would simply travel along the domain as a single point, thus providing us with a near useless visualization once the data is put into an appropriate program. 
+Without a starting impulse, there would be nothing to simulate, as the data would simply keep its initial value of zero. If one was to add an immediate pulse of an arbitrary value to a single point, it would prove sufficient. However, this would result in a sudden explosion of a single electromagnetic pulse that would simply travel along the domain as a single point, thus providing a near useless visualization once the data is put into an appropriate program. 
 
-Instead, we can use a Gaussian pulse excitation in the middle of the domain, and have it propagate throughout it. This is ideal because we are using reflective boundaries, meaning the pulse will bounce back and forth between each boundary without any loss. If we were to use absorbing boundary conditions, such an excitation would eventually lead to the waves disappearing completely. For such cases, a steady sinusoidal excitation that keeps going would prove more interesting.
+Instead, the Gaussian pulse excitation can be used in the middle of the domain, and have it propagate throughout it. This is ideal because the simulation is using reflective boundaries, meaning the pulse will bounce back and forth between each boundary without any loss. If one was to use absorbing boundary conditions, such an excitation would eventually lead to the waves disappearing completely. For such cases, a steady sinusoidal excitation that keeps going would prove more interesting.
 
-We will be using a Gaussian pulse for our example. The generic formula is given below:
+A Gaussian pulse will be used for this example. The generic formula is given below:
 
 \begin{equation}
 	\label{eqn:gaussianPulse}
@@ -205,22 +213,22 @@ where
 
 A good value for sufficient smoothness would be $\varepsilon = 0.001$, but this is heavily dependent on the implementation.
 
-For the third requirement, the reason why we would want to avoid the use of libraries that are not included by default in C++ is that such libraries could make the program dependent on the operating system that the machine is running, PATH variables, etc. In short, it would complicate the setup to run such a program too much, possibly voiding the last requirement. On top of that, in insisting on using only the very basics that C++ has to offer, the resulting code will be easier to relate to the formulas that are shown in this thesis, since all the code will be visible at all times. With that said, various improvements could be made if the use of external libraries is allowed. That will be discussed in more details in the Conclusion.
+For the third requirement, the reason why this project would want to avoid the use of header files that are not included by default in C++ is that such files could make the program dependent on things such as the operating system that the machine is running, PATH variables, etc. In short, it would complicate the setup to run such a program too much, possibly voiding the last requirement. On top of that, in insisting on using only the very basics that C++ has to offer, the resulting code will be easier to relate to the formulas that are shown in this thesis, since all the code will be visible at all times. With that said, various improvements could be made if the use of external libraries is allowed. That will be discussed in more details in the Conclusion.
 
-Fourth, we want the application to support anything from one to three dimensions. While only a 3D simulation would be realistically desired, for a thesis the 1D and 2D scenarios are also interesting to study. Not only that, but the 1D application leads smoothly to the development of the 2D application, which in turn leads to the smooth development of the 3D application. This progression resulted in having a standalone program for each scenario, rather than one for all of them. Rather than unify these applications, they were intentionally left as separate programs in the end, because it helps in complying with the last requirement.
+Fourth, the application should support anything from one to three dimensions. While only a 3D simulation would be realistically desired, for a thesis the 1D and 2D scenarios are also interesting to study. Not only that, but the 1D application leads smoothly to the development of the 2D application, which in turn leads to the smooth development of the 3D application. This progression resulted in having a standalone program for each scenario, rather than one for all of them. Rather than unify these applications, they were intentionally left as separate programs in the end, because it helps in complying with the last requirement.
 
 Lastly, after going through each of the previous requirements, this one is rather self-explanatory. To begin with, simple and compact code that works well standalone is one of the most important programming practices that developers should follow. While this program's goal is to simply be used as a demonstration of such an implementation, it should also be easily modifiable and adaptable, so that it can provide a good basis that can be used by larger applications that include far more features.
 
-With that said, we will have to go through certain limitations that plague all computers simply due to their nature. Since these limitations cannot be bypassed as of yet, we can never achieve an exact, perfectly realistic simulation. Thus, it is good to keep them in mind while developing such applications.
+With that said, certain limitations that plague all computers, simply due to their nature, will have to be explained. Since these limitations cannot be bypassed as of yet, one can never achieve an exact, perfectly realistic simulation. Thus, it is good to keep them in mind while developing such applications.
 
 \subsection{Computational Limitations and Inaccuracies Explained}
 
-Programmers can use programming languages to instruct computers to perform certain commands in certain orders, thus creating applications. However, these instructions are not what the computers use to dictate what should happen. These programming languages are decoded by the interpreter of choice, and then passed down in the form of a lower level language. This process can occur more than once too, until we get to the smallest unit a computer can have: a bit.
+Programmers can use programming languages to instruct computers to perform certain commands in certain orders, thus creating applications. However, these instructions are not what the computers use to dictate what should happen. These programming languages are decoded by the interpreter of choice, and then passed down in the form of a lower level language. This process occurs more than once too, until one gets to the smallest unit a computer can have: a bit.
 
 A bit is simple; it can have either a value of zero or one. Instructions are basically translated into many such bits, thus making what is basically computer language. Each instruction could be translated into millions of bits, but that by itself would not cause issues normally. The issue is that, no matter how powerful the computer is or how much memory it has, these bits are finite. As such, they present limitations when dealing with infinite concepts.
 
-One such concept is infinite numbers. To best explain this, let us use an example: summing thirds into a whole. If a person was to be asked to add $\frac{1}{9}$ nine times, they would do the following:
-$$\frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} = 1 \;,$$ which we know is correct. However, when we run the following code snippet:
+One such concept is infinite numbers. This would be best explained with an example: summing fractions into a whole. If a person was to be asked to add $\frac{1}{9}$ nine times, they would do the following:
+$$\frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} = 1 \;,$$ which a person knows is correct. However, when one runs the following code snippet:
 
 \begin{minted}[breaklines,frame=single]{c++}
 	double a = 1.0/9.0;
@@ -231,13 +239,29 @@ $$\frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}{9} + \frac{1}
 	}
 \end{minted}
 
-we would get the following result (Fig. \ref{fig:finiteprecision}): 
+one would get the following result (Fig. \ref{fig:finiteprecision}): 
 \begin{figure}[h!]
 	\centering
 	\includegraphics{Figures/finiteprecision}
 	\decoRule
-	\caption[Code Result]{According to our code, the total sum is not equal to 1.0, even though it should be.}
+	\caption[Code Result]{According to the code, the total sum is not equal to 1.0, even though it should be.}
 	\label{fig:finiteprecision}
 \end{figure}
 
-What is happening is that we are asking a computer to store the infinite number $1/9 = 0.\overline{1}$ using a finite amounts of bit. Depending on the data type we use, we can have anywhere from 8 bits of precision, to $2^8$ bits. However, that is still a finite amount, and no matter what we do the resulting value will be truncated to $0.1111...1$, resulting in a sum of $0.9999...9 \neq 1.0$ . That is why any simulation, regardless of the computer or the method used, will always be an approximation of reality. When performing thousands of calculations, this margin of error increases further. Despite that, these approximations are enough to give us a good idea of what to expect.
+What is happening is that a computer is being asked to store the infinite number $1/9 = 0.\overline{1}$ using a finite amounts of bit. Depending on the data type that is used, it can have anywhere from 8 bits of precision, to $2^8$ bits. However, that is still a finite amount, and no matter what one does, the resulting value will be truncated to $0.1111...1$, resulting in a sum of $0.9999...9 \neq 1.0$ . That is why any simulation, regardless of the computer or the method used, will always be an approximation of reality. When performing thousands of calculations, this margin of error increases further. Despite that, these approximations are enough to give a good idea of what to expect. Even more so when considering that there is an error with even bigger margins that must be discussed.
+
+\subsection{Discretization Error\textsuperscript{\cite{roy2010review}}}
+
+In computer simulations, by far the most noteworthy type of error is the Discretization Error. This error occurs whenever a discretization technique is applied. In more conventional words, it occurs whenever a continuous function or phenomenon is calculated as a finite number of evaluations using a  computer (Figure \ref{fig:discretizationError}).
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{Figures/discretizationError}
+	\decoRule
+	\caption[Discretization Error]{The difference between various estimations and the exact result\textsuperscript{\cite{dow_1998}}}
+	\label{fig:discretizationError}
+\end{figure}
+
+This type of error is inevitable whenever approximation techniques are used. In FDTD, it is the difference between the exact partial differential equation and the discretized algebraic equation used by the implementation. It can theoretically be calculated by taking the value of the exact solution and comparing it with the value received by the numerical approximation. In practice, however, doing so can prove difficult depending on the scenario. Such an error can also be observed by changing the domain mesh size. The smaller the mesh, the larger the error would be. 
+
+Therefore a balance should be struck between having a small enough mesh and having a short enough computational time. Another compromise would be a variable mesh size if the areas that need high precision are known beforehand. Keeping a coarse mesh in general and only refining it where needed could aid in reducing the error margin considerably.  Alternatively, one could look at refinement methods. However, they too bear a computational cost, and will therefore not be used here.

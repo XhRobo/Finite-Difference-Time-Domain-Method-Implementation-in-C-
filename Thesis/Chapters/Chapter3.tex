@@ -8,22 +8,22 @@
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-Now that we completed the one-dimensional scenario, the following is going to be much easier, as we are going to use the same logic for the most part. For the interest of saving time, redundant information that was covered previously is going to be omitted.
+Now that the one-dimensional scenario is complete, the following is going to be much easier, as for the most part the same logic is going to be used again. For the interest of saving time, redundant information that was covered previously is going to be omitted.
 
 \section{2D Discretization}
 
-In the previous chapter we mentioned the different transverse modes available for electromagnetic waves, but did not go too much in depth as they were not too relevant in that scenario. In a one-dimensional case, it does not matter much which axis we pick for which field, so long as they are perpendicular to which other (something that axes do by default). In the two-dimensional scenario however, the mode we choose is going to dictate our curls. 
+In the previous chapter the different transverse modes available for electromagnetic waves were mentioned briefly without going too much in depth as they were not so relevant in that scenario. In a one-dimensional case, it does not matter much which axis is picked for which field, so long as they are perpendicular to each other. In the two-dimensional scenario however, the mode that is choosen is going to dictate the curls that will be used. 
 
 \subsection{2D Transverse Modes}
 
-For the two-dimensional scenarios, choosing a transverse mode means that the field we chose will have no field in the direction of propagation, meaning the $z$ axis in our case. That means that any vector moving along that axis will have a value of zero for that field. However, the other field can only have values alongside that direction, meaning that it will be zero for the $x$ and $y$ axis instead. More specifically, each mode features the following field vectors:
+For the two-dimensional scenarios, choosing a transverse mode means that the chosen field will have no vectors in the direction of propagation, meaning the $z$ axis in this case. That means that any vector moving along that axis will have a value of zero for that field. However, the other field can only have values alongside that direction, meaning that it will be zero for the $x$ and $y$ axis instead. More specifically, each mode features the following field vectors:
 
 \begin{itemize}
 	\item \textbf{TE mode} - \space $\vec{E_x},\; \vec{E_y},\; \vec{H_z}$
 	\item \textbf{TM mode} - \space $\vec{E_z},\; \vec{H_x},\; \vec{H_y}$
 \end{itemize}
 
-While each mode will have us working with different vectors, the process is roughly the same. For our scenario, we will use TE mode, meaning that $\vec{E_z}, \vec{H_x}, \vec{H_y} = 0$.
+While each mode will have different vectors, the process is roughly the same. For this scenario TE mode will be used, meaning that $\vec{E_z}, \vec{H_x}, \vec{H_y} = 0$.
 
 \subsection{2D TE Electromagnetic Curls}
 
@@ -37,7 +37,7 @@ Similar to the one-dimensional scenario, each vector will have a curl around it,
 	\label{fig:fdtd2dHz}
 \end{figure}
 
-Using a similar indexing scheme as we did previously, we have:
+Using a similar indexing scheme as done previously:
 
 \begin{equation}
 	\label{eqn:indexing2DElectric}
@@ -57,21 +57,21 @@ which leads to
 	\frac{d}{dt} H_z(i,j) = -\frac{1}{\mu} \cdot (\frac{E_x(i,j) - E_x(i,j+1)}{\Delta y} + \frac{E_y(i+1,j)- E_y(i,j)}{\Delta x})
 \end{equation}
 
-If we have a uniform mesh size, meaning that $\Delta x = \Delta y =  \Delta z = \Delta s$, we can simplify equation \ref{eqn:2dHzCurl2} to:
+If there is a uniform mesh size, meaning that $\Delta x = \Delta y =  \Delta z = \Delta s$, one can simplify equation \ref{eqn:2dHzCurl2} to:
 
 \begin{equation}
 	\label{eqn:2dHzCurl3}
 	\frac{d}{dt} H_z(i,j) = -\frac{1}{\mu \cdot \Delta s} \cdot ((E_x(i,j) - E_x(i,j+1) + E_y(i+1,j)- E_y(i,j))
 \end{equation}
 
-For the left hand side, we know that:
+For the left hand side, it is known that:
 
 \begin{equation}
 	\label{eqn:2dHzCurl4}
 	\frac{d}{dt} H_z(i,j) = \frac{H_z^{new}(i,j) - H_z^{prev}(i,j)}{\Delta t}
 \end{equation}
 
-By combining equations \ref{eqn:2dHzCurl3} and \ref{eqn:2dHzCurl4}, we get our update equation for the magnetic field vector $H_z$:
+Combining equations \ref{eqn:2dHzCurl3} and \ref{eqn:2dHzCurl4} results in the update equation for the magnetic field vector $H_z$:
 
 \begin{multline}
 	\label{eqn:2dHzCurlFinal}
@@ -112,31 +112,31 @@ with a fairly similar equation (note the signs):
 	E_y^{new}(i,j) =  E_y^{prev}(i,j) - \frac{\Delta t}{\epsilon \cdot \Delta s} \cdot (H_z(i,j) - H_z(i-1,j))
 \end{equation}
 
-We can now proceed to the code implementation.
+The code implementation can now begin.
 
 \section{C++ Implementation}
 
-Starting off with our imports, we are going to ignore the ones we already discussed. We have however, added three new imports:
+Starting off with the imports, the ones that were already discussed will not be explained again. There are however new headers that will be needed:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 #include <io.h>
 #include <fstream>
 \end{minted}
 
-For the two dimensional scenario, we are going to change the way we visualize our data. The end result will be an animation that shows us how the waves propagate in real time. We will get deeper into it once we discuss data visualization, but for now all we need to know is that the output of the two-dimensional implementation is going to be CSV files. Our packages above help us with that:
+For the two dimensional scenario, a new method of visualizing the data will be used. The end result will be an animation that shows how the waves propagate in real time. It will be explained more in depth once data visualization is described, but for now all that is needed to be known is that the output of the two-dimensional implementation is going to be CSV files that contain the data. The header files above will help with that:
 
 \begin{itemize}
-	\item \textbf{fstream}\textsuperscript{\cite{fstream}} - Input output stream operations for files. Allows us to create and modify them.
-	\item \textbf{io.h}\textsuperscript{\cite{io.h}} - Header file used by \textbf{fstream} among other packages.
+	\item \textbf{fstream}\textsuperscript{\cite{fstream}} - Input output stream operations for files. Allows users to create and modify them.
+	\item \textbf{io.h}\textsuperscript{\cite{io.h}} - Header file used by \textbf{fstream} among other standard library files.
 \end{itemize}
 
-We are also going to introduce two new methods to write our electromagnetic data into files:
+Two new C++ functions to write the electromagnetic data into files need to be introduced:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vector<double>> Ey){
 	
-	//	"x","y",Ex,Ey
-	//	0,0,Ex[x,y],Ey[x,y]
+	//	x,y,z,Ex,Ey
+	//	i,j,0,Ex[x,y],Ey[x,y]
 	
 	ofstream csvFile(filename);
 	csvFile << "x,y,z,Ex,Ey\n";
@@ -152,8 +152,8 @@ void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vect
 
 void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
 	
-	//	"x","y",Hz
-	//	0,0,Hz[x,y]
+	//	x,y,z,Hz
+	//	i,j,0,Hz[x,y]
 	
 	ofstream csvFile(filename);
 	csvFile << "x,y,z,Hz\n";
@@ -168,9 +168,9 @@ void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
 }
 \end{minted}
 
-We will be calling these methods every time we loop, to print a file that contains the respective field's data for that time step. The filename format should be \textit{"X.csv.n"}, where \textit{X} is the field the data is for (E for electric, H for magnetic), while \textit{n} is the time step number. These files are going to get added in the the directory: \mint{c++}{const string filePath = "./Out/";}
+These functions will be called every loop to print a file that contains the respective field's data for that time step. The filename format should be \textit{"X.csv.n"}, where \textit{X} is the field the data is for (E for electric, H for magnetic), while \textit{n} is the time step number. These files are going to get added in the the directory: \mint{c++}{const string filePath = "./Out/";}
 
-We must also make some minor changes to the code to adapt it to a two-dimensional environment. For starters, we need to initialize our vectors as two-dimensional vectors. We also need two vectors for the electric field now, one for the $x$ axis and one for the $y$ axis.
+Some changes need to be made to the code to adapt it to a two-dimensional environment. For starters, the vectors need to be initialized as two-dimensional. The electric field will also require an extra vector now for a total of two, one for the $x$ axis and one for the $y$ axis. In total, the following vectors need to be declared:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 vector<vector<double>> Ex(N, vector<double> (N, 0));
@@ -178,29 +178,29 @@ vector<vector<double>> Ey(N, vector<double> (N, 0));
 vector<vector<double>> Hz(N, vector<double> (N, 0));
 \end{minted}
 
-Normally we would also need to add new variables for our deltas:
+Normally one would also need to add new variables for the deltas:
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 double deltaX = L / N;
 double deltaY = L / N;
 double deltaZ = L / N;
 \end{minted}
 
-Since we have a uniform mesh, meaning all the spatial steps have the same dimensions, we are only going to use one of them (\textit{deltaZ}). In the Appendix (\ref{AppendixA}) we are going to discuss how they can be implemented for unequal time step meshes. For now, since we are only using one of them, our $\Delta t$ will need to be changed to:
+Since a uniform mesh is being used, meaning all the spatial steps have the same dimensions, only one of these deltas needs to be used (e.g. \textit{deltaZ}). In the Appendix (\ref{AppendixA}) implementations for unequal mesh step sizes will be discussed further. For now, since only one delta will be used, $\Delta t$ will need to be changed to:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 double deltaT = (deltaZ * sqrt(permitivity*permeability)  * (1/sqrt(2)));
 \end{minted}
 
-Another difference is that we are going to apply our Gaussian pulse excitation in the center of the magnetic field this time. Due to the impedance of vacuum, we are going to promptly reduce the magnitude of this excitation, as otherwise we would get electric values that will be far too large.
+Another difference is that the Gaussian pulse excitation is going to be applied in the center of the magnetic field this time. Due to the impedance of vacuum, it is prudent to promptly reduce the magnitude of this excitation, as otherwise the electric values would be far too large.
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 // reducing the magnitude since in free space
 Hz[99][99] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
 \end{minted}
 
-Starting from the center will give us a nice symmetric propagation towards the edges. In symmetrical scenarios we can save computation time by splitting the domain into equal parts. It is even more helpful with circular symmetry as we can effectively split it into as many parts as we want, calculate the wave propagation for only one part, then replicate those values for the other parts. This will also be discussed in the Appendix, but for now we will move on with our most basic scenario.
+Starting from the center will result in a nice symmetric propagation towards the edges. In symmetrical scenarios one can save computation time by splitting the domain into equal parts. It is even more helpful with circular symmetry as the domain can effectively be split into as many parts as needed, and by calculating the wave propagation for only one part, those values can be then replicated for the other parts. This will also be discussed in the Appendix.
 
-By translating the update equations into code, we get the following in our main loop:
+By translating the update equations into code, the main loop becomes:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 for (int i = 0; i < N-1; i++) {
@@ -225,11 +225,11 @@ for (int i = 0; i < N-2; i++) {
 writeHDataToCsvFile((filePath + "H/H.csv." + to_string(i)), Hz);
 \end{minted}
 
-After we are done with each vector field, we can call the respective method to write our data into csv files. For organizational purposes, we will dump the data into separate folders. After waiting for code execution to finish, we will now have two folders with data that is ready to be used for visualization.
+After each vector field is done, one can call the respective method to write the data into csv files. For organizational purposes, this data will be dumped into separate folders for each field. After waiting for code execution to finish, there will now be two folders with data that is ready to be used for visualization.
 
 \section{Data Visualization}
 
-In order to visualize two-dimensional data in a meaningful manner, we are going to use a helpful open source program called Paraview\textsuperscript{\cite{paraview}}. It allows us to build real time simulations with the data we generated. It is also the reason we chose to name our files the way we did. By using the format \textit{X.csv.n} we can import all of our data as one object. We can do so easily by simply opening Paraview, selecting all of our data, and just dragging and dropping it into the "Pipeline Browser" panel, pictured below (Figure \ref{fig:paraviewFDTD2D1}).
+In order to visualize two-dimensional data in a meaningful manner, it would help to use an open source program called Paraview\textsuperscript{\cite{paraview}}. It allows to build real time simulations with the data that was generated. It is also the reason for the chosen naming scheme for the output files. By using the format \textit{X.csv.n} they can all be imported as one object. This can be easily done by simply opening Paraview, selecting all of the data in one of the output folders, and just dragging and dropping it into the "Pipeline Browser" panel, pictured below (Figure \ref{fig:paraviewFDTD2D1}).
 
 \begin{figure}[h!]
 	\centering
@@ -239,15 +239,15 @@ In order to visualize two-dimensional data in a meaningful manner, we are going 
 	\label{fig:paraviewFDTD2D1}
 \end{figure}
 
-Having just the data by itself will not do much however. That is why we need to apply filters to the data. They are:
+Having just the data by itself will not do much however. That is why one needs to apply filters to the data. The ones that will be used in this case are the following:
 
 \begin{itemize}
-	\item \textbf{Table to Points} - Simply displays the CSV data we got as points.
-	\item \textbf{Calculator} - Allows us to manipulate the data and dictate which value goes where.
+	\item \textbf{Table to Points} - Simply displays the CSV data as points.
+	\item \textbf{Calculator} - Allows to manipulate the data and dictate which value goes where.
 	\item \textbf{Glyph} - Transforms the data into lines which are better in visualizing vector fields
 \end{itemize}
 
-The order is important, as is the fact that each of these filters must be configured properly. For \textbf{Table to Points}, we must define the axes of our data. In our files, we have specified $x$ and $y$, but also $z$, which contains only zeros. We needed to do that since Paraview will not accept an empty value here. It is also helpful to tick \textbf{Axes Grid} under the \textbf{Annotations} category. In the \textbf{Calculator}, we need to add the following formula \mint{java}{iHat*Ex+jHat*Ey} which will unify our point data. Lastly, for the \textbf{Glyph}, we need to use the \textbf{Result} array we got from our \textbf{Calculator} as both \textbf{Orientation} and \textbf{Scaling}. Depending on whether the data is visible or not, we can change the scaling slider until we get what we need. If done correctly, we will get a result similar to Figure \ref{fig:FDTD2DE}.
+The order is important, as is the fact that each of these filters must be configured properly. For \textbf{Table to Points}, the axes for the data needs to be defined. In the output files, one will notice that not only $x$ and $y$ have been specified, but also $z$, which contains only zeros. That needed to be done that since Paraview will not accept less than three columns here. It is also helpful to tick \textbf{Axes Grid} under the \textbf{Annotations} category. In the \textbf{Calculator}, one needs to add the following formula \mint{java}{iHat*Ex+jHat*Ey} which will unify the point data. Lastly, for the \textbf{Glyph}, the \textbf{Result} array gotten from the \textbf{Calculator} needs to be used as both \textbf{Orientation} and \textbf{Scaling}. Depending on whether the data is visible or not,the scaling slide can be changed as desired. If done correctly, one will get a result similar to Figure \ref{fig:FDTD2DE}.
 
 \begin{figure}[h!]
 	\centering
@@ -276,7 +276,7 @@ The order is important, as is the fact that each of these filters must be config
 	\label{fig:FDTD2DE}
 \end{figure}
 
-The above is for the electric data. For the magnetic data we can use a simple \textbf{Table to Structured Grid}, and it will be good just like that. With a few adjustments to colors and scaling, we can achieve the following result (Figure \ref{fig:FDTD2DH}):
+The above is for the electric data. For the magnetic data it may be more simply to use \textbf{Table to Structured Grid}. With a few adjustments to colors and scaling, the following result can be achieved (Figure \ref{fig:FDTD2DH}):
 
 \begin{figure}[h!]
 	\centering
@@ -305,4 +305,4 @@ The above is for the electric data. For the magnetic data we can use a simple \t
 	\label{fig:FDTD2DH}
 \end{figure}
 
-Moving forward, we are going to use only the method we used for visualizing electric field data, as the \textbf{Table to Structured Grid} method is not usable when we use more than one vector. With that done, we can finally move on to the three-dimensional scenario, which is the most useful one for practical real life applications.
+Moving forward, only the visualizing method for the electric data above can be of use, as the \textbf{Table to Structured Grid} method is not applicable when using more than one vector. With that done, the three-dimensional scenario can finally be discussed, being the most useful one for practical real life applications.
