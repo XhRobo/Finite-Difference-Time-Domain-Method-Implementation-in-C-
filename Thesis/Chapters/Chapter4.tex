@@ -111,7 +111,7 @@ Starting off from the initial Maxwell equation:
 
 \begin{equation}
 	\label{eqn:magneticIntegral}
-	\oint H \cdot ds = \frac{d}{dt} \iint \epsilon \cdot E \cdot dA
+	\oint \vec{H} \cdot d\vec{s} = \frac{d}{dt} \iint \epsilon \cdot \vec{E} \cdot d\vec{A}
 \end{equation}
 \begin{multline}
 	\label{eqn:3dEzCurl1}
@@ -255,7 +255,7 @@ vector<vector<vector<double>>> Hz(N, vector<vector<double>>(N, vector<double>(N,
 Next the functions that create CSV files for the data need to be modified. Now that there is an equal number of vectors for both the electric and the magnetic wave, only one function is needed to handle both fields:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
-void writeDataToCsvFile(string filename, const vector<vector<vector<double>>> &Vx, const vector<vector<vector<double>>> \&Vy, const vector<vector<vector<double>>> &Vz){
+void writeDataToCsvFile(string filename, const vector<vector<vector<double>>> &Vx, const vector<vector<vector<double>>> &Vy, const vector<vector<vector<double>>> &Vz){
 	
 	//	x,y,z,Vx,Vy,Vz
 	//	0,0,Vx[x,y,z],Vy[x,y,z],Vz[x,y,z]
@@ -336,7 +336,6 @@ for (int i = 1; i < N-1; i++) {
 }
 
 writeDataToCsvFile((filePath + "E/E.csv." + to_string(i)), Ex, Ey, Ez);
-
 }
 \end{minted}
 

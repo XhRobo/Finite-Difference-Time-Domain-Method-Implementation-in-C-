@@ -51,21 +51,21 @@ Figure \ref{fig:fdtd1dHcurl} shows the curl around the magnetic vector $H_y(i)$.
 
 \begin{equation}
 	\label{eqn:magneticCurl1}
-	\oint E \cdot ds = E_x(i) \cdot \Delta x + E_z \cdot \Delta z - E_x(i+1) \cdot \Delta x - E_z \cdot \Delta z
+	\oint \vec{E} \cdot d\vec{s} = E_x(i) \cdot \Delta x + E_z \cdot \Delta z - E_x(i+1) \cdot \Delta x - E_z \cdot \Delta z
 \end{equation}
 
 Since there is no Ez vector in the one-dimensional TEM scenario, $Ez \cdot \Delta z = 0$. Therefore the equation \ref{eqn:magneticCurl1} can be simplified to:
 
 \begin{equation}
 	\label{eqn:magneticCurl2}
-	\oint E \cdot ds = E_x(i) \cdot \Delta x - E_x(i+1) \cdot \Delta x
+	\oint \vec{E} \cdot d\vec{s} = E_x(i) \cdot \Delta x - E_x(i+1) \cdot \Delta x
 \end{equation}
 
 On the left hand side of equation \ref{eqn:electricUpdateIntegral}:
 
 \begin{equation}
 	\label{eqn:magneticCurl3}
-	\int \mu \cdot H \cdot dA = \mu \int H \cdot dA = \mu \cdot H_y(i) \cdot \Delta x \cdot \Delta z
+	\int \mu \cdot \vec{H} \cdot d\vec{A} = \mu \int \vec{H} \cdot d\vec{A} = \mu \cdot H_y(i) \cdot \Delta x \cdot \Delta z
 \end{equation}
 
 By combining \ref{eqn:magneticCurl2} and \ref{eqn:magneticCurl3}:
@@ -92,12 +92,12 @@ The  same thing can be done the for the curl of the electric vector $E_x$, shown
 
 \begin{equation}
 	\label{eqn:electricCurl1}
-	\oint H \cdot ds = H_y(i) \cdot \Delta y - H_y(i-1) \cdot \Delta y = \Delta y (H_y(i) - H_y(i-1))
+	\oint \vec{H} \cdot d\vec{s} = H_y(i) \cdot \Delta y - H_y(i-1) \cdot \Delta y = \Delta y (H_y(i) - H_y(i-1))
 \end{equation}
 
 \begin{equation}
 	\label{eqn:electricCurl2}
-	\iint \epsilon \cdot E \cdot dA = \epsilon \cdot E_x(i) \cdot \Delta z \cdot \Delta y
+	\iint \epsilon \cdot \vec{E} \cdot d\vec{A} = \epsilon \cdot E_x(i) \cdot \Delta z \cdot \Delta y
 \end{equation}
 
 Combining \ref{eqn:electricCurl1} and \ref{eqn:electricCurl2}:
