@@ -61,7 +61,7 @@ The main method can then be changed to a normal function to call. The variables 
 
 This implementation uses one medium throughout the whole domain for the sake of simplicity. The medium is characterized purely by the values of permittivity and permeability. These can either be chosen out of known materials, or entered manually, and they can be either absolute values, or relative compared to the values of vacuum.
 
-As an example, water has a relative permittivity of around 80 times that of vacuum in room temperatures\textsuperscript{\cite{archer1990dielectric}}, and a relative permeability of 0.999992. This makes water a worse medium for electric waves to propagate, but slightly better for magnetic ones. There is a point to be made for pure metals, which are said to have "infinite" permittivity. In reality however, it is much more complicated and will therefore not be discussed over the scope of this thesis. One could also choose these values arbitrarily, if they desire to test purely theoretical applications. The biggest limitation for that is that these values need to satisfy the inequality $\frac{1}{\sqrt{\epsilon\mu}} \leq c$, where c is the speed of light in vacuum. 
+As an example, water has a relative permittivity of around 80 times that of vacuum in room temperatures\textsuperscript{\cite{archer1990dielectric}}, and a relative permeability of 0.999992. There is a point to be made for pure metals, which are said to have "infinite" permittivity. In reality however, it is much more complicated and will therefore not be discussed over the scope of this thesis. One could also choose these values arbitrarily, if they desire to test purely theoretical applications. The biggest limitation for that is that these values need to satisfy the inequality $\frac{1}{\sqrt{\epsilon\mu}} \leq c$, where c is the speed of light in vacuum. 
 
 In order to have more than our environment in this implementation, the only change required is to switch from using constants to using vectors for permittivity and permeability. These vectors should be of size N, meaning the domain size, and they should have as many dimensions as the domain does. Basically put, each singular mesh will have its own values. The example below shows how this is done:
 
@@ -179,15 +179,27 @@ for (int i = 0; i < numSteps4; i++) {
 
 \clearpage
 
+However, for the time step only one value can be used throughout the whole simulation. As such, the most ideal way to handle this is to pick the smallest time step value in the vector \textit{deltaT}, calling it \verb|deltaTmin|. This can either be implemented in the loops above, which is recommended in case time complexity is prioritized and removes the need for a \textit{deltaT} vector, or in its own loop, possibly contained in a function, for coding clarity (helpful in case the vector \textit{deltaT} is used in other parts of the code).
+
+\begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
+double deltaTmin;
+
+for (unsigned i = 0; i < deltaT.size(); i++) {
+	if (deltaT[i] < deltaTmin) {
+		deltaTmin = deltaT[i];
+	}
+}
+\end{minted}
+
 Then, the update loop would become:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 for (int z = 0; z < N-2; z++) {
-	H[z] = H[z] - (deltaT[z] / permeability / deltaZ[z]) * (E[z] - E[z+1]);
+	H[z] = H[z] - (deltaTmin / permeability / deltaZ[z]) * (E[z] - E[z+1]);
 }
 \end{minted}
 
-While this is the simplest way to achieve this goal, it is definitely not the best. Furthermore, such an implementation is useless in a moving field, as the mesh is static while the wave itself is moving throughout the domain. However, this can be used as a basis to implement an adaptive mesh. Better yet, one can choose a library that already implements this in a more efficient way, e.g. libMesh\textsuperscript{\cite{kirk2006libmesh}}. Should it be desirable to have both the multi-environment domain and a nonuniform or adaptive mesh, care should be taken that the number of steps is the same for both.
+While this is the simplest way to achieve this goal, it is definitely not the best. Furthermore, such an implementation may be useless in a moving field, as the mesh is static while the wave itself is moving throughout the domain. However, this can be used as a basis to implement an adaptive mesh. Better yet, one can choose a library that already implements this in a more efficient way, e.g. libMesh\textsuperscript{\cite{kirk2006libmesh}}. Should it be desirable to have both the multi-environment domain and a nonuniform or adaptive mesh, care should be taken that the number of steps is the same for both.
 
 \section{General Improvements}
 
@@ -199,7 +211,7 @@ The biggest bottleneck for such implementations will always be the amount of com
 
 A helpful way to quantify this is the so called \textit{Big O} notation, a mathematical notation used to describe the behavior of an algorithm when the number of arguments goes toward infinity. In Computer Science, it is used as a classification of algorithms based on their run time or spatial requirements\textsuperscript{\cite{mohr2014quantum}}. The current implementation is $O(n^d)$, where \textit{d} is the number of dimensions. This can also be read as: "the program will finish in polynomial or algebraic time".
 
-Unfortunately, the FDTD algorithm itself basically requires $n^3$ operations for each vector. Therefore, one improvement would be to use a coarser mesh, thereby having less computations to make. However, it can also be upgraded by removing the need to have three nested \textit{for} loops. The best way to do so would be to use a library for matrix operations. Alternatively, another possible way to improve the algorithm is to add support for symmetric cases, though this can be applied to matrices as well.
+Unfortunately, the FDTD algorithm itself basically requires $~n^3$ operations for each vector component. Therefore, one improvement would be to use a coarser mesh, thereby having less computations to make. However, it can also be upgraded by removing the need to have three nested \textit{for} loops. The best way to do so would be to use a library for matrix operations, which might improve the performance of each operation. Alternatively, another possible way to improve the algorithm is to add support for symmetric cases, though this can be applied to matrices as well.
 
 \subsection{Improvements for Symmetric Cases}
 
@@ -213,12 +225,10 @@ For ease of demonstration, the one-dimensional scenario will be used again as an
 double t = i * deltaT;
 double gamma = Teps / 2;
 
-E[0] = exp(-(beta * pow((t - gamma), 2)));  //Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
+E[99] = exp(-(beta * pow((t - gamma), 2)));  //Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
 \end{minted}
 
-The peak of the Gaussian pulse would be when $t - \gamma = 0$. After that point is reached, we know where the peak is and therefore the values in front of it can be applied to the values behind it. While this explanation is too naively simplistic to be effectively implemented, the basic idea is there.
-
-It is also known that this wave will travel forwards, be reflected from the boundary without any (intentional) loss in energy with negative values, then be reflected back once it reaches the beginning of the domain. The duration of this is $2N$ steps. After this point, every value can be fetched without calculating by using the value ${iterNum} - 2N$. Though as stated previously, this will not reflect the energy drift of the FDTD algorithm during long run times, but will instead repeat the same short term errors over and over again.
+It is known that this wave will travel forwards, be reflected from the boundary without any (intentional) loss in energy with negative values, then be reflected back once it reaches the beginning of the domain. The duration of this is $2N$ steps. This information can be used to cut the computation time in half, as one would only need to calculate one half of the domain, while the other can be mirrored.
 
 With the Gaussian pulse, symmetry can also be applied to the two and three-dimensional implementations as well, so long as the excitation is applied at the center of the domain. Since this pulse will be circular, it will be propagating symmetrically towards the edges of the domain. Therefore, the domain can be split not only into equal quadrants but also into finer equal parts, since a circular simulation can have infinite symmetry lines so long as they go directly through the middle. Symmetry can also be combined with matrices, reducing run time even further.
 
@@ -230,7 +240,7 @@ CUDA is a helpful application that supports multiple operating systems. It gives
 
 The reason is that while CPUs are meant to handle a large variety of tasks with high precision, they are limited in their parallel execution capabilities, which is where the GPU is needed. On the other hand, graphic cards could never fully replace processors, as though they may be able to perform the same operations multiple times, they lack the flexibility required to run large programs that the CPU has.
 
-CUDA has an easy installation and many tutorials on their main website, as well as an active community. However, as it requires an NVIDIA GPU, an alternative to it would be QUDA\textsuperscript{\cite{quda}}, which can be used regardless of the graphic card.
+CUDA has an easy installation and many tutorials on their main website, as well as an active community. However, as it requires an NVIDIA GPU, an alternative to it would be QUDA\textsuperscript{\cite{quda}} or OpenCL\textsuperscript{\cite{opencl}}, which can be used regardless of the graphic card.
 \clearpage
 
 \section{Full Code Files}
@@ -267,6 +277,7 @@ double eps = 1e-3;
 double Teps = 50 * deltaT;
 double beta = -(pow((2/Teps), 2) * log(eps));
 
+
 vector<double> E;
 vector<double> H;
 vector<double> tE;
@@ -283,10 +294,10 @@ int main()
 		double t = i * deltaT;
 		double gamma = Teps / 2;
 		
-		E[0] = exp(-(beta * pow((t - gamma), 2)));
+		E[0] = exp(-(beta * pow((t - gamma), 2)));  //Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
 		
 		// loop for values
-		for (int z = 0; z < N-1; z++) {
+		for (int z = 0; z < N-2; z++) {
 			H[z] = H[z] - (deltaT / permeability / deltaZ) * (E[z] - E[z+1]);
 		}
 		
@@ -294,10 +305,13 @@ int main()
 			E[z] = E[z] + (deltaT / permitivity / deltaZ) * (H[z] - H[z-1]);
 		}
 		
+		
 		// time graph
 		tE.push_back(E[100]);
 		tH.push_back(H[100]);
 	}
+	
+	
 	cout << "\n\ntE\n";
 	
 	// print E values
@@ -311,7 +325,8 @@ int main()
 	for (int n = 0; n < iterNum; n++) {
 		cout << to_string(tH[n]) + ",";
 	}
-}	
+	
+}
 \end{minted}
 
 \subsection{FDTD 2D}
@@ -328,12 +343,11 @@ int main()
 #include <vector>
 #include <string>
 #include <fstream>
-#include <cstdarg>
 
 using namespace std;
 
-const double permitivity = 8.854e-12;												// vacuum permitivity
-const double permeability = 1.256e-6; 								                // vacuum permeability
+const double permitivity = 8.854e-12;
+const double permeability = 1.256e-6;
 
 double L = 5;
 int N = 200;
@@ -355,7 +369,7 @@ vector<vector<double>> Hz(N, vector<double> (N, 0));
 
 const string filePath = "./Out/";
 
-void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vector<double>> Ey){
+void writeEDataToCsvFile(string filename, const vector<vector<double>> &Ex, const vector<vector<double>> &Ey){
 	
 	//	"x","y",Ex,Ey
 	//	0,0,Ex[x,y],Ey[x,y]
@@ -363,8 +377,8 @@ void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vect
 	ofstream csvFile(filename);
 	csvFile << "x,y,z,Ex,Ey\n";
 	
-	for (int x = 0; x < Ex[0].size(); x++) {
-		for (int y = 0; y < Ex[x].size(); y++) {
+	for (unsigned x = 0; x < Ex[0].size(); x++) {
+		for (unsigned y = 0; y < Ex[x].size(); y++) {
 			csvFile << to_string(x) + "," + to_string(y) + ",0," + to_string(Ex[x][y]) + "," + to_string(Ey[x][y]) + "\n";
 		}
 	}
@@ -372,7 +386,7 @@ void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vect
 	csvFile.close();
 }
 
-void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
+void writeHDataToCsvFile(string filename, const vector<vector<double>> &Hz){
 	
 	//	"x","y",Hz
 	//	0,0,Hz[x,y]
@@ -380,8 +394,8 @@ void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
 	ofstream csvFile(filename);
 	csvFile << "x,y,z,Hz\n";
 	
-	for (int x = 0; x < Hz[0].size(); x++) {
-		for (int y = 0; y < Ex[x].size(); y++) {
+	for (unsigned x = 0; x < Hz[0].size(); x++) {
+		for (unsigned y = 0; y < Hz[x].size(); y++) {
 			csvFile << to_string(x) + "," + to_string(y) + ",0," + to_string(Hz[x][y]) + "\n";
 		}
 	}
@@ -397,15 +411,15 @@ int main()
 		double gamma = Teps / 2;
 		
 		// reducing the magnitude since in free space
-		Hz[99][99] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;  //TO-DO: Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
+		Hz[99][99] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
 		
 		for (int i = 0; i < N-1; i++) {
-			for (int j = 1; j < N-2; j++) {
+			for (int j = 1; j < N-1; j++) {
 				Ex[i][j] = Ex[i][j] + (deltaT / permitivity / deltaZ) * (Hz[i][j] - Hz[i][j-1]);
 			}
 		}
 		
-		for (int i = 1; i < N-2; i++) {
+		for (int i = 1; i < N-1; i++) {
 			for (int j = 0; j < N-1; j++) {
 				Ey[i][j] = Ey[i][j] - ((deltaT / permitivity / deltaZ) * (Hz[i][j] - Hz[i-1][j]));
 			}
@@ -414,8 +428,8 @@ int main()
 		writeEDataToCsvFile((filePath + "E/E.csv." + to_string(i)), Ex, Ey);
 		
 		// loop for values
-		for (int i = 0; i < N-1; i++) {
-			for (int j = 0; j < N-1; j++) {
+		for (int i = 0; i < N-2; i++) {
+			for (int j = 0; j < N-2; j++) {
 				Hz[i][j] = Hz[i][j] - ((deltaT / permeability / deltaZ) * (Ex[i][j] - Ex[i][j+1] + Ey[i+1][j] - Ey[i][j]));
 			}
 		}
@@ -424,6 +438,8 @@ int main()
 		writeHDataToCsvFile((filePath + "H/H.csv." + to_string(i)), Hz);
 		
 	}
+	
+	
 }
 \end{minted}
 
@@ -441,7 +457,6 @@ int main()
 #include <vector>
 #include <string>
 #include <fstream>
-#include <cstdarg>
 
 using namespace std;
 
@@ -471,7 +486,11 @@ vector<vector<vector<double>>> Hz(N, vector<vector<double>>(N, vector<double>(N,
 
 const string filePath = "./Out/";
 
-void writeDataToCsvFile(string filename, vector<vector<vector<double>>> Vx, vector<vector<vector<double>>> Vy, vector<vector<vector<double>>> Vz){
+void writeDataToCsvFile(string filename, const vector<vector<vector<double>>> &Vx, const vector<vector<vector<double>>> &Vy, const vector<vector<vector<double>>> &Vz){
+	
+	//	x,y,z,Vx,Vy,Vz
+	//	0,0,Vx[x,y,z],Vy[x,y,z],Vz[x,y,z]
+	
 	ofstream csvFile(filename);
 	csvFile << "x,y,z,Vx,Vy,Vz\n";
 	
@@ -494,9 +513,7 @@ int main()
 		double gamma = Teps / 2;
 		
 		// reducing the magnitude since in free space
-		Ex[24][24][24] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;  //TO-DO: Gaussian excitation, alpha = 1, Teps = 50*deltaT, eps = 1e-3, t = i * deltaT
-		//Ey[9][9][9] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
-		//Ez[9][9][9] = exp(-(beta * pow((t - gamma), 2))) * 10e-4;
+		Ex[24][24][24] = exp(-(beta * pow((t - gamma), 2)));
 		
 		// loop for values
 		for (int i = 0; i < N-1; i++) {
@@ -525,32 +542,35 @@ int main()
 		
 		writeDataToCsvFile((filePath + "H/H.csv." + to_string(i)), Hx, Hy, Hz);
 		
-		for (int i = 0; i < N-2; i++) {
-			for (int j = 1; j < N-2; j++) {
-				for (int k = 1; k < N-2; k++) {
-					Ex[i][j][k] = Ex[i][j][k] + (deltaT / permitivity / deltaZ) * (Hz[i][j][k] - Hz[i][j-1][k] - Hy[i][j][k] + Hy[i][j][k-1]);
+		for (int i = 0; i < N-1; i++) {
+			for (int j = 1; j < N-1; j++) {
+				for (int k = 1; k < N-1; k++) {
+					Ex[i][j][k] = Ex[i][j][k] + (deltaT / permitivity / deltaZ) * (Hy[i][j][k-1] - Hy[i][j][k] - Hz[i][j-1][k] + Hz[i][j][k] );
 				}
 			}
 		}
 		
-		for (int i = 1; i < N-2; i++) {
-			for (int j = 0; j < N-2; j++) {
-				for (int k = 1; k < N-2; k++) {
-					Ey[i][j][k] = Ey[i][j][k] + (deltaT / permitivity / deltaZ) * (Hx[i][j][k] - Hx[i][j][k-1] - Hz[i][j][k] + Hz[i-1][j][k]);
+		for (int i = 1; i < N-1; i++) {
+			for (int j = 0; j < N-1; j++) {
+				for (int k = 1; k < N-1; k++) {
+					Ey[i][j][k] = Ey[i][j][k] + (deltaT / permitivity / deltaZ) * (Hz[i-1][j][k] - Hz[i][j][k] - Hx[i][j][k-1] + Hx[i][j][k]);
 				}
 			}
 		}
 		
-		for (int i = 1; i < N-2; i++) {
-			for (int j = 1; j < N-2; j++) {
-				for (int k = 0; k < N-2; k++) {
-					Ez[i][j][k] = Ez[i][j][k] + (deltaT / permitivity / deltaZ) * (Hy[i][j][k] - Hy[i-1][j][k] - Hx[i][j][k] + Hx[i][j-1][k]);
+		for (int i = 1; i < N-1; i++) {
+			for (int j = 1; j < N-1; j++) {
+				for (int k = 0; k < N-1; k++) {
+					Ez[i][j][k] = Ez[i][j][k] + (deltaT / permitivity / deltaZ) * (Hx[i][j-1][k] - Hx[i][j][k] - Hy[i-1][j][k] + Hy[i][j][k]);
 				}
 			}
 		}
 		
 		writeDataToCsvFile((filePath + "E/E.csv." + to_string(i)), Ex, Ey, Ez);
+		
 	}
+	
+	
 }
 \end{minted}
 

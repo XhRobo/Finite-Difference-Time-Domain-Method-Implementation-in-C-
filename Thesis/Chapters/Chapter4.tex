@@ -8,7 +8,7 @@
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-The three-dimensional scenario has a lot of similarities with the previous versions. The methodology is again pretty much the same. It might seem a bit intimidating at first, when considering that the number of vector components to deal with has doubled. This scenario is also where optimization really matters, considering that there will be $N^3$ amounts of data. Nonetheless, if one focuses on just the most basic implementation, taking this step by step, and splitting the effort into small parts, it will be easy to move forward.
+The three-dimensional scenario has a lot of similarities with the previous versions. The methodology is again pretty much the same. It might seem a bit intimidating at first, when considering that the number of vector components to deal with has doubled. This scenario is also where optimization really matters, considering that there will be $6 \cdot N^3$ amounts of data per time step. Nonetheless, if one focuses on just the most basic implementation, taking this step by step, and splitting the effort into small parts, it will be easy to move forward.
 
 \clearpage
 
@@ -24,7 +24,7 @@ The easiest way to explain the 3D discretization is with Figure \ref{fig:fdtd3dD
 	\label{fig:fdtd3dDisc}
 \end{figure}
 
-As seen previously, the magnetic field is staggered in every axis by half the step size. The figure also gives a hint as to how the vector components are laid out in the domain. If one was to take only the electric field into the consideration, they could show where each electric vector belongs (Figure \ref{fig:fdtd3dFull}). 
+As seen previously, the magnetic field is staggered in every axis by half the mesh step size. The figure also gives a hint as to how the vector components are laid out in the domain. If one was to take only the electric field into the consideration, they could show where each electric vector belongs (Figure \ref{fig:fdtd3dFull}). 
 
 \begin{figure}[h!]
 	\centering
@@ -115,13 +115,13 @@ Starting off from the initial Maxwell equation:
 \end{equation}
 \begin{multline}
 	\label{eqn:3dEzCurl1}
-	\Rightarrow H_x(i,j-1,k) \cdot \Delta x + H_y(i,j-1,k) \cdot \Delta y - H_x(i,j-1,k) \cdot \Delta x - H_y(i,j-1,k) \cdot \Delta y =\\ \epsilon \cdot \frac{d}{dt} E_z(i,j,k) \cdot \Delta x \cdot \Delta z
+	\Rightarrow H_x(i,j-1,k) \cdot \Delta x + H_y(i,j,k) \cdot \Delta y - H_x(i,j,k) \cdot \Delta x - H_y(i-1,j,k) \cdot \Delta y =\\ \epsilon \cdot \frac{d}{dt} E_z(i,j,k) \cdot \Delta x \cdot \Delta z
 \end{multline}
 
 Again taking into account the uniform mesh:
 \begin{equation}
 	\label{eqn:3dEzCurl2}
-	\frac{d E_z(i,j,k)}{dt} = \frac{1}{\epsilon \Delta s} (H_x(i,j-1,k) + H_y(i,j-1,k) - H_x(i,j-1,k) - H_y(i,j-1,k))
+	\frac{d E_z(i,j,k)}{dt} = \frac{1}{\epsilon \Delta s} (H_x(i,j-1,k) + H_y(i,j,k) - H_x(i,j,k) - H_y(i-1,j,k))
 \end{equation}
 
 On the left hand side:
@@ -133,7 +133,7 @@ On the left hand side:
 Finally, by combining equation \ref{eqn:3dEzCurl2} and \ref{eqn:3dEzCurl3}:
 \begin{multline}
 	\label{eqn:3dEzCurlFinal}
-	E_z^{new}(i,j,k) =  E_z^{prev}(i,j,k) + \frac{\Delta t}{\epsilon \cdot \Delta s} \cdot \\ (H_x(i-1,j,k) - H_x(i,j,k) - H_y(i,j,k-1) + H_y(i,j,k))
+	E_z^{new}(i,j,k) =  E_z^{prev}(i,j,k) + \frac{\Delta t}{\epsilon \cdot \Delta s} \cdot \\ (H_x(i,j-1,k) - H_x(i,j,k) - H_y(i-1,j,k) + H_y(i,j,k))
 \end{multline}
 
 One could proceed to manually do the curls for the remaining field vectors, however with a keen eye a pattern can be noticed in the equations above, shown in formula \ref{eqn:3dCurlPattern}.
@@ -233,7 +233,7 @@ int N = 50;
 int iterNum = 200;
 \end{minted}
 
-It is highly recommended to drastically reduce the size of the domain as well as the number of iterations. The reason is that not only have  the amount of update loops increased from $N^2$ to $N^3$, but now there are also six three-dimensional vectors instead of three two-dimensional ones. It is recommended to start from a small number and go up for there. The hardware that is available to the author of this project can handle around this much, so these values will stay as they are for now. It is a good thing to note that the resulting files can be too big for Paraview to handle, so that is another limitation there.
+It is highly recommended to drastically reduce the size of the domain as well as the number of iterations. The reason is that not only have  the amount of update loops increased from $N^2$ to $N^3$, but now there are also six three-dimensional C++ vectors instead of three two-dimensional ones. It is recommended to start from a small number and go up for there. The hardware that is available to the author of this project can handle around this much, so these values will stay as they are for now. It is a good thing to note that the resulting files can be too big for Paraview to handle, so that is another limitation there.
 
 Now that there are three dimensions, the \textit{deltaT} equation will also need to be updated:
 
@@ -241,7 +241,7 @@ Now that there are three dimensions, the \textit{deltaT} equation will also need
 double deltaT = (deltaZ * sqrt(permitivity*permeability)  * (1/sqrt(3)));
 \end{minted}
 
-Furthermore, six three-dimensional vectors are needed for the electric and magnetic fields, all initialized with N zeros in each entry:
+Furthermore, six three-dimensional C++ vectors are needed for the electric and magnetic fields, all initialized with N zeros in each entry:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
 vector<vector<vector<double>>> Ex(N, vector<vector<double>>(N, vector<double>(N, 0)));
@@ -255,7 +255,7 @@ vector<vector<vector<double>>> Hz(N, vector<vector<double>>(N, vector<double>(N,
 Next the functions that create CSV files for the data need to be modified. Now that there is an equal number of vectors for both the electric and the magnetic wave, only one function is needed to handle both fields:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
-void writeDataToCsvFile(string filename, vector<vector<vector<double>>> Vx, vector<vector<vector<double>>> Vy, vector<vector<vector<double>>> Vz){
+void writeDataToCsvFile(string filename, const vector<vector<vector<double>>> &Vx, const vector<vector<vector<double>>> \&Vy, const vector<vector<vector<double>>> &Vz){
 	
 	//	x,y,z,Vx,Vy,Vz
 	//	0,0,Vx[x,y,z],Vy[x,y,z],Vz[x,y,z]

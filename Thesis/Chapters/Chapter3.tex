@@ -19,11 +19,11 @@ In the previous chapter the different transverse modes available for electromagn
 For the two-dimensional scenarios, choosing a transverse mode means that the chosen field will have no vectors in the direction of propagation, meaning the $z$ axis in this case. That means that any vector moving along that axis will have a value of zero for that field. However, the other field can only have values alongside that direction, meaning that it will be zero for the $x$ and $y$ axis instead. More specifically, each mode features the following field vectors:
 
 \begin{itemize}
-	\item \textbf{TE mode} - \space $\vec{E_x},\; \vec{E_y},\; \vec{H_z}$
-	\item \textbf{TM mode} - \space $\vec{E_z},\; \vec{H_x},\; \vec{H_y}$
+	\item \textbf{TE mode} - \space $E_x,\; E_y,\; H_z$
+	\item \textbf{TM mode} - \space $E_z,\; H_x,\; H_y$
 \end{itemize}
 
-While each mode will have different vectors, the process is roughly the same. For this scenario TE mode will be used, meaning that $\vec{E_z}, \vec{H_x}, \vec{H_y} = 0$.
+While each mode will have different vectors, the process is roughly the same. For this scenario TE mode will be used, meaning that $E_z, H_x, H_y = 0$.
 
 \subsection{2D TE Electromagnetic Curls}
 
@@ -133,7 +133,7 @@ For the two dimensional scenario, a new method of visualizing the data will be u
 Two new C++ functions to write the electromagnetic data into files need to be introduced:
 
 \begin{minted}[breaklines,frame=single,fontsize=\footnotesize]{c++}
-void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vector<double>> Ey){
+void writeEDataToCsvFile(string filename, const vector<vector<double>> &Ex, const vector<vector<double>> &Ey){
 	
 	//	x,y,z,Ex,Ey
 	//	i,j,0,Ex[x,y],Ey[x,y]
@@ -150,7 +150,7 @@ void writeEDataToCsvFile(string filename, vector<vector<double>> Ex, vector<vect
 	csvFile.close();
 }
 
-void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
+void writeHDataToCsvFile(string filename, const vector<vector<double>> &Hz){
 	
 	//	x,y,z,Hz
 	//	i,j,0,Hz[x,y]
@@ -159,7 +159,7 @@ void writeHDataToCsvFile(string filename, vector<vector<double>> Hz){
 	csvFile << "x,y,z,Hz\n";
 	
 	for (unsigned x = 0; x < Hz[0].size(); x++) {
-		for (unsigned y = 0; y < Ex[x].size(); y++) {
+		for (unsigned y = 0; y < Hz[x].size(); y++) {
 			csvFile << to_string(x) + "," + to_string(y) + ",0," + to_string(Hz[x][y]) + "\n";
 		}
 	}
@@ -229,7 +229,7 @@ After each vector field is done, one can call the respective method to write the
 
 \section{Data Visualization}
 
-In order to visualize two-dimensional data in a meaningful manner, it would help to use an open source program called Paraview\textsuperscript{\cite{paraview}}. It allows to build real time simulations with the data that was generated. It is also the reason for the chosen naming scheme for the output files. By using the format \textit{X.csv.n} they can all be imported as one object. This can be easily done by simply opening Paraview, selecting all of the data in one of the output folders, and just dragging and dropping it into the "Pipeline Browser" panel, pictured below (Figure \ref{fig:paraviewFDTD2D1}).
+In order to visualize two-dimensional data in a meaningful manner, it would help to use an open source program called Paraview\textsuperscript{\cite{paraview}}. It allows to build animated visualizations with the data that was generated. It is also the reason for the chosen naming scheme for the output files. By using the format \textit{X.csv.n} they can all be imported as one object. This can be easily done by simply opening Paraview, selecting all of the data in one of the output folders, and just dragging and dropping it into the "Pipeline Browser" panel, pictured below (Figure \ref{fig:paraviewFDTD2D1}).
 
 \begin{figure}[h!]
 	\centering
@@ -247,7 +247,7 @@ Having just the data by itself will not do much however. That is why one needs t
 	\item \textbf{Glyph} - Transforms the data into lines which are better in visualizing vector fields
 \end{itemize}
 
-The order is important, as is the fact that each of these filters must be configured properly. For \textbf{Table to Points}, the axes for the data needs to be defined. In the output files, one will notice that not only $x$ and $y$ have been specified, but also $z$, which contains only zeros. That needed to be done that since Paraview will not accept less than three columns here. It is also helpful to tick \textbf{Axes Grid} under the \textbf{Annotations} category. In the \textbf{Calculator}, one needs to add the following formula \mint{java}{iHat*Ex+jHat*Ey} which will unify the point data. Lastly, for the \textbf{Glyph}, the \textbf{Result} array gotten from the \textbf{Calculator} needs to be used as both \textbf{Orientation} and \textbf{Scaling}. Depending on whether the data is visible or not,the scaling slide can be changed as desired. If done correctly, one will get a result similar to Figure \ref{fig:FDTD2DE}.
+The order is important, as is the fact that each of these filters must be configured properly. For \textbf{Table to Points}, the vector components for the data needs to be defined. In the output files, one will notice that not only $x$ and $y$ have been specified, but also $z$, which contains only zeros. That needed to be done that since Paraview will not accept less than three columns here. It is also helpful to tick \textbf{Axes Grid} under the \textbf{Annotations} category. In the \textbf{Calculator}, one needs to add the following formula \mint{java}{iHat*Ex+jHat*Ey} which will build the vector data from the components. Lastly, for the \textbf{Glyph}, the \textbf{Result} array gotten from the \textbf{Calculator} needs to be used as both \textbf{Orientation} and \textbf{Scaling}. Depending on whether the data is visible or not,the scaling slider can be changed as desired. If done correctly, one will get a result similar to Figure \ref{fig:FDTD2DE}.
 
 \begin{figure}[h!]
 	\centering
@@ -276,7 +276,7 @@ The order is important, as is the fact that each of these filters must be config
 	\label{fig:FDTD2DE}
 \end{figure}
 
-The above is for the electric data. For the magnetic data it may be more simply to use \textbf{Table to Structured Grid}. With a few adjustments to colors and scaling, the following result can be achieved (Figure \ref{fig:FDTD2DH}):
+The above is for the vectorial electric data. For the scalar magnetic data it may be more simple to use \textbf{Table to Structured Grid}. With a few adjustments to colors and scaling, the following result can be achieved (Figure \ref{fig:FDTD2DH}):
 
 \begin{figure}[h!]
 	\centering
@@ -305,4 +305,4 @@ The above is for the electric data. For the magnetic data it may be more simply 
 	\label{fig:FDTD2DH}
 \end{figure}
 
-Moving forward, only the visualizing method for the electric data above can be of use, as the \textbf{Table to Structured Grid} method is not applicable when using more than one vector. With that done, the three-dimensional scenario can finally be discussed, being the most useful one for practical real life applications.
+Moving forward, only the visualizing method for the electric data above can be of use, as the \textbf{Table to Structured Grid} method is not applicable when using more than one vector component. With that done, the three-dimensional scenario can finally be discussed, being the most useful one for practical real life applications.

@@ -8,7 +8,7 @@ This thesis is the final documentation for a project in the Master of Science de
 
 This thesis is heavily focused on theoretical aspect of such an application, and as such the code will be simplistic and not use any advanced external libraries not included by default in standard C++. The application will not have a User Interface (UI), therefore the only way to customize the initial values of the code variables would be through an Integrated Development Environment (IDE) that can handle C++, such as Eclipse \textsuperscript{\cite{eclipse}}. The benefit of not relying on any external open source libraries is the ability for this code to be used by any machine regardless of operating system and easy integration into applications that need such simulations.
 
-Alongside this document, the project also included the code files found in the GitHub repository\textsuperscript{\cite{robo}}. As the base \LaTeX \space template of this thesis was found online\textsuperscript{\cite{template}}, these files are also included, with the license allowing viewing and modification so long as it is for a non-commercial use. After the official deadline of January 5th 2021, this project will be considered complete and no further changes will be made.
+Alongside this document, the project also includes the code files which can be found in the GitHub repository\textsuperscript{\cite{robo}}. As the base \LaTeX \space template of this thesis was found online\textsuperscript{\cite{template}}, these files are also included, with the license allowing viewing and modification so long as it is for a non-commercial use. After the official deadline of January 5th 2021, this project will be considered complete and no further changes will be made.
 
 \section{Motivation}
 
@@ -18,9 +18,9 @@ In order to achieve what they have, scientists needed to first understand the ph
 
 This thesis is going to describe the implementation of a C++ algorithm that uses the FDTD method to simulate how an electromagnetic field behaves in vacuum. The goal of the app is to be able to generate data that can then be used by a third party visualization program. This project features three standalone implementations, for one-dimensional, two-dimensional, and three-dimensional cases.
 
-The basis for all of these calculations are the well known Maxwell Equations, which govern all electromagnetic phenomena. They will be used alongside the FDTD method to create update equations that will run in a loop for a certain amount of time. The initial values, domain size, domain environment, and simulation time can all be changed in code. To begin off the simulation, a starting impulse will be eeded. For this project, the Gaussian pulse equation will be adapted used to add an excitation to the simulation that would otherwise be static. 
+The basis for all of these calculations are the well known Maxwell Equations, which govern all electromagnetic phenomena. They will be used alongside the FDTD method to create update equations that will run in a loop for a certain amount of time. The initial values, domain size, domain environment, and simulation time can all be changed in code. To start off the simulation, a starting impulse will be eeded. For this project, the Gaussian pulse equation will be adapted to add an excitation to the simulation that would otherwise be static. 
 
-At the end, one can find the conclusion where uses for this application as well as further improvements are discussed. Anyone that would like to use this project as a basis for their own work should take a look at the \ref{AppendixA} should they have any issues.
+At the end, one can find the conclusion where uses for this application as well as further improvements are discussed. Anyone that would like to use this project as a basis for their own work should take a look at the Appendix (\ref{AppendixA}) should they have any issues.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
@@ -38,7 +38,7 @@ That is why, thanks to the progress made in the computational capabilities of co
 %-----------------------------------
 \subsection{Maxwell Equations}
 
-As mentioned above, Maxwell Equations are believed to dictate the behavior of all kinds of electromagnetic fields at a macroscopic level. These equations are the following:
+As mentioned above, Maxwell Equations are believed to describe the behavior of all kinds of electromagnetic fields at a macroscopic level. These equations are the following:
 
 \begin{equation}
 	\label{eqn:electricinduction}
@@ -59,7 +59,7 @@ As mentioned above, Maxwell Equations are believed to dictate the behavior of al
 
 To give a brief explanation over the meaning of each equation:
 
-Equation \ref{eqn:electricinduction} explains the effects of the electric field $\vec{E}$ on the rate of change of the magnetic induction $\vec{B}$. This can also be referred to as the equation of electromagnetic induction, where the right hand side is the EMF or voltage and the left hand side is the magnetic flux. To those who study this particular area of physics, this equation will seem familiar, because it was derived from Faraday's law of induction.
+Equation \ref{eqn:electricinduction} explains the effects of the electric field $\vec{E}$ on the rate of change of the magnetic induction $\vec{B}$. This can also be referred to as the equation of electromagnetic induction, where the left hand side is the EMF or voltage and the right hand side is the time derivative of the magnetic flux. To those who study this particular area of physics, this equation will seem familiar, because it was derived from Faraday's law of induction.
 
 \begin{figure}
 	\centering
@@ -69,7 +69,7 @@ Equation \ref{eqn:electricinduction} explains the effects of the electric field 
 	\label{fig:faradayexp}
 \end{figure}
 
-Equation \ref{eqn:amperesLaw} is also known as Ampère–Maxwell law, because although it originated from Ampère, the current form was derived by Maxwell to include the magnetic current density $\vec{J}$. The equation explains the effects of the magnetic field on the electric current.
+Equation \ref{eqn:amperesLaw} is also known as Ampère–Maxwell law, because although it originated from Ampère, the current form was derived by Maxwell to include the displacement current $\frac{\partial \vec{D}}{\partial t}$. The equation explains the effects of the magnetic field and the excitation current $\vec{J}$ on the electric field.
 
 Equation \ref{eqn:magneticDivergence}, otherwise known as Gauss's law for magnetism, talks about the divergence of the magnetic field. According to this law the divergence is always 0. What this means is that in a magnetic field there is no such thing as a source (positive divergence) or a sink (negative divergence), rather a magnetic field can be more closely compared to a closed loop that flows in one direction. That is why every magnet that is known so far, at least under normal conditions, of has two poles. To translate this into something more easily understandable, it basically means that, if one was to pick any subset of the area of a magnetic field, no matter what area was picked, it would have the same number of vector fields going inside and out. A simple representation of this rule can be seen in \ref{fig:magneticdivergence}, where it can be noted that the number of vectors heading towards the north pole are equal to the vectors going outside of it. Interestingly enough, if the bar magnet were to be cut in half, then the result would be two smaller bar magnets with 2 poles each and the exact same vector field.
 
@@ -77,11 +77,11 @@ Equation \ref{eqn:magneticDivergence}, otherwise known as Gauss's law for magnet
 	\centering
 	\includegraphics[scale=0.9]{Figures/magneticdivergence}
 	\decoRule
-	\caption[Magnetic Divergence]{A crude representation of magnetic divergence through the use of a bar magnet.}
+	\caption[Magnetic Divergence]{A crude representation of magnetic divergence through the use of a bar magnet (picture modified from \cite{magneticPic}).}
 	\label{fig:magneticdivergence}
 \end{figure}
 
-Equation \ref{eqn:gausslaw}, is the main Gauss law for electric currents. It looks rather similar to his law of magnetism on the left hand side; the previous magnetic divergence is now replaced with the electric divergence. The bigger difference is the $\rho$ on the right hand side, which is the density of charge of the electric field. In basic terms, it means that the divergence of the electric field is equal to the charge density for that point.
+Equation \ref{eqn:gausslaw}, is the main Gauss law for electric fields. It looks rather similar to his law of magnetism on the left hand side; the previous magnetic divergence is now replaced with the electric divergence. The bigger difference is the $\rho$ on the right hand side, which is the density of charge of the electric field. In basic terms, it means that the divergence of the electric field is equal to the charge density for that point.
 
 For the above equations, the following material relations will be useful later on:
 \begin{equation}
@@ -91,14 +91,14 @@ For the above equations, the following material relations will be useful later o
 	\vec{B}(\vec{r},t) = \mu(\vec{r}) \cdot \vec{H}(\vec{r},t)
 \end{equation}
 
-The equations above are shown in their derivative form, but they can also be shown as their integral equivalent. There is no difference in implementation, regardless of which form is used.
+The Maxwell equations above are shown in their derivative form, but they can also be shown as their integral form equivalent. There is no difference in implementation, regardless of which form is used.
 
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
 
 \subsection{Solving the Wave Equation}
-Using the formulas above, one can derive the electromagnetic wave equation, which is needed to proceed with the implementation further. Firstly for convenience, an assumption will be made that the environment is the vacuum of space. Secondly, it can also be assumed that there is no initial charge in this space or loss of energy. This means that $\epsilon(\vec{r})=\epsilon_{0}$ and $\mu(\vec{r})=\mu_{0}$. This allows for the simplification of the above equations and gives the numerical solution for the wave equation:
+Using the formulas above, one can derive the electromagnetic wave equation, which is needed to proceed with the implementation further. Firstly for convenience, an assumption will be made that the environment is the vacuum of space. Secondly, it can also be assumed that there is no initial charge in this space nor any loss of energy. This means that $\epsilon(\vec{r})=\epsilon_{0}$ and $\mu(\vec{r})=\mu_{0}$. This allows for the simplification of the above equations and gives the numerical solution for the wave equation (substitution of \ref{eqn:amperesLaw} in \ref{eqn:electricinduction}):
 
 \begin{equation}
 	\label{eqn:waveEquation}
@@ -107,9 +107,9 @@ Using the formulas above, one can derive the electromagnetic wave equation, whic
 
 where: $$c = \frac{1}{\sqrt{\mu_{0}\epsilon_{0}}}$$
 
-This equation is useful because it will be used to derive the formulas that are going to be needed for the simulations. Going forwards, this will be used as a basis to adapt the solution to every environment, regardless of dimensionality. From this point, there are many ways to proceed. Some of the most notable are the Finite Element Method (FEM), the Finite Integration Technique (FIT), and the Finite Difference Time Domain Method (FDTD). All of them are also known as Approximation Methods.
+This equation is useful because it will be used to derive the formulas that are going to be needed for the simulations. Going forward, this will be used as a basis to adapt the solution to every environment, regardless of dimensionality. From this point, there are many ways to proceed. Some of the most notable are the Finite Element Method (FEM), the Finite Integration Technique (FIT), and the Finite Difference Time Domain Method (FDTD). All of them are also known as Approximation Methods.
 
-FEM is a well known numerical method used to obtain an approximation for a given boundary value problem. The basic principle is to divide a system into smaller subsets, called finite elements (hence the name), which are much simpler to solve. This is done by discretizing the given space for each of its dimensions, and then constructing a mesh of the object. As a result, from the initial boundary value problem one can get a system of equations that are further used to approximate each singular simplified function over the given domain. These equations are then compiled together into a system of equations that is then used to model the initial problem. The solution is then approximated by solving this system and minimizing the error function.\textsuperscript{\cite{logan2011first}}
+FEM is a well known numerical method used to obtain an approximation for a given boundary value problem. The basic principle is to divide a system into smaller subsets, called finite elements (hence the name), which are much simpler to solve. This is done by discretizing the given space for each of its dimensions, and then constructing a mesh of the object. As a result, from the initial boundary value problem one can get a system of equations that are further used to approximate each solution function over the given domain. These equations are then compiled together into a system of equations that is then used to model the initial problem. The solution is then approximated by solving this system and minimizing the error function.\textsuperscript{\cite{logan2011first}}
 
 The finite integration technique (FIT) is a bit more straightforward. It can help numerically solve electromagnetic field problems by disctretizing in both the time and frequency domain. The first to introduce this technique was Thomas Weiland in 1977.\textsuperscript{\cite{weiland1977discretization}} It has later seen continuous improvements and can now cover all electromagnetic problems and applications. This approach works by using the Maxwell equations above and applying their integral form to a set of staggered grids (e.g. Cartesian grid). This allows for a memory efficient implementation as well as giving the ability to handle different boundary conditions and variable material properties.
 
@@ -123,11 +123,11 @@ This simplicity is also the reason it was chosen for this thesis, as it is the o
 
 \section{Finite Difference Time Domain Method}
 
-FDTD was first proposed by Kane Yee in a 1966 paper and was initially called the Yee Algorithm, taken from the author's name. It was modified later from further research, resulting in the modern version that is widely used to this day. This method can be basically summarized in the following steps:
+FDTD was first proposed by Kane Yee in a 1966 paper\textsuperscript{\cite{yee1966numerical}} and was initially called the Yee Algorithm, taken from the author's name. It was modified later from further research, resulting in the modern version that is widely used to this day. This method can be basically summarized in the following steps:
 
 \begin{enumerate}
 	\item Replace the derivatives from the Maxwell Equations with finite differences
-	\item Discretize the space and time of the domain, while staggering the electric fields from the magnetic ones (e.g. by half a time step, and spatially by using a different axis)
+	\item Discretize the space and time of the domain, while staggering the electric fields from the magnetic ones (e.g. by half a time step, and spatially by using half a mesh skip in each coordinate direction)
 	\item Get the update equations
 	\item Use the update equations to get the future step for magnetic and electric fields
 	\item Repeat the step above throughout the set duration
@@ -142,41 +142,41 @@ Before beginning with the discretization, it was mentioned previously that Maxwe
 
 \begin{equation}
 	\label{eqn:electricinductionintegral}
-	\oint E \cdot ds = - \frac{d}{dt} \int B \cdot dA
+	\oint \vec{E} \cdot d\vec{s} = - \frac{d}{dt} \iint \vec{B} \cdot d\vec{A}
 \end{equation}
 \begin{equation}
 	\label{eqn:amperesLawintegral}
-	\oint H \cdot ds = \int \frac{dD}{dt} \cdot dA
+	\oint \vec{H} \cdot d\vec{s} = \iint \frac{d\vec{D}}{dt} \cdot d\vec{A}
 \end{equation}
 \begin{equation}
 	\label{eqn:magneticDivergenceintegral}
-	\int D \cdot dA = \int \rho dV
+	\varoiint \vec{D} \cdot d\vec{A} = \iiint \rho dV
 \end{equation}
 \begin{equation}
 	\label{eqn:gausslawintegral}
-	\int B \cdot dA = 0
+	\varoiint \vec{B} \cdot d\vec{A} = 0
 \end{equation}
 
 The material relations will look as follows:
 
 \begin{equation}
 	\label{eqn:dIntegral}
-	D = \epsilon \cdot E
+	\vec{D} = \epsilon \cdot \vec{E}
 \end{equation}
 \begin{equation}
 	\label{eqn:bIntegral}
-	B = \mu \cdot H
+	\vec{B} = \mu \cdot \vec{H}
 \end{equation}
 
 By plugging \ref{eqn:bIntegral} and \ref{eqn:dIntegral} into equations \ref{eqn:electricinductionintegral} and \ref{eqn:amperesLawintegral} respectively:
 
 \begin{equation}
 	\label{eqn:electricUpdateIntegral}
-	\oint E \cdot ds = - \frac{d}{dt} \int \mu \cdot H \cdot dA
+	\oint \vec{E} \cdot d\vec{s} = - \frac{d}{dt} \iint \mu \cdot \vec{H} \cdot d\vec{A}
 \end{equation}
 \begin{equation}
 	\label{eqn:magneticUpdateIntegral}
-	\oint H \cdot ds = \frac{d}{dt} \iint \epsilon \cdot E \cdot dA
+	\oint \vec{H} \cdot d\vec{s} = \frac{d}{dt} \iint \epsilon \cdot \vec{E} \cdot d\vec{A}
 \end{equation}
 
 Equations \ref{eqn:electricUpdateIntegral} and \ref{eqn:magneticUpdateIntegral} are going to be used later on during the implementation to derive the specific update equations. With all that, the general theoretical part is finished. For this project, the above functions will need to be implemented into a program that can generate approximate data on electromagnetic waves, which will be discussed in the next section.
@@ -193,9 +193,9 @@ The result of this project is not only this documentation, but also a relatively
 	\item Be simple and compact, so that it can be adapted to a bigger application if necessary
 \end{itemize}
 
-The first requirement is understandably the most basic functionality, the goal of the whole project. This data will be generated from scratch, using the environment variables of permittivity $\epsilon$ and permeability $\mu$. These values can be changed depending on the environment, which can be vacuum, copper, etc. The examples here will use the values for free space $\epsilon_{0}$ and $\mu_{0}$. Also, these values are going to be constant throughout the simulation, meaning it will feature one material through out the whole domain. 
+The first requirement is understandably the most basic functionality, the goal of the whole project. This data will be generated from scratch, using the environment material properties of permittivity $\epsilon$ and permeability $\mu$. These values can be changed depending on the environment, which can be vacuum, copper, etc. The examples here will use the values for free space (vacuum) $\epsilon_{0}$ and $\mu_{0}$. Also, these values are going to be constant throughout the simulation, meaning it will feature one material through out the whole domain. 
 
-Without a starting impulse, there would be nothing to simulate, as the data would simply keep its initial value of zero. If one was to add an immediate pulse of an arbitrary value to a single point, it would prove sufficient. However, this would result in a sudden explosion of a single electromagnetic pulse that would simply travel along the domain as a single point, thus providing a near useless visualization once the data is put into an appropriate program. 
+Without a starting impulse, there would be nothing to simulate, as the data would simply keep its initial value of zero. If one was to add an immediate pulse of an arbitrary value to a single point, it would prove sufficient. However, this would result in a sudden explosion of a single electromagnetic pulse that would simply travel along the domain as a very short pulse, thus providing a near useless visualization once the data is put into an appropriate program. 
 
 Instead, the Gaussian pulse excitation can be used in the middle of the domain, and have it propagate throughout it. This is ideal because the simulation is using reflective boundaries, meaning the pulse will bounce back and forth between each boundary without any loss. If one was to use absorbing boundary conditions, such an excitation would eventually lead to the waves disappearing completely. For such cases, a steady sinusoidal excitation that keeps going would prove more interesting.
 
@@ -215,7 +215,7 @@ A good value for sufficient smoothness would be $\varepsilon = 0.001$, but this 
 
 For the third requirement, the reason why this project would want to avoid the use of header files that are not included by default in C++ is that such files could make the program dependent on things such as the operating system that the machine is running, PATH variables, etc. In short, it would complicate the setup to run such a program too much, possibly voiding the last requirement. On top of that, in insisting on using only the very basics that C++ has to offer, the resulting code will be easier to relate to the formulas that are shown in this thesis, since all the code will be visible at all times. With that said, various improvements could be made if the use of external libraries is allowed. That will be discussed in more details in the Conclusion.
 
-Fourth, the application should support anything from one to three dimensions. While only a 3D simulation would be realistically desired, for a thesis the 1D and 2D scenarios are also interesting to study. Not only that, but the 1D application leads smoothly to the development of the 2D application, which in turn leads to the smooth development of the 3D application. This progression resulted in having a standalone program for each scenario, rather than one for all of them. Rather than unify these applications, they were intentionally left as separate programs in the end, because it helps in complying with the last requirement.
+Fourth, the application should support anything from one to three dimensions. While only a 3D simulation will be needed for most practical applications, for a thesis the 1D and 2D scenarios are also interesting to study. Not only that, but the 1D application leads smoothly to the development of the 2D application, which in turn leads to the smooth development of the 3D application. This progression resulted in having a standalone program for each scenario, rather than one for all of them. Rather than unify these applications, they were intentionally left as separate programs in the end, because it helps in complying with the last requirement.
 
 Lastly, after going through each of the previous requirements, this one is rather self-explanatory. To begin with, simple and compact code that works well standalone is one of the most important programming practices that developers should follow. While this program's goal is to simply be used as a demonstration of such an implementation, it should also be easily modifiable and adaptable, so that it can provide a good basis that can be used by larger applications that include far more features.
 
@@ -223,7 +223,7 @@ With that said, certain limitations that plague all computers, simply due to the
 
 \subsection{Computational Limitations and Inaccuracies Explained}
 
-Programmers can use programming languages to instruct computers to perform certain commands in certain orders, thus creating applications. However, these instructions are not what the computers use to dictate what should happen. These programming languages are decoded by the interpreter of choice, and then passed down in the form of a lower level language. This process occurs more than once too, until one gets to the smallest unit a computer can have: a bit.
+Programmers can use programming languages to instruct computers to perform certain commands in certain orders, thus creating applications. However, these instructions are not what the computers use to dictate what should happen. These programming languages are decoded by the interpreter or compiler of choice, and then passed down in the form of a lower level language. This process occurs more than once too, until one gets to the smallest unit a computer can have: a bit.
 
 A bit is simple; it can have either a value of zero or one. Instructions are basically translated into many such bits, thus making what is basically computer language. Each instruction could be translated into millions of bits, but that by itself would not cause issues normally. The issue is that, no matter how powerful the computer is or how much memory it has, these bits are finite. As such, they present limitations when dealing with infinite concepts.
 
@@ -262,6 +262,6 @@ In computer simulations, by far the most noteworthy type of error is the Discret
 	\label{fig:discretizationError}
 \end{figure}
 
-This type of error is inevitable whenever approximation techniques are used. In FDTD, it is the difference between the exact partial differential equation and the discretized algebraic equation used by the implementation. It can theoretically be calculated by taking the value of the exact solution and comparing it with the value received by the numerical approximation. In practice, however, doing so can prove difficult depending on the scenario. Such an error can also be observed by changing the domain mesh size. The smaller the mesh, the larger the error would be. 
+This type of error is inevitable whenever approximation techniques are used. In FDTD, it is the difference between the exact partial differential equation and the discretized algebraic equation used by the implementation. It can theoretically be calculated by taking the value of the exact solution and comparing it with the value received by the numerical approximation. In practice, however, doing so can prove difficult depending on the scenario. Such an error can also be observed by changing the domain mesh size. The larger the mesh, the larger the error would be. 
 
-Therefore a balance should be struck between having a small enough mesh and having a short enough computational time. Another compromise would be a variable mesh size if the areas that need high precision are known beforehand. Keeping a coarse mesh in general and only refining it where needed could aid in reducing the error margin considerably.  Alternatively, one could look at refinement methods. However, they too bear a computational cost, and will therefore not be used here.
+Therefore a balance should be achieved between having a small enough number of mesh cells and having a short enough computational time. Another compromise would be a variable mesh size if the areas that need high precision are known beforehand. Keeping a coarse mesh in general and only refining it where needed could aid in reducing the error margin considerably.  Alternatively, one could look at refinement methods. However, they too bear a computational cost, and will therefore not be used here.

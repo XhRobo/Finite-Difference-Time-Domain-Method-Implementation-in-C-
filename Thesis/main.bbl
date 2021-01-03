@@ -270,6 +270,29 @@
     \field{year}{2010}
   \endentry
 
+  \entry{magneticPic}{online}{}
+    \name{author}{1}{}{%
+      {{hash=DG}{%
+         family={Doublys},
+         familyi={D\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DG1}
+    \strng{fullhash}{DG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{KS3 Physics: 4. Electromagnetism}
+    \verb{url}
+    \verb https://medium.com/@ghduoblys/ks3-physics-4-electromagnetism-c8fb668f
+    \verb ba93
+    \endverb
+    \field{year}{2020 (accessed December 21, 2020)}
+  \endentry
+
   \entry{dow_1998}{article}{}
     \name{author}{1}{}{%
       {{hash=DJ}{%
@@ -361,75 +384,6 @@
     \warn{\item Invalid format of field 'month'}
   \endentry
 
-  \entry{engle_skeel_drees_2005}{article}{}
-    \name{author}{3}{}{%
-      {{hash=ERD}{%
-         family={Engle},
-         familyi={E\bibinitperiod},
-         given={Robert\bibnamedelima D.},
-         giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod},
-      }}%
-      {{hash=SRD}{%
-         family={Skeel},
-         familyi={S\bibinitperiod},
-         given={Robert\bibnamedelima D.},
-         giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod},
-      }}%
-      {{hash=DM}{%
-         family={Drees},
-         familyi={D\bibinitperiod},
-         given={Matthew},
-         giveni={M\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{ERDSRDDM1}
-    \strng{fullhash}{ERDSRDDM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{E}
-    \field{sortinithash}{E}
-    \field{number}{2}
-    \field{pages}{432–452}
-    \field{title}{Monitoring energy drift with shadow Hamiltonians}
-    \field{volume}{206}
-    \field{journaltitle}{Journal of Computational Physics}
-    \field{year}{2005}
-  \endentry
-
-  \entry{gao2013optimal}{article}{}
-    \name{author}{2}{}{%
-      {{hash=GL}{%
-         family={Gao},
-         familyi={G\bibinitperiod},
-         given={LiPing},
-         giveni={L\bibinitperiod},
-      }}%
-      {{hash=ZB}{%
-         family={Zhang},
-         familyi={Z\bibinitperiod},
-         given={Bo},
-         giveni={B\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Springer}%
-    }
-    \strng{namehash}{GLZB1}
-    \strng{fullhash}{GLZB1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{G}
-    \field{sortinithash}{G}
-    \field{number}{8}
-    \field{pages}{1705\bibrangedash 1726}
-    \field{title}{Optimal error estimates and modified energy conservation
-  identities of the ADI-FDTD scheme on staggered grids for 3D Maxwell’s
-  equations}
-    \field{volume}{56}
-    \field{journaltitle}{Science China Mathematics}
-    \field{year}{2013}
-  \endentry
-
   \entry{io.h}{misc}{}
     \name{author}{1}{}{%
       {{hash=G}{%
@@ -448,6 +402,29 @@
     \verb{url}
     \verb https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a00782_source.
     \verb html
+    \endverb
+  \endentry
+
+  \entry{opencl}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=ITKG}{%
+         family={Inc.},
+         familyi={I\bibinitperiod},
+         given={The Khronos®\bibnamedelima Group},
+         giveni={T\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim
+  G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {The Khronos® Group Inc.}%
+    }
+    \strng{namehash}{ITKG1}
+    \strng{fullhash}{ITKG1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \verb{url}
+    \verb https://www.khronos.org/opencl/
     \endverb
   \endentry
 
@@ -899,6 +876,33 @@
   equations for six-component fields.-Electronics and Communication,(AE{\"U}),
   Vol. 31}
     \field{year}{1977}
+  \endentry
+
+  \entry{yee1966numerical}{article}{}
+    \name{author}{1}{}{%
+      {{hash=YK}{%
+         family={Yee},
+         familyi={Y\bibinitperiod},
+         given={Kane},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{YK1}
+    \strng{fullhash}{YK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Y}
+    \field{sortinithash}{Y}
+    \field{number}{3}
+    \field{pages}{302\bibrangedash 307}
+    \field{title}{Numerical solution of initial boundary value problems
+  involving Maxwell's equations in isotropic media}
+    \field{volume}{14}
+    \field{journaltitle}{IEEE Transactions on antennas and propagation}
+    \field{year}{1966}
   \endentry
 
   \entry{texstudio}{misc}{}
